@@ -80,8 +80,6 @@ def CovarianceRetrieval(energy_grid, nuclide, mt_Number, data_library, temperatu
 
     nuclide_number = 10000 * nuclide_ZZZ_number + 10 * nuclide_mass_number
 
-    print(nuclide_number)
-
     'Retrieve the covariance data'
 
     errorr = sandy.get_endf6_file(data_library, 
