@@ -234,6 +234,201 @@ def GenerateUnperturbedNeutronACEFile(frendy_Path, endf_Path, temperature, nucli
         print('\n')
         print("ACE file couldn''t generate; consult terminal output for assistance")
 
+def GenerateDirectPerturbationACEFiles(frendy_Path, unperturbed_ACE_file_path, energy_Grid_MeV, mt_Numbers, nuclide, perturbation_coefficient, cleanup_Flag = True):
     
+    """
+    Need to write
+
+    """
+
+    'Import necessary modules'
+
+    import os 
+    import shutil
+    import sys
+
+    'Store the initial directory to return to after creating the ACE files'
+
+    starting_directory = os.getcwd()
+
+    'Set the current directory to that of FRENDY'
+
+    os.chdir(frendy_Path)
+
+    'Create a folder to store the directly perturbation ACE files'
+
+    perturbed_ace_folder_path = frendy_Path + '/' + str(nuclide) + '_DirectPerturbationACEFiles_ReactionMT'
+
+    for mt in mt_Numbers:
+        
+        perturbed_ace_folder_path += '_'
+        perturbed_ace_folder_path += str(mt)
+
+    os.makedirs(perturbed_ace_folder_path)
+
+    'Set the current directory to that of the folder for ease in file generation, execution, and cleanup'
+
+    os.chdir(perturbed_ace_folder_path)
+
+    'Create a folder to store the perturbation input files'
+
+    perturbation_input_folder_name = str(nuclide) + '_DirectPerturbationInputs_ReactionMT'
+
+    for mt in mt_Numbers:
+        
+        perturbation_input_folder_name += '_'
+        perturbation_input_folder_name += str(mt)
+
+    os.mkdir(perturbation_input_folder_name)
+
+    'Write the input files into the folder, and create a list of the input files that is needed by FRENDY'
+
+    perturbation_list_filename = 'perturbation_list_' + str(nuclide) + '_MT' 
+
+    for mt in mt_Numbers:
+
+        perturbation_list_filename += '_'
+        perturbation_list_filename += str(mt)
+
+    perturbation_list_filename += 'Direct.inp'
+
+    perturbation_list_lines = []
+
+    for ii in range(0, len(energy_grid)-1):
+        if ii < 9:
+            perturbation_input_file_name = perturbation_input_folder_name + '/' + str(nuclide) + f"_000{ii+1}"
+
+            input_file_line = perturbation_input_file_name + '\n'
+
+            perturbation_list_lines.append(input_file_line)
+        
+        elif (ii>=9) and (ii<=98):
+            perturbation_input_file_name = perturbation_input_folder_name + '/' + str(nuclide) + f"_00{ii+1}" 
+
+            input_file_line = perturbation_input_file_name + '\n'
+
+            perturbation_list_lines.append(input_file_line)
+
+        else:
+            perturbation_input_file_name = perturbation_input_folder_name + '/' + str(nuclide) + f"_0{ii+1}"
+
+            input_file_line = perturbation_input_file_name + '\n'
+
+            perturbation_list_lines.append(input_file_line)
+
+        'Set a failure mode in case multiple MT numbers are used'
+        if len(mt_Numbers) > 1:
+            sys.exit('Code is currently only configured for single MT number perturbations. Additional multi-MT functionality will be added later')
+        else:
+            with open(perturbation_input_file_name, 'w') as file:
+                file.write(str(mt) + '     ' + str(energy_grid[ii]) + '     ' + str(energy_grid[ii+1]) + '     ' + str(perturbation_coefficient))
+                file.close()
+            
+    with open(perturbation_list_filename, 'w') as file:
+        file.writelines(perturbation_list_lines)
+        file.close()
+
+    'Generate the input file to perform the direct perturbations'
+    'Some of the lines help to produce an output log that may be useful for debugging; make sure cleanup_Flag is set to False so to ensure it isn''t deleted'
+
+    create_ace_files_input_filename = 'run_create_perturbed_ace_file.csh'
+
+    input_file_lines = []
+
+    first_line = '#!/bin/csh\n'
+    input_file_lines.append(first_line)
+
+    first_space = '\n'
+    input_file_lines.append(first_space)
+
+    executable_line = 'set EXE     = ' + str(frendy_Path) + '/tools/perturbation_ace_file/perturbation_ace_file.exe'
+    input_file_lines.append(executable_line)
+
+    second_space = '\n'
+    input_file_lines.append(second_space)
+
+    perturbation_list_line = 'set INP     = ' + str(perturbation_list_filename)
+    input_file_lines.append(perturbation_list_line)
+
+    third_space = '\n'
+    input_file_lines.append(third_space)
+
+    unperturbed_ace_file_line = 'set ACE     = ' + str(unperturbed_ACE_file_path)
+    input_file_lines.append(unperturbed_ace_file_line)
+
+    fourth_space = '\n'
+    input_file_lines.append(fourth_space)
+
+    output_log_line1 = 'set LOG = results.log\n'
+    input_file_lines.append(output_log_line1)
+
+    output_log_line2 = 'echo "${EXE}  ${ACE}  ${INP}"      > ${LOG}\n'
+    input_file_lines.append(output_log_line2)
+
+    output_log_line3 = 'echo ""                           >> ${LOG}\n'
+    input_file_lines.append(output_log_line3)
+
+    running_command_line = '${EXE}  ${ACE}  ${INP} >> ${LOG}\n'
+    input_file_lines.append(running_command_line)
+
+    with open(create_ace_files_input_filename, 'w') as file:
+        file.writelines(input_file_lines)
+        file.close()
+    
+    'Run the file generation command'
+
+    file_generation_command = 'csh ./run_create_perturbed_ace_file.csh'
+
+    os.system(file_generation_command)
+
+    'Check if all of the files were created successfully based on the folder numbers they should be in'
+
+    file_failure_flag = False
+
+    for ii in range(0, len(energy_grid)-1):
+        if ii < 9:
+            folder_to_check = perturbed_ace_folder_path + f"/000{ii+1}"
+
+        elif (ii>=9) and (ii<=98):
+            folder_to_check = perturbed_ace_folder_path + f"/00{ii+1}"
+
+        else:
+            folder_to_check = perturbed_ace_folder_path + f"/0{ii+1}"
+        
+        if os.path.exists(folder_to_check):
+            continue
+        else:
+            file_failure_flag = True
+            break
+
+    'Optional File Cleanup Section'
+
+    if cleanup_Flag:
+        os.remove(perturbation_list_filename)
+        shutil.rmtree(perturbation_input_folder_name)
+        os.remove(create_ace_files_input_filename)
+        os.remove(perturbed_ace_folder_path + '/results.log')
+
+        print('Intermediate Files Removed')
+
+    'Return to the starting directory'
+
+    os.chdir(starting_directory)
+
+    'Display output message'
+    
+    if file_failure_flag:
+        print("One or more ACE files failed to generate; consult outputs for details")
+    else:
+        print("All ACE files have successfully generated; they are located in: " + str(perturbed_ace_folder_path))
+
+    
+    
+    
+
+
+
+
+'def GenerateRandomSamplingACEFiles():'
 
 
