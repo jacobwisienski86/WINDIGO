@@ -237,6 +237,7 @@ def GenerateUnperturbedNeutronACEFile(frendy_Path, endf_Path, temperature, nucli
 def GenerateDirectPerturbationACEFiles(frendy_Path, unperturbed_ACE_file_path, energy_Grid_MeV, mt_Numbers, nuclide, perturbation_coefficient, cleanup_Flag = True):
     
     """
+    
     Need to write
 
     """
@@ -422,13 +423,305 @@ def GenerateDirectPerturbationACEFiles(frendy_Path, unperturbed_ACE_file_path, e
     else:
         print("All ACE files have successfully generated; they are located in: " + str(perturbed_ace_folder_path))
 
+def GenerateRandomSamplingACEFiles(frendy_Path, relative_covariance_matrix_path, unperturbed_ACE_file_path, energy_Grid_MeV, mt_Numbers, nuclide, seed = 1234567, sample_size = 100, cleanup_Flag = False):
+    """
+
+    Write later
+
+    """
+
+    'Import modules'
+
+    import os 
+    import shutil
+
+    'Grab the starting directory to return to as need be'
+
+    starting_directory = os.getcwd()
+
+    'Retrieve the directory for the random sampling'
+
+    random_sampling_tool_directory = frendy_Path + '/tools/make_perturbation_factor'
+
+    executable_directory = random_sampling_tool_directory + '/make_perturbation_factor.exe'
+
+    os.chdir(random_sampling_tool_directory)
+
+    'Set up the execution file'
+
+    execution_filename = 'run_make_perturbation_factor.csh'
+
+    executable_lines = []
+
+    first_line = '#!/bin/csh\n'
+
+    executable_lines.append(first_line)
+
+    first_space = '\n'
+
+    executable_lines.append(first_space)
+
+    executor_line = 'set EXE     = ' + str(executable_directory) + '\n'
+
+    executable_lines.append(executor_line)
+
+    second_space = '\n'
+
+    executable_lines.append(second_space)
+
+    input_line = 'set INP        = ' + str(random_sampling_tool_directory) + '/sample_copy.inp'  
+
+    executable_lines.append(input_line)
+
+    third_space = '\n'
+
+    executable_lines.append(third_space)
+
+    fourth_space = '\n'
+
+    executable_lines.append(fourth_space)
+
+    log_line1 = 'set LOG = result.log\n'
+
+    executable_lines.append(log_line1)
+
+    log_line2 = 'echo "${EXE}  ${INP}"      > ${LOG}\n'
+
+    executable_lines.append(log_line2)
+
+    log_line3 = 'echo ""                   >> ${LOG}\n'
+
+    executable_lines.append(log_line3)
+
+    execution_line = '${EXE}  ${INP} >> ${LOG}\n'
+
+    executable_lines.append(execution_line)
+
+    with open(execution_filename, 'w') as file:
+        file.writelines(executable_lines)
+        file.close()
+
+    'Create the random sampling input file'
+
+    sample_filename = 'sample_copy.inp'
+
+    sample_lines = []
+
+    sample_size_line = '<sample_size>         ' +str(sample_size) + '\n'
+
+    sample_lines.append(sample_size_line)
+
+    linespace = '\n'
+
+    sample_lines.append(linespace)
+
+    seed_line = '<seed>                ' + str(seed) + '\n'
+
+    sample_lines.append(seed_line)
+
+    sample_lines.append(linespace)
+
+    covariance_matrix_line = '<relative_covariance> ' + str(relative_covariance_matrix_path) + '\n'
+
+    sample_lines.append(covariance_matrix_line)
+
+    sample_lines.append(linespace)
+
+    for zz in range(0, len(energy_Grid_MeV)):
+
+        if zz == 0:
+
+            energy_line = '<energy_grid>          (' + str(energy_Grid_MeV[zz]) + '\n'
+
+            sample_lines.append(energy_line)
+
+        elif zz == len(energy_Grid_MeV) - 1:
+
+            energy_line = '                       ' + str(energy_Grid_MeV[zz]) + ')\n'  
+
+            sample_lines.append(energy_line)
+
+        else:
+
+            energy_line = '                       ' + str(energy_Grid_MeV[zz]) + '\n'
+
+            sample_lines.append(energy_line)
     
+    sample_lines.append(linespace)
+
+    nuclide_line = '<nuclide>             (' + str(nuclide) + ')\n'
+
+    sample_lines.append(nuclide_line)
+
+    sample_lines.append(linespace)
+
+    reaction_line = '<reaction>            (' + str(mt_Numbers) +')\n'
+
+    sample_lines.append(reaction_line)
+
+    sample_lines.append(linespace)
+
+    with open(sample_filename, 'w') as file:
+        file.writelines(sample_lines)
+        file.close()
+
+    'Execute the creation of the randomly sampled perturbation coefficients'
+
+    perturbation_factor_command = 'csh ./' + str(execution_filename)
+
+    os.system(perturbation_factor_command)
+
+    'Check if the perturbation factors were made successfully'
+
+    if os.path.exists(random_sampling_tool_directory + '/' +str(nuclide)):
+        print('Perturbation factors created successfully')
+    else:
+        print('Perturbation factors not created successfully')
+
+    'Remove extra files if chosen'
+
+    if cleanup_Flag:
+        os.remove(sample_filename)
+        os.remove(execution_filename)
     
+    'Move the perturbation factor inputs to the root FRENDY directory, and change their name'
+
+    original_inputs_directory = random_sampling_tool_directory + '/' +str(nuclide)
+
+    new_inputs_directory = frendy_Path
+
+    shutil.move(original_inputs_directory, new_inputs_directory)
+
+    new_inputs_directory_name =  str(nuclide) + '_RandomSamplingInputs_ReactionMT_' + str(mt_Numbers) + '_Inputs'
+
+    shutil.move(frendy_Path + '/' + str(nuclide),  frendy_Path + '/' + new_inputs_directory_name)
+
+    'Move to the root FRENDY directory'
+
+    os.chdir(frendy_Path)
+
+    'Create the random sampling perturbations list'
+
+    perturbation_list_filename = 'perturbation_list_' + str(nuclide) + '_MT_' + str(mt_Numbers) + '.inp'
+
+    perturbation_list_lines = []
+
+    for ii in range(0, sample_size):
+        if ii < 9:
+            perturbation_input_line = new_inputs_directory_name + '/' + str(nuclide) + f"_000{ii+1}\n"
+            perturbation_list_lines.append(perturbation_input_line)
+
+        elif (ii>=9) and (ii<=98):
+            perturbation_input_line = new_inputs_directory_name + '/' + str(nuclide) + f"_00{ii+1}\n"
+            perturbation_list_lines.append(perturbation_input_line)
+
+        else:
+            perturbation_input_line = new_inputs_directory_name + '/' + str(nuclide) + f"_0{ii+1}\n"
+            perturbation_list_lines.append(perturbation_input_line)
     
+    with open(perturbation_list_filename, 'w') as file:
+        file.writelines(perturbation_list_lines)
+        file.close()
 
+    'Create a new directory to store the ACE files, and move the needed files there'
 
+    ace_files_directory = frendy_Path + '/' + str(nuclide) + '_RandomSamplingACEFiles_ReactionMT_'  + str(mt_Numbers)
 
+    os.mkdir(ace_files_directory)
 
-'def GenerateRandomSamplingACEFiles():'
+    shutil.move(frendy_Path + '/' + perturbation_list_filename, ace_files_directory + '/' + perturbation_list_filename)
+    shutil.move(frendy_Path + '/' + new_inputs_directory_name, ace_files_directory + '/' + new_inputs_directory_name)
 
+    os.chdir(ace_files_directory)
+
+    'Generate the execution file'
+
+    create_ace_files_input_filename = 'run_create_perturbed_ace_file.csh'
+
+    input_file_lines = []
+
+    first_line = '#!/bin/csh\n'
+    input_file_lines.append(first_line)
+
+    first_space = '\n'
+    input_file_lines.append(first_space)
+
+    executable_line = 'set EXE     = ' + str(frendy_Path) + '/tools/perturbation_ace_file/perturbation_ace_file.exe'
+    input_file_lines.append(executable_line)
+
+    second_space = '\n'
+    input_file_lines.append(second_space)
+
+    perturbation_list_line = 'set INP     = ' + str(ace_files_directory) + '/' + 'perturbation_list_' + str(nuclide) + '_MT_' + str(mt_Numbers) + '.inp'
+    input_file_lines.append(perturbation_list_line)
+
+    third_space = '\n'
+    input_file_lines.append(third_space)
+
+    unperturbed_ace_file_line = 'set ACE     = ' + str(unperturbed_ACE_file_path)
+    input_file_lines.append(unperturbed_ace_file_line)
+
+    fourth_space = '\n'
+    input_file_lines.append(fourth_space)
+
+    output_log_line1 = 'set LOG = results.log\n'
+    input_file_lines.append(output_log_line1)
+
+    output_log_line2 = 'echo "${EXE}  ${ACE}  ${INP}"      > ${LOG}\n'
+    input_file_lines.append(output_log_line2)
+
+    output_log_line3 = 'echo ""                           >> ${LOG}\n'
+    input_file_lines.append(output_log_line3)
+
+    running_command_line = '${EXE}  ${ACE}  ${INP} >> ${LOG}\n'
+    input_file_lines.append(running_command_line)
+
+    with open(create_ace_files_input_filename, 'w') as file:
+        file.writelines(input_file_lines)
+        file.close()
+
+    'Run the command to generate the ACE files'
+
+    random_sampling_file_command = 'csh ./' + str(create_ace_files_input_filename)
+
+    os.system(random_sampling_file_command)
+
+    'Check if all of the files were created successfully based on the folder numbers they should be in'
+
+    file_failure_flag = False
+
+    for ii in range(0, sample_size):
+        if ii < 9:
+            folder_to_check = str(ace_files_directory) + f"000{ii+1}"
+
+        elif (ii>=9) and (ii<=98):
+            folder_to_check = str(ace_files_directory) + f"00{ii+1}"
+
+        else:
+            folder_to_check = str(ace_files_directory) + f"0{ii+1}"
+        
+        if os.path.exists(folder_to_check):
+            continue
+        else:
+            file_failure_flag = True
+            break
+
+    'Optional File Cleanup Section'
+
+    if cleanup_Flag:
+        os.remove(perturbation_list_filename)
+        shutil.rmtree(new_inputs_directory_name)
+        os.remove(create_ace_files_input_filename)
+        os.remove(perturbed_ace_folder_path + '/results.log')
+
+        print('Intermediate Files Removed')
+
+    'Return to the starting directory'
+
+    os.chdir(starting_directory)
+
+    if file_failure_flag == False:
+        print('ACE files not generated successfully; check outputs for more information')
+    else:
+        print('All ACE files generated successfully and are located in: ' + str(ace_files_directory))
 
