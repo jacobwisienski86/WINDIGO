@@ -67,12 +67,6 @@ def buildPerturbedCrossSectionsLibraries(unperturbed_nuclide_list,
 
     return perturbed_model_top_directory_name
 
-buildPerturbedCrossSectionsLibraries(unperturbed_nuclide_list = ['H2', 'He3', 'Li6', 'C12'],
-                                     neutron_sublibrary_path = r'/mnt/c/Users/jacob/endfb80/endfb-viii.0-hdf5/neutron',
-                                     perturbed_ACE_folder_path = r'/mnt/c/Users/jacob/frendy_20241030/H1_DirectPerturbationACEFiles_ReactionMT_2',
-                                     perturbed_nuclide = 'H1',
-                                     model_name = 'Fusion')
-
 
 
 
