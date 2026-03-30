@@ -18,7 +18,7 @@ def retrieve_nuclide_information(nuclide):
     """
 
     import numpy as np
-    from z_number_library import nuclide_ZZZs
+    from .z_number_library import nuclide_ZZZs
 
     'Grab the nuclide\'s element and mass number from the input'
 

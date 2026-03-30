@@ -47,7 +47,7 @@ def sandy_covariance_retrieval(
 
     'Import necessary internal functions'
 
-    from sandy_internal_functions import (
+    from .sandy_internal_functions import (
         retrieve_nuclide_information,
         retrieve_covariance_data,
         plot_covariance,
@@ -100,3 +100,13 @@ def sandy_covariance_retrieval(
         return csv_filename
 
     print('Covariance Retrieval Process Complete')
+
+sandy_covariance_retrieval(
+    energy_grid = [1E-4, 20, 30000],
+    nuclide = 'He4',
+    mt_Number = 1,
+    data_library = 'endfb_80' ,
+    temperature = 300,
+    relative_Flag=False,
+    plotting_Flag=False
+)
