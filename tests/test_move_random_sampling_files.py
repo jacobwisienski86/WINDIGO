@@ -15,7 +15,7 @@ def test_move_random_sampling_files_basic(monkeypatch):
 
     monkeypatch.setattr("shutil.move", fake_move)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         move_random_sampling_files
     )
 
@@ -50,7 +50,7 @@ def test_move_random_sampling_files_varied_inputs(monkeypatch):
 
     monkeypatch.setattr("shutil.move", fake_move)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         move_random_sampling_files
     )
 
@@ -78,7 +78,7 @@ def test_move_random_sampling_files_move_order(monkeypatch):
 
     monkeypatch.setattr("shutil.move", fake_move)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         move_random_sampling_files
     )
 

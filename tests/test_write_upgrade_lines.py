@@ -8,7 +8,7 @@ import pytest
 def test_write_upgrade_lines_low_energy(monkeypatch):
     'Test behavior for energies < 99.99'
 
-    from src.WENDIGO.frendy_internal_functions import write_upgrade_lines
+    from src.WINDIGO.frendy_internal_functions import write_upgrade_lines
 
     energy_grid = [1.0, 2.0, 3.0]
 
@@ -35,7 +35,7 @@ def test_write_upgrade_lines_low_energy(monkeypatch):
 def test_write_upgrade_lines_mid_energy(monkeypatch):
     'Test behavior for energies between 99.99 and 99990'
 
-    from src.WENDIGO.frendy_internal_functions import write_upgrade_lines
+    from src.WINDIGO.frendy_internal_functions import write_upgrade_lines
 
     energy_grid = [100.0, 200.0, 300.0]
 
@@ -57,7 +57,7 @@ def test_write_upgrade_lines_mid_energy(monkeypatch):
 def test_write_upgrade_lines_high_energy(monkeypatch):
     'Test behavior for energies >= 99990'
 
-    from src.WENDIGO.frendy_internal_functions import write_upgrade_lines
+    from src.WINDIGO.frendy_internal_functions import write_upgrade_lines
 
     energy_grid = [100000.0, 200000.0, 300000.0]
 

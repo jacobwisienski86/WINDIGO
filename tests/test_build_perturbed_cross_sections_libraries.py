@@ -8,7 +8,7 @@ import pytest
 
 def test_build_perturbed_cross_sections_libraries_happy_path(monkeypatch):
     'Test that all helper functions are called with correct arguments'
-    module = "src.WENDIGO.openmc_internal_functions"
+    module = "src.WINDIGO.openmc_internal_functions"
 
     calls = {}
 
@@ -37,7 +37,7 @@ def test_build_perturbed_cross_sections_libraries_happy_path(monkeypatch):
     monkeypatch.setattr(f"{module}.create_model_folders", fake_create_model_folders)
     monkeypatch.setattr(f"{module}.create_perturbed_xml", fake_create_perturbed_xml)
 
-    from src.WENDIGO.openmc_main_functions import build_perturbed_cross_sections_libraries
+    from src.WINDIGO.openmc_main_functions import build_perturbed_cross_sections_libraries
 
     result = build_perturbed_cross_sections_libraries(
         unperturbed_nuclide_list=["U235"],
@@ -79,7 +79,7 @@ def test_build_perturbed_cross_sections_libraries_happy_path(monkeypatch):
 
 def test_build_perturbed_cross_sections_libraries_defaults(monkeypatch):
     'Test behavior when optional parameters are omitted'
-    module = "src.WENDIGO.openmc_internal_functions"
+    module = "src.WINDIGO.openmc_internal_functions"
 
     monkeypatch.setattr(f"{module}.count_directories", lambda perturbed_ACE_folder_path: 1)
     monkeypatch.setattr(f"{module}.create_numbers", lambda directory_number: ["0001"])
@@ -91,7 +91,7 @@ def test_build_perturbed_cross_sections_libraries_defaults(monkeypatch):
     monkeypatch.setattr(f"{module}.create_perturbed_xml",
                         lambda **kwargs: xml_args.update(kwargs))
 
-    from src.WENDIGO.openmc_main_functions import build_perturbed_cross_sections_libraries
+    from src.WINDIGO.openmc_main_functions import build_perturbed_cross_sections_libraries
 
     result = build_perturbed_cross_sections_libraries(
         unperturbed_nuclide_list=["U238"],
@@ -108,7 +108,7 @@ def test_build_perturbed_cross_sections_libraries_defaults(monkeypatch):
 
 def test_build_perturbed_cross_sections_libraries_call_order(monkeypatch):
     'Test that helper functions are called in the correct order'
-    module = "src.WENDIGO.openmc_internal_functions"
+    module = "src.WINDIGO.openmc_internal_functions"
 
     call_order = []
 
@@ -131,7 +131,7 @@ def test_build_perturbed_cross_sections_libraries_call_order(monkeypatch):
     monkeypatch.setattr(f"{module}.create_model_folders", wrap("folders"))
     monkeypatch.setattr(f"{module}.create_perturbed_xml", wrap("xml"))
 
-    from src.WENDIGO.openmc_main_functions import build_perturbed_cross_sections_libraries
+    from src.WINDIGO.openmc_main_functions import build_perturbed_cross_sections_libraries
 
     build_perturbed_cross_sections_libraries(
         ["U235"], "/neut", [], "/tsl", "/ace"

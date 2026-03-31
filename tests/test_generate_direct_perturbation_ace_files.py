@@ -33,26 +33,26 @@ def test_generate_direct_perturbation_ace_files_basic(monkeypatch):
 
     # Mock internal FRENDY functions
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_inputs",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_inputs",
         lambda **kwargs: (["line1", "line2"], "input_folder"),
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_list",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_list",
         lambda **kwargs: "pert_list.inp",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_command_file",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_command_file",
         lambda **kwargs: "run_create_perturbed_ace_file.csh",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.direct_perturbation_folder_check",
+        "src.WINDIGO.frendy_internal_functions.direct_perturbation_folder_check",
         lambda **kwargs: False,
     )
 
     captured = StringIO()
     monkeypatch.setattr(sys, "stdout", captured)
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_direct_perturbation_ace_files
     )
 
@@ -100,26 +100,26 @@ def test_generate_direct_perturbation_ace_files_failure(monkeypatch):
     monkeypatch.setattr("shutil.rmtree", lambda p: None)
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_inputs",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_inputs",
         lambda **kwargs: (["x"], "folder"),
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_list",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_list",
         lambda **kwargs: "list.inp",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_command_file",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_command_file",
         lambda **kwargs: "cmd.csh",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.direct_perturbation_folder_check",
+        "src.WINDIGO.frendy_internal_functions.direct_perturbation_folder_check",
         lambda **kwargs: True,
     )
 
     captured = StringIO()
     monkeypatch.setattr(sys, "stdout", captured)
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_direct_perturbation_ace_files
     )
 
@@ -150,26 +150,26 @@ def test_generate_direct_perturbation_ace_files_no_cleanup(monkeypatch):
     monkeypatch.setattr("shutil.rmtree", lambda p: calls["rmtree"].append(p))
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_inputs",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_inputs",
         lambda **kwargs: (["a"], "folderA"),
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_list",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_list",
         lambda **kwargs: "list.inp",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_command_file",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_command_file",
         lambda **kwargs: "cmd.csh",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.direct_perturbation_folder_check",
+        "src.WINDIGO.frendy_internal_functions.direct_perturbation_folder_check",
         lambda **kwargs: False,
     )
 
     captured = StringIO()
     monkeypatch.setattr(sys, "stdout", captured)
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_direct_perturbation_ace_files
     )
 
@@ -201,23 +201,23 @@ def test_generate_direct_perturbation_ace_files_varied_inputs(monkeypatch):
     monkeypatch.setattr("shutil.rmtree", lambda p: None)
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_inputs",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_inputs",
         lambda **kwargs: (["x"], "folder"),
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_list",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_list",
         lambda **kwargs: "list.inp",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_command_file",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_command_file",
         lambda **kwargs: "cmd.csh",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.direct_perturbation_folder_check",
+        "src.WINDIGO.frendy_internal_functions.direct_perturbation_folder_check",
         lambda **kwargs: False,
     )
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_direct_perturbation_ace_files
     )
 
@@ -270,23 +270,23 @@ def test_generate_direct_perturbation_ace_files_calls_internal_functions(monkeyp
         return False
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_inputs",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_inputs",
         fake_inputs,
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_list",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_list",
         fake_list,
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_command_file",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_command_file",
         fake_cmd,
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.direct_perturbation_folder_check",
+        "src.WINDIGO.frendy_internal_functions.direct_perturbation_folder_check",
         fake_check,
     )
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_direct_perturbation_ace_files
     )
 
@@ -331,23 +331,23 @@ def test_generate_direct_perturbation_ace_files_directory_switching(monkeypatch)
     monkeypatch.setattr("shutil.rmtree", lambda p: None)
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_inputs",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_inputs",
         lambda **kwargs: (["x"], "folder"),
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_list",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_list",
         lambda **kwargs: "list.inp",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_direct_perturbation_command_file",
+        "src.WINDIGO.frendy_internal_functions.create_direct_perturbation_command_file",
         lambda **kwargs: "cmd.csh",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.direct_perturbation_folder_check",
+        "src.WINDIGO.frendy_internal_functions.direct_perturbation_folder_check",
         lambda **kwargs: False,
     )
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_direct_perturbation_ace_files
     )
 

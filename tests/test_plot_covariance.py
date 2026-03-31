@@ -41,7 +41,7 @@ def test_plot_covariance_filename(mock_plotting):
     Test that plot_covariance generates the correct filename and calls savefig.
     """
 
-    from src.WENDIGO.sandy_internal_functions import plot_covariance
+    from src.WINDIGO.sandy_internal_functions import plot_covariance
 
     covariance_data = np.array([[1, 2], [3, 4]])
     energy_grid = [1e-5, 1e-3, 1e-1]
@@ -69,7 +69,7 @@ def test_plot_covariance_non_square_matrix(mock_plotting):
     the covariance matrix is non-square.
     """
 
-    from src.WENDIGO.sandy_internal_functions import plot_covariance
+    from src.WINDIGO.sandy_internal_functions import plot_covariance
 
     covariance_data = np.array([[1, 2, 3], [4, 5, 6]])  # 2x3 matrix
     energy_grid = [1e-5, 1e-3]
@@ -96,7 +96,7 @@ def test_plot_covariance_empty_energy_grid(mock_plotting):
     Test that the filename logic works even when the energy grid is empty.
     """
 
-    from src.WENDIGO.sandy_internal_functions import plot_covariance
+    from src.WINDIGO.sandy_internal_functions import plot_covariance
 
     covariance_data = np.array([[1]])
     energy_grid = []  # edge case

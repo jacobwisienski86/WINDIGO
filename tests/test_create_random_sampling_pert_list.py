@@ -37,7 +37,7 @@ def test_create_random_sampling_pert_list_basic(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_random_sampling_pert_list
     )
 
@@ -71,7 +71,7 @@ def test_create_random_sampling_pert_list_three_digit_format(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_random_sampling_pert_list
     )
 
@@ -101,7 +101,7 @@ def test_create_random_sampling_pert_list_large_index(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_random_sampling_pert_list
     )
 
@@ -130,7 +130,7 @@ def test_create_random_sampling_pert_list_varied_inputs(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_random_sampling_pert_list
     )
 

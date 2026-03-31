@@ -39,7 +39,7 @@ def test_create_model_folders_basic(mock_fs):
     Basic test: ensure correct folder creation and naming.
     """
 
-    from src.WENDIGO.openmc_internal_functions import create_model_folders
+    from src.WINDIGO.openmc_internal_functions import create_model_folders
 
     created_dirs, removed_dirs = mock_fs
 
@@ -72,7 +72,7 @@ def test_create_model_folders_removes_existing(mock_fs):
     If the top directory already exists, it should be removed before recreation.
     """
 
-    from src.WENDIGO.openmc_internal_functions import create_model_folders
+    from src.WINDIGO.openmc_internal_functions import create_model_folders
 
     created_dirs, removed_dirs = mock_fs
 
@@ -100,7 +100,7 @@ def test_create_model_folders_zero(mock_fs):
     If directory_number = 0, only the top directory should be created.
     """
 
-    from src.WENDIGO.openmc_internal_functions import create_model_folders
+    from src.WINDIGO.openmc_internal_functions import create_model_folders
 
     created_dirs, removed_dirs = mock_fs
 

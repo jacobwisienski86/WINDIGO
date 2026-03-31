@@ -34,7 +34,7 @@ def test_generate_random_sampling_factors_success(monkeypatch):
     captured = StringIO()
     monkeypatch.setattr(sys, "stdout", captured)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         generate_random_sampling_factors
     )
 
@@ -75,7 +75,7 @@ def test_generate_random_sampling_factors_failure(monkeypatch):
     captured = StringIO()
     monkeypatch.setattr(sys, "stdout", captured)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         generate_random_sampling_factors
     )
 
@@ -103,7 +103,7 @@ def test_generate_random_sampling_factors_cleanup(monkeypatch):
     captured = StringIO()
     monkeypatch.setattr(sys, "stdout", captured)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         generate_random_sampling_factors
     )
 

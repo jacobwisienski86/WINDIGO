@@ -37,7 +37,7 @@ def test_create_direct_perturbation_command_file_basic(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_direct_perturbation_command_file
     )
 
@@ -89,7 +89,7 @@ def test_create_direct_perturbation_command_file_varied_inputs(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_direct_perturbation_command_file
     )
 
@@ -122,7 +122,7 @@ def test_create_direct_perturbation_command_file_line_count(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_direct_perturbation_command_file
     )
 

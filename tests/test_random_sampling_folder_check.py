@@ -16,7 +16,7 @@ def test_random_sampling_folder_check_all_present(monkeypatch):
 
     monkeypatch.setattr("os.path.exists", fake_exists)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         random_sampling_folder_check
     )
 
@@ -44,7 +44,7 @@ def test_random_sampling_folder_check_first_missing(monkeypatch):
 
     monkeypatch.setattr("os.path.exists", fake_exists)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         random_sampling_folder_check
     )
 
@@ -64,7 +64,7 @@ def test_random_sampling_folder_check_middle_missing(monkeypatch):
 
     monkeypatch.setattr("os.path.exists", fake_exists)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         random_sampling_folder_check
     )
 
@@ -87,7 +87,7 @@ def test_random_sampling_folder_check_three_digit_format(monkeypatch):
 
     monkeypatch.setattr("os.path.exists", fake_exists)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         random_sampling_folder_check
     )
 
@@ -114,7 +114,7 @@ def test_random_sampling_folder_check_large_index(monkeypatch):
 
     monkeypatch.setattr("os.path.exists", fake_exists)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         random_sampling_folder_check
     )
 

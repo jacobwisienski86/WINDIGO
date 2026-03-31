@@ -52,7 +52,7 @@ def test_save_covariance_file_basic(mock_file_ops):
     the intermediate CSV.
     """
 
-    from src.WENDIGO.sandy_internal_functions import save_covariance_file
+    from src.WINDIGO.sandy_internal_functions import save_covariance_file
 
     mock_df, removed_files = mock_file_ops
 
@@ -93,7 +93,7 @@ def test_save_covariance_file_empty_energy_grid(mock_file_ops):
     Test filename logic when the energy grid is empty.
     """
 
-    from src.WENDIGO.sandy_internal_functions import save_covariance_file
+    from src.WINDIGO.sandy_internal_functions import save_covariance_file
 
     mock_df, removed_files = mock_file_ops
 

@@ -37,7 +37,7 @@ def test_create_random_sampling_tool_inputs_basic(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_random_sampling_tool_inputs
     )
 
@@ -88,7 +88,7 @@ def test_create_random_sampling_tool_inputs_varied_paths(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_random_sampling_tool_inputs
     )
 
@@ -120,7 +120,7 @@ def test_create_random_sampling_tool_inputs_energy_grid_formatting(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_random_sampling_tool_inputs
     )
 
@@ -154,7 +154,7 @@ def test_create_random_sampling_tool_inputs_line_count(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_random_sampling_tool_inputs
     )
 

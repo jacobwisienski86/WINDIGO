@@ -90,7 +90,7 @@ def mock_environment(monkeypatch):
 
 def test_create_perturbed_xml_basic(mock_environment):
     # Import AFTER fake openmc is injected
-    from src.WENDIGO.openmc_internal_functions import create_perturbed_xml
+    from src.WINDIGO.openmc_internal_functions import create_perturbed_xml
 
     env = mock_environment
 
@@ -178,7 +178,7 @@ def test_create_perturbed_xml_picks_last_valid_file(monkeypatch):
     monkeypatch.setattr("copy.deepcopy", fake_deepcopy)
 
     # --- Run function ---
-    from src.WENDIGO.openmc_internal_functions import create_perturbed_xml
+    from src.WINDIGO.openmc_internal_functions import create_perturbed_xml
 
     unperturbed_library = MockLibrary()
     create_perturbed_xml(
@@ -242,7 +242,7 @@ def test_create_perturbed_xml_overwrite_h5(monkeypatch):
     monkeypatch.setattr("copy.deepcopy", fake_deepcopy)
 
     # --- Run function ---
-    from src.WENDIGO.openmc_internal_functions import create_perturbed_xml
+    from src.WINDIGO.openmc_internal_functions import create_perturbed_xml
 
     unperturbed_library = MockLibrary()
     create_perturbed_xml(
@@ -306,7 +306,7 @@ def test_create_perturbed_xml_multiple_models(monkeypatch):
     monkeypatch.setattr("copy.deepcopy", fake_deepcopy)
 
     # --- Run function ---
-    from src.WENDIGO.openmc_internal_functions import create_perturbed_xml
+    from src.WINDIGO.openmc_internal_functions import create_perturbed_xml
 
     unperturbed_library = MockLibrary()
     create_perturbed_xml(

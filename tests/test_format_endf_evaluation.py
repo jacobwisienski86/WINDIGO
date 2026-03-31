@@ -15,7 +15,7 @@ def test_format_endf_evaluation_basic(monkeypatch):
 
     monkeypatch.setattr("shutil.copy2", fake_copy2)
 
-    from src.WENDIGO.frendy_internal_functions import format_endf_evaluation
+    from src.WINDIGO.frendy_internal_functions import format_endf_evaluation
 
     result = format_endf_evaluation("/path/to/U235.endf")
 
@@ -35,7 +35,7 @@ def test_format_endf_evaluation_relative_path(monkeypatch):
         lambda src, dst: copied.append((src, dst))
     )
 
-    from src.WENDIGO.frendy_internal_functions import format_endf_evaluation
+    from src.WINDIGO.frendy_internal_functions import format_endf_evaluation
 
     result = format_endf_evaluation("Th232.endf")
 
@@ -55,7 +55,7 @@ def test_format_endf_evaluation_filename_with_dots(monkeypatch):
         lambda src, dst: copied.append((src, dst))
     )
 
-    from src.WENDIGO.frendy_internal_functions import format_endf_evaluation
+    from src.WINDIGO.frendy_internal_functions import format_endf_evaluation
 
     result = format_endf_evaluation("/lib/n-092.U235.v1.endf")
 

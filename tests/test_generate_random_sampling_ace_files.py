@@ -32,42 +32,42 @@ def test_generate_random_sampling_ace_files_success(monkeypatch):
     monkeypatch.setattr("shutil.rmtree", lambda p: calls["rmtree"].append(p))
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file",
         lambda **kwargs: calls["create_exec"].append(kwargs) or "exec.csh",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_tool_inputs",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_tool_inputs",
         lambda **kwargs: calls["create_inputs"].append(kwargs) or "sample.inp",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.generate_random_sampling_factors",
+        "src.WINDIGO.frendy_internal_functions.generate_random_sampling_factors",
         lambda **kwargs: calls["gen_factors"].append(kwargs),
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.move_random_sampling_files",
+        "src.WINDIGO.frendy_internal_functions.move_random_sampling_files",
         lambda **kwargs: calls["move"].append(kwargs) or "U235_inputs",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_pert_list",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_pert_list",
         lambda **kwargs: calls["create_list"].append(kwargs) or "pert_list.inp",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_ace_directory",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_ace_directory",
         lambda **kwargs: calls["create_dir"].append(kwargs) or "/F/U235_RSACE",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file",
         lambda **kwargs: calls["create_ace_exec"].append(kwargs) or "run_ace.csh",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.random_sampling_folder_check",
+        "src.WINDIGO.frendy_internal_functions.random_sampling_folder_check",
         lambda **kwargs: calls["folder_check"].append(kwargs) or True,
     )
 
     captured = StringIO()
     monkeypatch.setattr(sys, "stdout", captured)
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_random_sampling_ace_files
     )
 
@@ -100,42 +100,42 @@ def test_generate_random_sampling_ace_files_failure(monkeypatch):
     monkeypatch.setattr("shutil.rmtree", lambda p: None)
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file",
         lambda **kwargs: "exec.csh",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_tool_inputs",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_tool_inputs",
         lambda **kwargs: "sample.inp",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.generate_random_sampling_factors",
+        "src.WINDIGO.frendy_internal_functions.generate_random_sampling_factors",
         lambda **kwargs: None,
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.move_random_sampling_files",
+        "src.WINDIGO.frendy_internal_functions.move_random_sampling_files",
         lambda **kwargs: "inputs",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_pert_list",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_pert_list",
         lambda **kwargs: "list.inp",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_ace_directory",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_ace_directory",
         lambda **kwargs: "/F/RSACE",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file",
         lambda **kwargs: "run.csh",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.random_sampling_folder_check",
+        "src.WINDIGO.frendy_internal_functions.random_sampling_folder_check",
         lambda **kwargs: False,
     )
 
     captured = StringIO()
     monkeypatch.setattr(sys, "stdout", captured)
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_random_sampling_ace_files
     )
 
@@ -166,42 +166,42 @@ def test_generate_random_sampling_ace_files_no_cleanup(monkeypatch):
     monkeypatch.setattr("shutil.rmtree", lambda p: calls["rmtree"].append(p))
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file",
         lambda **kwargs: "exec.csh",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_tool_inputs",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_tool_inputs",
         lambda **kwargs: "sample.inp",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.generate_random_sampling_factors",
+        "src.WINDIGO.frendy_internal_functions.generate_random_sampling_factors",
         lambda **kwargs: None,
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.move_random_sampling_files",
+        "src.WINDIGO.frendy_internal_functions.move_random_sampling_files",
         lambda **kwargs: "inputs",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_pert_list",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_pert_list",
         lambda **kwargs: "list.inp",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_ace_directory",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_ace_directory",
         lambda **kwargs: "/F/RSACE",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file",
         lambda **kwargs: "run.csh",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.random_sampling_folder_check",
+        "src.WINDIGO.frendy_internal_functions.random_sampling_folder_check",
         lambda **kwargs: True,
     )
 
     captured = StringIO()
     monkeypatch.setattr(sys, "stdout", captured)
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_random_sampling_ace_files
     )
 
@@ -234,39 +234,39 @@ def test_generate_random_sampling_ace_files_directory_switching(monkeypatch):
     monkeypatch.setattr("shutil.rmtree", lambda p: None)
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file",
         lambda **kwargs: "exec.csh",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_tool_inputs",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_tool_inputs",
         lambda **kwargs: "sample.inp",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.generate_random_sampling_factors",
+        "src.WINDIGO.frendy_internal_functions.generate_random_sampling_factors",
         lambda **kwargs: None,
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.move_random_sampling_files",
+        "src.WINDIGO.frendy_internal_functions.move_random_sampling_files",
         lambda **kwargs: "inputs",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_pert_list",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_pert_list",
         lambda **kwargs: "list.inp",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_ace_directory",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_ace_directory",
         lambda **kwargs: "/F/RSACE",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file",
         lambda **kwargs: "run.csh",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.random_sampling_folder_check",
+        "src.WINDIGO.frendy_internal_functions.random_sampling_folder_check",
         lambda **kwargs: True,
     )
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_random_sampling_ace_files
     )
 
@@ -341,39 +341,39 @@ def test_generate_random_sampling_ace_files_internal_calls(monkeypatch):
         return True
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file",
         fake_exec,
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_tool_inputs",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_tool_inputs",
         fake_inputs,
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.generate_random_sampling_factors",
+        "src.WINDIGO.frendy_internal_functions.generate_random_sampling_factors",
         fake_factors,
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.move_random_sampling_files",
+        "src.WINDIGO.frendy_internal_functions.move_random_sampling_files",
         fake_move,
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_pert_list",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_pert_list",
         fake_list,
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_ace_directory",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_ace_directory",
         fake_dir,
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file",
         fake_ace_exec,
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.random_sampling_folder_check",
+        "src.WINDIGO.frendy_internal_functions.random_sampling_folder_check",
         fake_check,
     )
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_random_sampling_ace_files
     )
 
@@ -415,39 +415,39 @@ def test_generate_random_sampling_ace_files_varied_inputs(monkeypatch):
     monkeypatch.setattr("shutil.rmtree", lambda p: None)
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file",
         lambda **kwargs: "exec.csh",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_tool_inputs",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_tool_inputs",
         lambda **kwargs: "sample.inp",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.generate_random_sampling_factors",
+        "src.WINDIGO.frendy_internal_functions.generate_random_sampling_factors",
         lambda **kwargs: None,
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.move_random_sampling_files",
+        "src.WINDIGO.frendy_internal_functions.move_random_sampling_files",
         lambda **kwargs: "inputs",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_pert_list",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_pert_list",
         lambda **kwargs: "list.inp",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_ace_directory",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_ace_directory",
         lambda **kwargs: "/ROOT/Th232_RSACE",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file",
+        "src.WINDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file",
         lambda **kwargs: "run.csh",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.random_sampling_folder_check",
+        "src.WINDIGO.frendy_internal_functions.random_sampling_folder_check",
         lambda **kwargs: True,
     )
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_random_sampling_ace_files
     )
 

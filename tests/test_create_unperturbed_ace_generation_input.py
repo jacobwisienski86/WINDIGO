@@ -36,7 +36,7 @@ def test_create_unperturbed_ace_generation_input_normal(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_unperturbed_ace_generation_input
     )
 
@@ -75,11 +75,11 @@ def test_create_unperturbed_ace_generation_input_upgrade(monkeypatch):
     ]
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.write_upgrade_lines",
+        "src.WINDIGO.frendy_internal_functions.write_upgrade_lines",
         lambda energy_grid: fake_upgrade
     )
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_unperturbed_ace_generation_input
     )
 
@@ -112,11 +112,11 @@ def test_create_unperturbed_ace_generation_input_empty_energy_grid(monkeypatch):
     monkeypatch.setattr("builtins.open", fake_open)
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.write_upgrade_lines",
+        "src.WINDIGO.frendy_internal_functions.write_upgrade_lines",
         lambda energy_grid: []
     )
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_unperturbed_ace_generation_input
     )
 
@@ -146,7 +146,7 @@ def test_create_unperturbed_ace_generation_input_print(monkeypatch):
     captured = StringIO()
     monkeypatch.setattr(sys, "stdout", captured)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_unperturbed_ace_generation_input
     )
 
@@ -179,11 +179,11 @@ def test_create_unperturbed_ace_generation_input_no_upgrade_empty_grid(monkeypat
 
     # Ensure write_upgrade_lines is NOT called
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.write_upgrade_lines",
+        "src.WINDIGO.frendy_internal_functions.write_upgrade_lines",
         lambda energy_grid: (_ for _ in ()).throw(Exception("Should not be called"))
     )
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_unperturbed_ace_generation_input
     )
 

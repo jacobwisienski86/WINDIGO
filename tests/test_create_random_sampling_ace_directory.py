@@ -20,7 +20,7 @@ def test_create_random_sampling_ace_directory_basic(monkeypatch):
     monkeypatch.setattr("os.mkdir", fake_mkdir)
     monkeypatch.setattr("shutil.move", fake_move)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_random_sampling_ace_directory
     )
 
@@ -60,7 +60,7 @@ def test_create_random_sampling_ace_directory_varied_inputs(monkeypatch):
     monkeypatch.setattr("os.mkdir", lambda p: mkdir_calls.append(p))
     monkeypatch.setattr("shutil.move", lambda s, d: move_calls.append((s, d)))
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_random_sampling_ace_directory
     )
 
@@ -89,7 +89,7 @@ def test_create_random_sampling_ace_directory_move_order(monkeypatch):
     monkeypatch.setattr("os.mkdir", lambda p: None)
     monkeypatch.setattr("shutil.move", lambda s, d: move_calls.append((s, d)))
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_random_sampling_ace_directory
     )
 

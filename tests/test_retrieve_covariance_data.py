@@ -69,7 +69,7 @@ def test_retrieve_covariance_data_absolute(mock_sandy):
     Test absolute covariance retrieval and MF/MT routing for general XS data.
     """
 
-    from src.WENDIGO.sandy_internal_functions import (
+    from src.WINDIGO.sandy_internal_functions import (
         retrieve_covariance_data
     )
 
@@ -95,7 +95,7 @@ def test_retrieve_covariance_data_relative(mock_sandy):
     Test relative covariance retrieval and MF/MT routing for nu-related data.
     """
 
-    from src.WENDIGO.sandy_internal_functions import (
+    from src.WINDIGO.sandy_internal_functions import (
         retrieve_covariance_data
     )
 
@@ -121,7 +121,7 @@ def test_retrieve_covariance_data_fission_spectrum(mock_sandy):
     Test MF/MT routing for fission spectrum covariance (MT=1018 → MF=35).
     """
 
-    from src.WENDIGO.sandy_internal_functions import (
+    from src.WINDIGO.sandy_internal_functions import (
         retrieve_covariance_data
     )
 

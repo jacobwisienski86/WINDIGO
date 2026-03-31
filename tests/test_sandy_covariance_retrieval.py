@@ -52,19 +52,19 @@ def mock_internal_functions(monkeypatch):
 
     # IMPORTANT: patch the functions *as imported inside sandy_main_functions.py*
     monkeypatch.setattr(
-        "src.WENDIGO.sandy_internal_functions.retrieve_nuclide_information",
+        "src.WINDIGO.sandy_internal_functions.retrieve_nuclide_information",
         fake_retrieve_nuclide_information
     )
     monkeypatch.setattr(
-        "src.WENDIGO.sandy_internal_functions.retrieve_covariance_data",
+        "src.WINDIGO.sandy_internal_functions.retrieve_covariance_data",
         fake_retrieve_covariance_data
     )
     monkeypatch.setattr(
-        "src.WENDIGO.sandy_internal_functions.plot_covariance",
+        "src.WINDIGO.sandy_internal_functions.plot_covariance",
         fake_plot_covariance
     )
     monkeypatch.setattr(
-        "src.WENDIGO.sandy_internal_functions.save_covariance_file",
+        "src.WINDIGO.sandy_internal_functions.save_covariance_file",
         fake_save_covariance_file
     )
 
@@ -74,7 +74,7 @@ def test_sandy_covariance_retrieval_no_plot(mock_internal_functions):
     Test sandy_covariance_retrieval when plotting is disabled.
     """
 
-    from src.WENDIGO.sandy_main_functions import sandy_covariance_retrieval
+    from src.WINDIGO.sandy_main_functions import sandy_covariance_retrieval
 
     csv_filename = sandy_covariance_retrieval(
         energy_grid=[1e-5, 1e-3],
@@ -94,7 +94,7 @@ def test_sandy_covariance_retrieval_with_plot(mock_internal_functions):
     Test sandy_covariance_retrieval when plotting is enabled.
     """
 
-    from src.WENDIGO.sandy_main_functions import sandy_covariance_retrieval
+    from src.WINDIGO.sandy_main_functions import sandy_covariance_retrieval
 
     csv_filename, plot_filename = sandy_covariance_retrieval(
         energy_grid=[1e-5, 1e-3],

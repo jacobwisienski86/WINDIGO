@@ -43,7 +43,7 @@ def test_create_direct_perturbation_inputs_basic(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_direct_perturbation_inputs
     )
 
@@ -87,7 +87,7 @@ def test_create_direct_perturbation_inputs_three_digit_index(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_direct_perturbation_inputs
     )
 
@@ -121,7 +121,7 @@ def test_create_direct_perturbation_inputs_large_index(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_direct_perturbation_inputs
     )
 

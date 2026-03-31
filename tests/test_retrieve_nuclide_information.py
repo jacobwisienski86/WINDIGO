@@ -19,11 +19,11 @@ def test_retrieve_nuclide_information(monkeypatch):
     }
 
     monkeypatch.setattr(
-        "src.WENDIGO.z_number_library.nuclide_ZZZs",
+        "src.WINDIGO.z_number_library.nuclide_ZZZs",
         mock_z_numbers
     )
 
-    from src.WENDIGO.sandy_internal_functions import retrieve_nuclide_information
+    from src.WINDIGO.sandy_internal_functions import retrieve_nuclide_information
 
     # H1 → Z=1, A=1 → 10000*1 + 10*1 = 10010
     assert retrieve_nuclide_information("H1") == 10010
@@ -44,11 +44,11 @@ def test_retrieve_nuclide_information_invalid_number(monkeypatch):
     mock_z_numbers = {"X": 99}
 
     monkeypatch.setattr(
-        "src.WENDIGO.z_number_library.nuclide_ZZZs",
+        "src.WINDIGO.z_number_library.nuclide_ZZZs",
         mock_z_numbers
     )
 
-    from src.WENDIGO.sandy_internal_functions import retrieve_nuclide_information
+    from src.WINDIGO.sandy_internal_functions import retrieve_nuclide_information
 
     with pytest.raises(ValueError):
         retrieve_nuclide_information("Xabc")

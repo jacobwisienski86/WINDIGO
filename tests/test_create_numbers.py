@@ -10,7 +10,7 @@ def test_create_numbers_basic():
     Basic test: ensure correct zero-padded numbering.
     """
 
-    from src.WENDIGO.openmc_internal_functions import create_numbers
+    from src.WINDIGO.openmc_internal_functions import create_numbers
 
     result = create_numbers(5)
 
@@ -22,7 +22,7 @@ def test_create_numbers_zero():
     If directory_number = 0, the function should return an empty list.
     """
 
-    from src.WENDIGO.openmc_internal_functions import create_numbers
+    from src.WINDIGO.openmc_internal_functions import create_numbers
 
     result = create_numbers(0)
 
@@ -34,7 +34,7 @@ def test_create_numbers_large():
     Ensure correct formatting for larger numbers (e.g., 100+).
     """
 
-    from src.WENDIGO.openmc_internal_functions import create_numbers
+    from src.WINDIGO.openmc_internal_functions import create_numbers
 
     result = create_numbers(123)
 
@@ -51,7 +51,7 @@ def test_create_numbers_type_and_format():
     Ensure all outputs are strings and always 4 characters long.
     """
 
-    from src.WENDIGO.openmc_internal_functions import create_numbers
+    from src.WINDIGO.openmc_internal_functions import create_numbers
 
     result = create_numbers(10)
 

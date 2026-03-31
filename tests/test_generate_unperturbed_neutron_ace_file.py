@@ -46,15 +46,15 @@ def test_generate_unperturbed_neutron_ace_file_basic(monkeypatch):
 
     # Patch internal FRENDY imports in frendy_main_functions
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.format_endf_evaluation",
+        "src.WINDIGO.frendy_internal_functions.format_endf_evaluation",
         fake_format,
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input",
+        "src.WINDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input",
         fake_create_input,
     )
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_unperturbed_neutron_ace_file
     )
 
@@ -119,18 +119,18 @@ def test_generate_unperturbed_neutron_ace_file_upgrade(monkeypatch):
 
     # Patch internal FRENDY functions
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.format_endf_evaluation",
+        "src.WINDIGO.frendy_internal_functions.format_endf_evaluation",
         lambda endf_Path: "formatted.dat",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input",
+        "src.WINDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input",
         lambda **kwargs: "input_file.inp",
     )
 
     captured = StringIO()
     monkeypatch.setattr(sys, "stdout", captured)
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_unperturbed_neutron_ace_file
     )
 
@@ -163,11 +163,11 @@ def test_generate_unperturbed_neutron_ace_file_failure(monkeypatch):
     monkeypatch.setattr("os.remove", lambda p: None)
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.format_endf_evaluation",
+        "src.WINDIGO.frendy_internal_functions.format_endf_evaluation",
         lambda endf_Path: "formatted.dat",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input",
+        "src.WINDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input",
         lambda **kwargs: "input_file.inp",
     )
 
@@ -176,7 +176,7 @@ def test_generate_unperturbed_neutron_ace_file_failure(monkeypatch):
     captured = StringIO()
     monkeypatch.setattr(sys, "stdout", captured)
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_unperturbed_neutron_ace_file
     )
 
@@ -203,17 +203,17 @@ def test_generate_unperturbed_neutron_ace_file_no_cleanup(monkeypatch):
     monkeypatch.setattr("os.remove", lambda p: calls["remove"].append(p))
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.format_endf_evaluation",
+        "src.WINDIGO.frendy_internal_functions.format_endf_evaluation",
         lambda endf_Path: "formatted.dat",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input",
+        "src.WINDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input",
         lambda **kwargs: "input_file.inp",
     )
 
     monkeypatch.setattr("os.path.exists", lambda p: True)
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_unperturbed_neutron_ace_file
     )
 
@@ -249,15 +249,15 @@ def test_generate_unperturbed_neutron_ace_file_energy_grid_none(monkeypatch):
     monkeypatch.setattr("os.path.exists", lambda p: True)
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.format_endf_evaluation",
+        "src.WINDIGO.frendy_internal_functions.format_endf_evaluation",
         lambda endf_Path: "formatted.dat",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input",
+        "src.WINDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input",
         fake_create_input,
     )
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_unperturbed_neutron_ace_file
     )
 
@@ -286,17 +286,17 @@ def test_generate_unperturbed_neutron_ace_file_upgrade_no_cleanup(monkeypatch):
     monkeypatch.setattr("os.remove", lambda p: calls["remove"].append(p))
 
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.format_endf_evaluation",
+        "src.WINDIGO.frendy_internal_functions.format_endf_evaluation",
         lambda endf_Path: "formatted.dat",
     )
     monkeypatch.setattr(
-        "src.WENDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input",
+        "src.WINDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input",
         lambda **kwargs: "input_file.inp",
     )
 
     monkeypatch.setattr("os.path.exists", lambda p: True)
 
-    from src.WENDIGO.frendy_main_functions import (
+    from src.WINDIGO.frendy_main_functions import (
         generate_unperturbed_neutron_ace_file
     )
 

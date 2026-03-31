@@ -46,7 +46,7 @@ def test_create_unperturbed_library_basic(mock_openmc, mock_listdir):
     Ensure neutron and TSL files are correctly registered.
     """
 
-    from src.WENDIGO.openmc_internal_functions import create_unperturbed_library
+    from src.WINDIGO.openmc_internal_functions import create_unperturbed_library
 
     mock_listdir({
         "/neutrons": ["H1.h5", "U235.h5", "junk.txt"],
@@ -73,7 +73,7 @@ def test_create_unperturbed_library_no_matches(mock_openmc, mock_listdir):
     If no files match, nothing should be registered.
     """
 
-    from src.WENDIGO.openmc_internal_functions import create_unperturbed_library
+    from src.WINDIGO.openmc_internal_functions import create_unperturbed_library
 
     mock_listdir({
         "/neutrons": ["A.h5", "B.h5"],
@@ -95,7 +95,7 @@ def test_create_unperturbed_library_multiple_matches(mock_openmc, mock_listdir):
     Ensure all matching files are registered, not just the last one.
     """
 
-    from src.WENDIGO.openmc_internal_functions import create_unperturbed_library
+    from src.WINDIGO.openmc_internal_functions import create_unperturbed_library
 
     mock_listdir({
         "/neutrons": ["H1_1.h5", "H1_2.h5", "H1_extra.txt"],

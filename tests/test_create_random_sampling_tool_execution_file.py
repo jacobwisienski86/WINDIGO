@@ -37,7 +37,7 @@ def test_create_random_sampling_tool_execution_file_basic(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_random_sampling_tool_execution_file
     )
 
@@ -80,7 +80,7 @@ def test_create_random_sampling_tool_execution_file_varied_inputs(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_random_sampling_tool_execution_file
     )
 
@@ -108,7 +108,7 @@ def test_create_random_sampling_tool_execution_file_line_count(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_random_sampling_tool_execution_file
     )
 

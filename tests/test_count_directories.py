@@ -39,7 +39,7 @@ def test_count_directories_basic(mock_scandir):
     Count only directories and skip files.
     """
 
-    from src.WENDIGO.openmc_internal_functions import count_directories
+    from src.WINDIGO.openmc_internal_functions import count_directories
 
     entries = [
         MockDirEntry("folderA", True),
@@ -58,7 +58,7 @@ def test_count_directories_skips_input_dirs(mock_scandir):
     Directories containing 'Input' or 'input' should be skipped.
     """
 
-    from src.WENDIGO.openmc_internal_functions import count_directories
+    from src.WINDIGO.openmc_internal_functions import count_directories
 
     entries = [
         MockDirEntry("Input_Files", True),
@@ -78,7 +78,7 @@ def test_count_directories_empty(mock_scandir):
     No directories should return 0.
     """
 
-    from src.WENDIGO.openmc_internal_functions import count_directories
+    from src.WINDIGO.openmc_internal_functions import count_directories
 
     entries = []
     mock_scandir(entries)
@@ -92,7 +92,7 @@ def test_count_directories_mixed_case_input(mock_scandir):
     Ensure case-insensitive matching for 'Input' directories.
     """
 
-    from src.WENDIGO.openmc_internal_functions import count_directories
+    from src.WINDIGO.openmc_internal_functions import count_directories
 
     entries = [
         MockDirEntry("InPuT_folder", True),

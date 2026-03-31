@@ -37,7 +37,7 @@ def test_create_direct_perturbation_list_basic(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_direct_perturbation_list
     )
 
@@ -66,7 +66,7 @@ def test_create_direct_perturbation_list_empty(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_direct_perturbation_list
     )
 
@@ -92,7 +92,7 @@ def test_create_direct_perturbation_list_varied_lines(monkeypatch):
 
     monkeypatch.setattr("builtins.open", fake_open)
 
-    from src.WENDIGO.frendy_internal_functions import (
+    from src.WINDIGO.frendy_internal_functions import (
         create_direct_perturbation_list
     )
 
