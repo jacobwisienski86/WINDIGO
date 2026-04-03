@@ -1,3 +1,10 @@
+import os
+import openmc
+from pathlib import Path
+import copy
+import shutil
+
+
 def count_directories(perturbed_ACE_folder_path):
     """
     Count the number of directories within the perturbed ACE files folder
@@ -12,10 +19,6 @@ def count_directories(perturbed_ACE_folder_path):
         containing the perturbed ACE files. Doesn't include a directory
         containing the perturbation inputs.
     """
-
-    'Import needed modules'
-
-    import os
 
     'Set a starting value for the directory number'
 
@@ -93,11 +96,6 @@ def create_unperturbed_library(
         all necessary xs data to run the model except for the perturbed xs data.
     """
 
-    'Import needed modules'
-
-    import os
-    import openmc
-
     'Initial the data library'
 
     unperturbed_library = openmc.data.DataLibrary()
@@ -147,11 +145,6 @@ def create_model_folders(
         perturbed_model_folder_list (list): List with paths to each folder
         containing the perturbed cross_sections.xml files.
     """
-
-    'Import needed modules'
-
-    import os
-    import shutil
 
     'Set the name of the directory where the folders will be located'
 
@@ -213,13 +206,6 @@ def create_perturbed_xml(
         perturbed_model_folder_list (list): List containing the names of the
         folders where the perturbed cross_sections.xml files will be stored.
     """
-
-    'Import needed modules'
-
-    import os
-    import openmc
-    from pathlib import Path
-    import copy
 
     'Retrieve the starting directory'
 

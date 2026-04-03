@@ -4,6 +4,8 @@
 
 # Functions related to generating unperturbed ACE files
 
+import shutil
+import os
 
 def format_endf_evaluation(endf_Path):
     """
@@ -16,10 +18,6 @@ def format_endf_evaluation(endf_Path):
     Results:
         endf_file_dat (str): Path to the .dat formatted ENDF evaluation.
     """
-
-    'Import modules'
-
-    import shutil
 
     'Create a .dat file to use for the ACE file generation'
 
@@ -177,7 +175,8 @@ def create_unperturbed_ace_generation_input(
 
     if upgrade_Flag:
         upgrade_lines = write_upgrade_lines(energy_grid=energy_grid)
-        ace_file_lines.append(upgrade_lines)
+        for line in upgrade_lines:
+            ace_file_lines.append(line)
 
     'Write the ACE file generation input'
 
@@ -222,10 +221,6 @@ def create_direct_perturbation_inputs(
 
         perturbation_input_folder_name (str): Directory containing the inputs.
     """
-
-    'Import needed modules'
-
-    import os
 
     'Create a folder to store the perturbation input files'
 
@@ -405,10 +400,6 @@ def direct_perturbation_folder_check(
     Results:
         file_failure_flag (Bool): True if any ACE file is missing.
     """
-
-    'Import needed modules'
-
-    import os
 
     file_failure_flag = False
 
@@ -598,10 +589,6 @@ def generate_random_sampling_factors(
         cleanup_Flag (Bool): Remove intermediate files if True.
     """
 
-    'Import needed modules'
-
-    import os
-
     perturbation_factor_command = 'csh ./' + str(execution_filename)
     os.system(perturbation_factor_command)
 
@@ -643,14 +630,8 @@ def move_random_sampling_files(
         are stored.
     """
 
-    'Import needed modules'
-
-    import shutil
-
-    (
-        "Move the perturbation factor inputs to the root FRENDY directory, "
-        "and change their name"
-    )
+    'Move the perturbation factor inputs to the root FRENDY directory, '
+    'and change their name'
 
     original_inputs_directory = (
         random_sampling_tool_directory + '/' + str(nuclide)
@@ -762,11 +743,6 @@ def create_random_sampling_ace_directory(
         new_inputs_directory_name (str): Directory where the sampling inputs
         are located.
     """
-
-    'Import needed modules'
-
-    import os
-    import shutil
 
     ace_files_directory = (
         frendy_Path
@@ -890,21 +866,17 @@ def random_sampling_folder_check(
         file_failure_flag (Bool): True if any ACE file is missing.
     """
 
-    'Import needed modules'
-
-    import os
-
     file_failure_flag = False
 
     for ii in range(0, sample_size):
 
         if ii < 9:
-            folder_to_check = str(ace_files_directory) + f"000{ii + 1}"
+            folder_to_check = str(ace_files_directory) + f"/000{ii + 1}"
         elif 9 <= ii <= 98:
-            folder_to_check = str(ace_files_directory) + f"00{ii + 1}"
+            folder_to_check = str(ace_files_directory) + f"/00{ii + 1}"
         else:
-            folder_to_check = str(ace_files_directory) + f"0{ii + 1}"
-
+            folder_to_check = str(ace_files_directory) + f"/0{ii + 1}"
+            
         if os.path.exists(folder_to_check):
             continue
         else:

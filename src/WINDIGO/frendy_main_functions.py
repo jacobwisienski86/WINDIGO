@@ -1,5 +1,23 @@
 # Set of functions related to the workflow that make use of FRENDY
 
+import os
+import shutil
+from WINDIGO.frendy_internal_functions import (
+    format_endf_evaluation,
+    create_unperturbed_ace_generation_input,
+    create_direct_perturbation_inputs,
+    create_direct_perturbation_list,
+    create_direct_perturbation_command_file,
+    direct_perturbation_folder_check,
+    create_random_sampling_tool_execution_file,
+    create_random_sampling_tool_inputs,
+    generate_random_sampling_factors,
+    move_random_sampling_files,
+    create_random_sampling_pert_list,
+    create_random_sampling_ace_directory,
+    create_random_sampling_ace_execution_file,
+    random_sampling_folder_check
+)
 
 def generate_unperturbed_neutron_ace_file(
     frendy_Path,
@@ -24,21 +42,13 @@ def generate_unperturbed_neutron_ace_file(
 
         upgrade_Flag (Bool): Add additional energy grid points if True.
 
-        energy_grid (list or ndarray): Energy grid used for perturbation bounds.
+        energy_grid (list or ndarray): Energy grid used for perturbation bounds. [in eV]
 
         cleanup_Flag (Bool): Delete intermediate files if True.
 
     Results:
         output_file_path (str): Path to the generated ACE file.
     """
-
-    'Import modules and internal functions'
-
-    import os
-    from .frendy_internal_functions import (
-        format_endf_evaluation,
-        create_unperturbed_ace_generation_input
-    )
 
     if energy_grid is None:
         energy_grid = []
@@ -143,18 +153,7 @@ def generate_direct_perturbation_ace_files(
     Results:
         perturbed_ace_folder_path (str): Directory containing perturbed ACE files.
     """
-
-    'Import necessary modules and functions'
-
-    import os
-    import shutil
-    from .frendy_internal_functions import (
-        create_direct_perturbation_inputs,
-        create_direct_perturbation_list,
-        create_direct_perturbation_command_file,
-        direct_perturbation_folder_check
-    )
-
+    
     'Store the initial directory to return to after creating the ACE files'
 
     starting_directory = os.getcwd()
@@ -279,21 +278,6 @@ def generate_random_sampling_ace_files(
         files are located.
     """
 
-    'Import modules'
-
-    import os
-    import shutil
-    from .frendy_internal_functions import (
-        create_random_sampling_tool_execution_file,
-        create_random_sampling_tool_inputs,
-        generate_random_sampling_factors,
-        move_random_sampling_files,
-        create_random_sampling_pert_list,
-        create_random_sampling_ace_directory,
-        create_random_sampling_ace_execution_file,
-        random_sampling_folder_check
-    )
-
     'Grab the starting directory to return to as need be'
 
     starting_directory = os.getcwd()
@@ -409,7 +393,7 @@ def generate_random_sampling_ace_files(
 
     'Display outputs depending on completion status'
 
-    if file_failure_flag is False:
+    if file_failure_flag is True:
         print('ACE files not generated successfully; check outputs for more information')
     else:
         print(

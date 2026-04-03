@@ -1,5 +1,13 @@
 # Main functions related to Sandy to be used with WENDIGO
 
+'Import internal functions'
+from WINDIGO.sandy_internal_functions import (
+    retrieve_nuclide_information,
+    retrieve_covariance_data,
+    plot_covariance,
+    save_covariance_file
+)
+
 def sandy_covariance_retrieval(
     energy_grid,
     nuclide,
@@ -45,15 +53,6 @@ def sandy_covariance_retrieval(
         data.
     """
 
-    'Import necessary internal functions'
-
-    from .sandy_internal_functions import (
-        retrieve_nuclide_information,
-        retrieve_covariance_data,
-        plot_covariance,
-        save_covariance_file
-    )
-
     (
         "Retrieve the number used to specify which nuclide's covariance "
         "data is retrieved using Sandy"
@@ -94,9 +93,10 @@ def sandy_covariance_retrieval(
         flag_String=flag_String
     )
 
+    
+    print('Covariance Retrieval Process Complete')
+
     if plotting_Flag:
         return csv_filename, plot_filename
     else:
         return csv_filename
-
-    print('Covariance Retrieval Process Complete')

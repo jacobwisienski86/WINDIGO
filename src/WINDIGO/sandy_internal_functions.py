@@ -2,6 +2,12 @@
 # quantification workflow. Not intended to be called directly when using
 # the workflow.
 
+import os
+import sandy
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+from WINDIGO.z_number_library import nuclide_ZZZs
 
 def retrieve_nuclide_information(nuclide):
     """
@@ -16,9 +22,6 @@ def retrieve_nuclide_information(nuclide):
         nuclide_number (int): Number used to specify which nuclide will have
         its covariance data retrieved using Sandy.
     """
-
-    import numpy as np
-    from .z_number_library import nuclide_ZZZs
 
     'Grab the nuclide\'s element and mass number from the input'
 
@@ -82,12 +85,6 @@ def retrieve_covariance_data(
         flag_String (str): 'Relative' or 'Absolute' for naming conventions.
     """
 
-    'Import needed modules'
-
-    import numpy as np
-    import os
-    import sandy
-
     'Set the appropriate data type name for use in the final filenames'
 
     if relative_Flag:
@@ -118,15 +115,15 @@ def retrieve_covariance_data(
     'Select the correct MF file based upon the requested MT number'
 
     'Nu-Related Cov Data'
-    if ([mt_Number] in [452, 455, 456]) is True:
+    if (mt_Number in [452, 455, 456]) is True:
         cov = errorr['errorr31'].get_cov(mts=[mt_Number])
 
     'Fission Spectrum-Related Cov Data'
-    if ([mt_Number] in [1018]) is True:
-        cov = errorr['errorr35'].get_cov(mts=[mt_Number])
+    if (mt_Number in [1018]) is True:
+        cov = errorr['errorr35'].get_cov()
 
     'General XS Cov Data'
-    if ([mt_Number] not in [452, 455, 456]) and ([mt_Number] not in [1018]):
+    if (mt_Number not in [452, 455, 456]) and (mt_Number not in [1018]):
         cov = errorr['errorr33'].get_cov(mts=[mt_Number])
 
     'Save the covariance data as a separate variable and output the shape'
@@ -161,9 +158,6 @@ def plot_covariance(covariance_data, energy_grid, nuclide, mt_Number, flag_Strin
     Results:
         plot_filename (str): Path to the saved plot.
     """
-
-    import matplotlib.pyplot as plt
-    import seaborn as sns
 
     fig, ax = plt.subplots(figsize=(8, 8), dpi=100)
     ax.set_aspect("equal")
@@ -208,11 +202,6 @@ def save_covariance_file(covariance_data, energy_grid, nuclide, mt_Number, flag_
     Results:
         csv_filename (str): Path to the saved CSV file.
     """
-
-    'Import needed modules'
-
-    import pandas as pd
-    import os
 
     covariance_data.to_csv('intermediate_dataframe.csv', index=False)
 

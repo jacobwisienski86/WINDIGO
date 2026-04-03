@@ -1,5 +1,13 @@
 # Functions related to functionality with OpenMC for WENDIGO
 
+from WINDIGO.openmc_internal_functions import (
+    count_directories,
+    create_numbers,
+    create_unperturbed_library,
+    create_model_folders,
+    create_perturbed_xml
+)
+
 def build_perturbed_cross_sections_libraries(
     unperturbed_nuclide_list,
     neutron_sublibrary_path,
@@ -53,17 +61,6 @@ def build_perturbed_cross_sections_libraries(
         perturbed_model_top_directory (str): Path to the directory containing
         the folders with the perturbed cross_sections.xml files.
     """
-
-    'Import needed functions'
-
-    from .openmc_internal_functions import (
-        count_directories,
-        create_numbers,
-        create_unperturbed_library,
-        create_model_folders,
-        create_perturbed_xml
-    )
-    from pathlib import Path
 
     'Count the number of directories within the perturbed ACE file folder'
 
