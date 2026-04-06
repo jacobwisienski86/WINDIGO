@@ -52,7 +52,7 @@ https://www.sciencedirect.com/science/article/pii/S0306454916305278
 
 WINDIGO was originally developed as part of research towards a Master's of Science degree in Nuclear Engineering by Jacob Wisienski under the advisement of Dr. Stefano Terlizzi at the Pennsylvania State University.
 
-## Contacts
+# Contacts
 
 [**Jacob Wisienski**](https://github.com/jacobwisienski86)
 
