@@ -94,12 +94,16 @@ def create_unperturbed_library(
                 xs_filename = f"{neutron_sublibrary_path}/{file}"
                 unperturbed_library.register_file(xs_filename)
 
-    # Register thermal scattering files
-    for thermal_scatter in unperturbed_TSL_list:
-        for file in os.listdir(thermal_scatter_sublibrary_path):
-            if thermal_scatter in file and file.endswith(".h5"):
-                tsl_filename = f"{thermal_scatter_sublibrary_path}/{file}"
-                unperturbed_library.register_file(tsl_filename)
+    #Check if thermal scattering data will be included in the model of interest
+    if (thermal_scatter_sublibrary_path != '') and (unperturbed_TSL_list != []):
+        # Register thermal scattering files
+        for thermal_scatter in unperturbed_TSL_list:
+            for file in os.listdir(thermal_scatter_sublibrary_path):
+                if thermal_scatter in file and file.endswith(".h5"):
+                    tsl_filename = f"{thermal_scatter_sublibrary_path}/{file}"
+                    unperturbed_library.register_file(tsl_filename)
+    else:
+        print('No thermal scattering data will be included.')
 
     return unperturbed_library
 
@@ -196,7 +200,7 @@ def create_perturbed_xml(
             if (
                 'xsdir' not in file
                 and 'h5' not in file
-                and file.endswith('.ace')
+                and 'ace' in file
             ):
                 perturbed_ACE_file_path = f"{perturbed_data_folder}/{file}"
                 break
