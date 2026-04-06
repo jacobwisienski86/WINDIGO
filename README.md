@@ -1,6 +1,6 @@
 # WINDIGO
 
-The Workflow Integrating Nuclear Data InvestiGations into Openmc (WINDIGO) is a Python package with a set of functions that are useful for allowing users to propagate uncertainty into OpenMC (Open Monte Carlo) calculations based on uncertainties in nuclear data. These functions make use of the Python package SANDY (SAmpler of Nuclear Data and uncertaintY) and the software FRENDY (FRom Evaluated Nuclear Data librarY). WINDIGO doesn't perform any modifications to nuclear data or any simulations using it on its own, rather it serves as a tool to make performing these functions more efficient using pre-established codes.
+The Workflow Integrating Nuclear Data InvestiGations into Openmc (WINDIGO) is a Python package with a set of functions that are useful for allowing users to propagate uncertainty into OpenMC (Open Monte Carlo) calculations based on uncertainties in nuclear data. These functions make use of the Python package SANDY (SAmpler of Nuclear Data and uncertaintY) and the software FRENDY (FRom Evaluated Nuclear Data librarY). WINDIGO doesn't perform any modifications to nuclear data or any simulations using it on its own, rather it serves as a tool to make performing these tasks more efficient using pre-established codes.
 
 # Installation and Configuration
 
@@ -12,7 +12,7 @@ pip install WINDIGO
 
 SANDY, FRENDY, and OpenMC must also be installed by the user to enable their functionality with WINDIGO. 
 
-SANDY can generally be installed using a command line input similarly to WINDIGO.
+SANDY can generally be installed using a command line input with a Python package manager similarly to WINDIGO.
 
 ```bash 
 pip install sandy
