@@ -32,6 +32,10 @@ FRENDY Documentation Homepage: https://rpg.jaea.go.jp/main/en/program_frendy/
 
 FRENDY Installation Instructions: https://rpg.jaea.go.jp/download/frendy/seminar/03.FRENDY_installation_ver1.5.pdf
 
+Known neutron cross section libraries that SANDY can retrieve covariance data for within its latest stable release (Version 1.1) include: ENDF/B-VII.1, ENDF/B-VIII.0, JENDL-4.0u, JEFF-3.1.1, JEFF-3.2, JEFF-3.3, and TENDL-2023. Access to additional libraries for covariance retrieval, such as for ENDF/B-VIII.1, require installations of SANDY corresponding to other branches of the SANDY GitHub repository such as the develop branch.
+
+FRENDY should be able to process any nuclear data evaluations that follow the standard ENDF-6 format. Libraries with cross section evaluations that the WINDIGO developers have tested with FRENDY include ENDF/B-VIII.0, ENDF/B-VIII.1, and FENDL-3.2c. 
+
 *It is advised not to modify the names and locations of directories within their installation of FRENDY. Doing so will limit the operational abilities of WINDIGO as it has been written with the default configuration of FRENDY in mind with regards to navigating directories.*
 
 # References
