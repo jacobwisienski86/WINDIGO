@@ -32,7 +32,7 @@ FRENDY Documentation Homepage: https://rpg.jaea.go.jp/main/en/program_frendy/
 
 FRENDY Installation Instructions: https://rpg.jaea.go.jp/download/frendy/seminar/03.FRENDY_installation_ver1.5.pdf
 
-**It is imperative that prospective users of WINDIGO do not modify the names and locations of directories within their installation of FRENDY. Doing so will limit the operational abilities of WINDIGO as it has been written with the default configuration of FRENDY in mind with regards to navigating directories. This is not an issue with SANDY and OpenMC as WINDIGO relies upon their Python API instead of navigating their specific directories.**
+*It is advised not to modify the names and locations of directories within their installation of FRENDY. Doing so will limit the operational abilities of WINDIGO as it has been written with the default configuration of FRENDY in mind with regards to navigating directories.*
 
 # References
 
