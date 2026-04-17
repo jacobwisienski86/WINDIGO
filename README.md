@@ -24,6 +24,7 @@ pip install .
 
 Optionally one can activate a virtual environment to add WINDIGO as a package there instead of within the user's main Python installation.
 
+
 SANDY, FRENDY, and OpenMC must also be installed by the user to enable their functionality with WINDIGO. 
 
 SANDY can generally be installed using a command line input with a Python package manager similarly to WINDIGO.
@@ -45,6 +46,14 @@ OpenMC Installation Instructions: https://docs.openmc.org/en/stable/quickinstall
 FRENDY Documentation Homepage: https://rpg.jaea.go.jp/main/en/program_frendy/
 
 FRENDY Installation Instructions: https://rpg.jaea.go.jp/download/frendy/seminar/03.FRENDY_installation_ver1.5.pdf
+
+
+To test that everything was installed properly and is functioning correctly, users can navigate to the root directory of the repository and run:
+```bash
+pytest
+```
+To run the unit tests using the pytest package.
+
 
 Known neutron cross section libraries that SANDY can retrieve covariance data for within its latest stable release (Version 1.1) include: ENDF/B-VII.1, ENDF/B-VIII.0, JENDL-4.0u, JEFF-3.1.1, JEFF-3.2, JEFF-3.3, and TENDL-2023. Access to additional libraries for covariance retrieval, such as for ENDF/B-VIII.1, require installations of SANDY corresponding to other branches of the SANDY GitHub repository such as the develop branch.
 
