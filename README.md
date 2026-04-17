@@ -4,11 +4,25 @@ The Workflow Integrating Nuclear Data InvestiGations into Openmc (WINDIGO) is a 
 
 # Installation and Configuration
 
-WINDIGO can easily be installed from the command line using a Python package manager such as pip. 
+WINDIGO can easily be installed by first cloning the repository:
 
 ```bash
-pip install WINDIGO
+git clone https://github.com/jacobwisienski86/WINDIGO.git
 ```
+
+Then by navigating to the root directory of the cloned repository:
+
+```bash
+cd ./WINDIGO
+```
+
+And finally using the Python package manager pip to run:
+
+```bash
+pip install .
+```
+
+Optionally one can activate a virtual environment to add WINDIGO as a package there instead of within the user's main Python installation.
 
 SANDY, FRENDY, and OpenMC must also be installed by the user to enable their functionality with WINDIGO. 
 
