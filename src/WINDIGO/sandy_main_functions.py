@@ -48,7 +48,7 @@ def sandy_covariance_retrieval(
         data to a tabulated version. Expressed as a fraction (i.e 
         err_tolerance = 0.1 means that converted cross section data
         is considered valid if it falls within 10% of the continuous
-        version)
+        version) Default is 0.1.
 
     relative_Flag : bool, optional
         Retrieve relative covariance data if True. Default is False.
