@@ -94,7 +94,8 @@ def create_unperturbed_ace_generation_input(
     endf_file_dat,
     temperature,
     upgrade_Flag=False,
-    energy_grid=None
+    energy_grid=None,
+    verbosity_Flag = False
 ):
     """
     Write the input file used to generate unperturbed ACE files.
@@ -103,6 +104,25 @@ def create_unperturbed_ace_generation_input(
     ----------
     frendy_Path : str
         Path to FRENDY installation directory.
+
+    nuclide : str
+        Name of the nuclide whose ENDF evaluation is used.
+    
+    endf_file_dat: str
+        Name of the .dat-formatted ENDF evaluation used for
+        ACE file generation.
+
+    temperature : int
+        Temperature at which to generate the ACE file.
+
+    upgrade_Flag : bool, optional
+        Add additional energy grid points if True.
+
+    energy_grid : list or ndarray, optional
+        Energy grid used for perturbation bounds [eV].
+
+    verbosity_Flag: bool, optional
+        Suppress terminal output for ACE file creation if True.
 
     Returns
     -------
@@ -148,6 +168,17 @@ def create_unperturbed_ace_generation_input(
     if upgrade_Flag:
         upgrade_lines = write_upgrade_lines(energy_grid=energy_grid)
         ace_file_lines.extend(upgrade_lines)
+    
+    # Add a flag to remove a portion of terminal output if desired
+    if verbosity_Flag:
+        main_verbosity_line = 'print_set_data_ace_data_generator    off\n'
+        ace_file_lines.append(main_verbosity_line)
+
+        resonance_verbosity_line = 'print_set_data_linearize    off\n'
+        ace_file_lines.append(resonance_verbosity_line)
+
+        doppler_verbosity_line = 'print_set_data_dop    off\n'
+        ace_file_lines.append(doppler_verbosity_line)
 
     # Write file
     with open(ace_file_gen_input_filename, "w") as file:
