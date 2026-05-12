@@ -52,6 +52,7 @@ def test_sandy_covariance_retrieval_no_plot(monkeypatch):
         mt_Number=102,
         data_library="endfb_80",
         temperature=300,
+        err_tolerance=0.1,
         relative_Flag=False,
         plotting_Flag=False,
     )
@@ -66,15 +67,18 @@ def test_sandy_covariance_retrieval_no_plot(monkeypatch):
     # -----------------------------
     assert calls["retrieve_nuclide_information"] == ["U235"]
 
-    assert calls["retrieve_covariance_data"][0]["nuclide"] == "U235"
-    assert calls["retrieve_covariance_data"][0]["mt_Number"] == 102
-    assert calls["retrieve_covariance_data"][0]["data_library"] == "endfb_80"
-    assert calls["retrieve_covariance_data"][0]["temperature"] == 300
-    assert calls["retrieve_covariance_data"][0]["relative_Flag"] is False
+    rc = calls["retrieve_covariance_data"][0]
+    assert rc["nuclide_number"] == 922350
+    assert rc["mt_Number"] == 102
+    assert rc["data_library"] == "endfb_80"
+    assert rc["temperature"] == 300
+    assert rc["err_tolerance"] == 0.1
+    assert rc["relative_Flag"] is False
 
-    assert calls["save_covariance_file"][0]["nuclide"] == "U235"
-    assert calls["save_covariance_file"][0]["mt_Number"] == 102
-    assert calls["save_covariance_file"][0]["flag_String"] == "Absolute"
+    sc = calls["save_covariance_file"][0]
+    assert sc["nuclide"] == "U235"
+    assert sc["mt_Number"] == 102
+    assert sc["flag_String"] == "Absolute"
 
     # -----------------------------
     # Validate printed output
@@ -133,6 +137,7 @@ def test_sandy_covariance_retrieval_with_plot(monkeypatch):
         mt_Number=18,
         data_library="endfb_80",
         temperature=600,
+        err_tolerance=0.2,
         relative_Flag=True,
         plotting_Flag=True,
     )
@@ -148,12 +153,17 @@ def test_sandy_covariance_retrieval_with_plot(monkeypatch):
     # -----------------------------
     assert calls["retrieve_nuclide_information"] == ["U235"]
 
-    assert calls["retrieve_covariance_data"][0]["relative_Flag"] is True
+    rc = calls["retrieve_covariance_data"][0]
+    assert rc["nuclide_number"] == 922350
+    assert rc["relative_Flag"] is True
+    assert rc["err_tolerance"] == 0.2
 
-    assert calls["plot_covariance"][0]["flag_String"] == "Relative"
-    assert calls["plot_covariance"][0]["nuclide"] == "U235"
+    pc = calls["plot_covariance"][0]
+    assert pc["flag_String"] == "Relative"
+    assert pc["nuclide"] == "U235"
 
-    assert calls["save_covariance_file"][0]["flag_String"] == "Relative"
+    sc = calls["save_covariance_file"][0]
+    assert sc["flag_String"] == "Relative"
 
     # -----------------------------
     # Validate printed output

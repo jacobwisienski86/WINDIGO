@@ -28,11 +28,9 @@ def test_retrieve_covariance_data_general_xs(monkeypatch):
 
     printed = []
 
-    # Fake covariance matrix
     fake_matrix = np.array([[1, 2], [3, 4]])
     fake_cov_obj = FakeCov(fake_matrix)
 
-    # Fake errorr object with only errorr33 populated
     fake_errorr = make_fake_errorr(
         cov31=None,
         cov33=type("CovBlock", (), {"get_cov": lambda self, mts: fake_cov_obj})(),
@@ -42,7 +40,7 @@ def test_retrieve_covariance_data_general_xs(monkeypatch):
     # Mock sandy.get_endf6_file(...).get_errorr(...)
     def fake_get_endf6_file(lib, xs, nuc):
         class FakeEndf:
-            def get_errorr(self, **kwargs):
+            def get_errorr(self, err, temperature, errorr_kws, groupr_kws):
                 return fake_errorr
         return FakeEndf()
 
@@ -51,16 +49,15 @@ def test_retrieve_covariance_data_general_xs(monkeypatch):
         fake_get_endf6_file,
     )
 
-    # Capture print
     monkeypatch.setattr(builtins, "print", lambda msg: printed.append(msg))
 
     cov, flag = retrieve_covariance_data(
         energy_grid=[1, 2, 3],
-        nuclide="U235",
-        mt_Number=102,  # general XS
+        mt_Number=102,
         data_library="endfb_80",
         nuclide_number=922350,
         temperature=300,
+        err_tolerance=0.1,
         relative_Flag=False,
     )
 
@@ -85,7 +82,7 @@ def test_retrieve_covariance_data_nu_related(monkeypatch):
 
     def fake_get_endf6_file(lib, xs, nuc):
         class FakeEndf:
-            def get_errorr(self, **kwargs):
+            def get_errorr(self, err, temperature, errorr_kws, groupr_kws):
                 return fake_errorr
         return FakeEndf()
 
@@ -97,11 +94,11 @@ def test_retrieve_covariance_data_nu_related(monkeypatch):
 
     cov, flag = retrieve_covariance_data(
         energy_grid=[1],
-        nuclide="U235",
         mt_Number=452,
         data_library="endfb_80",
         nuclide_number=922350,
         temperature=300,
+        err_tolerance=0.05,
         relative_Flag=True,
     )
 
@@ -126,7 +123,7 @@ def test_retrieve_covariance_data_fission_spectrum(monkeypatch):
 
     def fake_get_endf6_file(lib, xs, nuc):
         class FakeEndf:
-            def get_errorr(self, **kwargs):
+            def get_errorr(self, err, temperature, errorr_kws, groupr_kws):
                 return fake_errorr
         return FakeEndf()
 
@@ -138,11 +135,11 @@ def test_retrieve_covariance_data_fission_spectrum(monkeypatch):
 
     cov, flag = retrieve_covariance_data(
         energy_grid=[1, 2],
-        nuclide="U235",
         mt_Number=1018,
         data_library="endfb_80",
         nuclide_number=922350,
         temperature=300,
+        err_tolerance=0.2,
         relative_Flag=False,
     )
 
