@@ -3,6 +3,14 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+from .post_processing_internal_functions import (
+   check_input_types,
+   calculate_forward_coefficients,
+   calculate_backward_coefficients,
+   calculate_central_coefficients,
+   convert_per_lethargy,
+   plot_relative_sens,
+)
 
 def generate_relative_sensitivity_plot(
         energy_grid_MeV,
@@ -79,65 +87,62 @@ def generate_relative_sensitivity_plot(
 
    #Ensure that parameters are ndarrays as necessary
 
-   if type(energy_grid_MeV) is not np.ndarray:
-      energy_grid_MeV = np.array(energy_grid_MeV)
-   if type(original_inputs) is not np.array:
-      original_inputs = np.array(original_inputs)
-   if type(positive_perturbed_outputs) is not np.ndarray:
-      positive_perturbed_outputs = np.array(positive_perturbed_outputs)
-   if type(negative_perturbed_outputs) is not np.ndarray:
-      negative_perturbed_outputs = np.array(negative_perturbed_outputs)
-   if type(positive_perturbed_inputs) is not np.ndarray:
-      positive_perturbed_inputs = np.array(positive_perturbed_inputs)
-   if type(negative_perturbed_inputs) is not np.ndarray:
-      negative_perturbed_inputs = np.array(negative_perturbed_inputs)
+   inputs = [energy_grid_MeV,
+             original_inputs,
+             positive_perturbed_outputs,
+             negative_perturbed_outputs,
+             positive_perturbed_inputs,
+             negative_perturbed_inputs]
+   
+   modified_inputs = check_input_types(inputs = inputs)
 
-   #Calculate the relative sensitivity coefficients based on the 
-   #chosen calculation method
+   energy_grid_MeV = modified_inputs[0]
+   original_inputs = modified_inputs[1]
+   positive_perturbed_outputs = modified_inputs[2]
+   negative_perturbed_outputs = modified_inputs[3]
+   positive_perturbed_inputs = modified_inputs[4]
+   negative_perturbed_inputs = modified_inputs[5]
+
+
+   #Check that a correct sensitivity coefficient calculation method has been input
 
    if (sens_calculation_method != 'Forward') and (sens_calculation_method != 'Backward') and (sens_calculation_method != 'Central'):
       raise Exception('Invalid sensitivity coefficient calculation method')
+   
+   #Calculate the relative sensitivity coefficients
+
+   relative_flag = True
 
    if sens_calculation_method == 'Forward':
-      relative_sens_coefficients = (positive_perturbed_outputs - unperturbed_output)/(positive_perturbed_inputs - original_inputs) * (original_inputs/unperturbed_output)
+      relative_sens_coefficients = calculate_forward_coefficients(positive_perturbed_outputs = positive_perturbed_outputs,
+                                                                  unperturbed_output = unperturbed_output,
+                                                                  positive_perturbed_inputs = positive_perturbed_inputs,
+                                                                  original_inputs = original_inputs,
+                                                                  relative_flag = relative_flag)
    elif sens_calculation_method == 'Backward':
-      relative_sens_coefficients = (unperturbed_output - negative_perturbed_outputs)/(original_inputs - negative_perturbed_inputs) * (original_inputs/unperturbed_output)
+      relative_sens_coefficients = calculate_backward_coefficients(negative_perturbed_outputs=negative_perturbed_outputs,\
+                                                                   unperturbed_output=unperturbed_output,
+                                                                   negative_perturbed_inputs=negative_perturbed_inputs,
+                                                                   original_inputs=original_inputs,
+                                                                   relative_flag=relative_flag)
+
    else:
-      relative_sens_coefficients = (positive_perturbed_outputs - negative_perturbed_outputs)/(2*perturbation_coefficient*original_inputs) * (original_inputs/unperturbed_output)
-      
-   #Create an array of lethargy widths
+      relative_sens_coefficients = calculate_central_coefficients(positive_perturbed_outputs=positive_perturbed_outputs,
+                                                                  negative_perturbed_outputs=negative_perturbed_outputs,
+                                                                  unperturbed_output=unperturbed_output,
+                                                                  positive_perturbed_inputs=positive_perturbed_inputs,
+                                                                  negative_perturbed_inputs=negative_perturbed_inputs,
+                                                                  original_inputs=original_inputs,
+                                                                  perturbation_coefficient=perturbation_coefficient,
+                                                                  relative_flag=relative_flag)
 
-   lethargy_widths = []
+   relative_sens_per_lethargy = convert_per_lethargy(relative_sens_coefficients=relative_sens_coefficients,
+                                                     energy_grid_MeV=energy_grid_MeV)
+   
+   plot_relative_sens(relative_sens_per_lethargy=relative_sens_per_lethargy,
+                      energy_grid_MeV=energy_grid_MeV)
 
-   for ii in range(0, len(energy_grid_MeV)-1):
-      lethargy_width = np.log(energy_grid_MeV[ii+1] / energy_grid_MeV[ii])
-      lethargy_widths.append(lethargy_width)
 
-   lethargy_width = np.array(lethargy_widths)
-
-   #Compute the relative sensitivity per lethargy
-
-   relative_sens_per_lethargy = relative_sens_coefficients/lethargy_widths
-
-   #Add an extra zero to relative_sens_per_lethargy to assist with plotting
-
-   relative_sens_per_lethargy = np.insert(relative_sens_per_lethargy, 0, 0)
-
-   #Plot the sensitivity profile
-
-   fig, ax = plt.subplots(figsize = (8,6))
-
-   ax.step(energy_grid_MeV, relative_sens_per_lethargy, color = 'black')
-   ax.tick_params(axis = 'x', labelsize = 18)
-   ax.tick_params(axis = 'y', labelsize = 18)
-   ax.set_xscale('log')
-   ax.set_xlabel('Energy (MeV)', fontsize = 18)
-   ax.set_ylabel('Relative Sensitivity Per Lethargy Width', fontsize = 18)
-   ax.grid()
-
-   plt.tight_layout()
-   plt.savefig('RelativeSensitivityPlot.png', dpi = 350, bbox_inches = 'tight')
-   plt.show
 
 def calculate_direct_perturbation_uncertainty(
       sens_calculation_method,
@@ -215,3 +220,32 @@ def calculate_random_sampling_uncertainty(
    print('The random sampling uncertainty is: ' + str(propagated_uncertainty))
 
    return propagated_uncertainty
+
+scale44_grid_MeV = np.array([
+    1.0000E-11, 3.0000E-9, 7.5000E-9, 1.0000E-8, 2.5300E-8,
+    3.0000E-8, 4.0000E-8, 5.0000E-8, 7.0000E-8, 1.0000E-7,
+    1.5000E-7, 2.0000E-7, 2.2500E-7, 2.5000E-7, 2.7500E-7,
+    3.2500E-7, 3.5000E-7, 3.7500E-7, 4.0000E-7, 6.2500E-7,
+    1.0000E-6, 1.7700E-6, 3.0000E-6, 4.7500E-6, 6.0000E-6,
+    8.1000E-6, 1.0000E-5, 3.0000E-5, 1.0000E-4, 5.5000E-4,
+    3.0000E-3, 1.7000E-2, 2.5000E-2, 1.0000E-1, 4.0000E-1,
+    9.0000E-1, 1.4000E0, 1.8500E0, 2.3540E0, 2.4790E0,
+    3.0000E0, 4.8000E0, 6.4340E0, 8.1873E0, 2.0000E1
+])
+
+
+generate_relative_sensitivity_plot(energy_grid_MeV=scale44_grid_MeV,
+                                   unperturbed_output=np.load('examples/Jezebel_BaseKeff_Value.npy'),
+                                   sens_calculation_method='Forward',
+                                   original_inputs=np.load('examples/Original_Pu239Fission_xs.npy'),
+                                   positive_perturbed_outputs=np.load('examples/Jezebel_DirectKeff_Values.npy'),
+                                   positive_perturbed_inputs=np.load('examples/Perturbed_Pu239Fission_xs.npy'))
+
+calculate_direct_perturbation_uncertainty(sens_calculation_method='Forward',
+                                   unperturbed_output=np.load('examples/Jezebel_BaseKeff_Value.npy'),
+                                   original_inputs=np.load('examples/Original_Pu239Fission_xs.npy'),
+                                   positive_perturbed_outputs=np.load('examples/Jezebel_DirectKeff_Values.npy'),
+                                   positive_perturbed_inputs=np.load('examples/Perturbed_Pu239Fission_xs.npy'),
+                                   covariance_matrix=np.loadtxt(open('examples/covarianceMatrix_45Groups_Pu239_MT_18_Absolute.csv', "rb"), delimiter=","))            
+
+calculate_random_sampling_uncertainty(perturbed_outputs=np.load('examples/Jezebel_RandomKeff_Values.npy'))
