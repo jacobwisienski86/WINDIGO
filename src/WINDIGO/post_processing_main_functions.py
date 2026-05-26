@@ -79,11 +79,7 @@ def generate_relative_sensitivity_plot(
    given value should be 0.1.
    Default is 1.0.
 
-   Returns
-   ---------
-      Plot of the relative sensitivity per unit lethargy of the perturbed outputs
-      versus the incident neutron energy.   
-   """ 
+   """
 
    #Ensure that parameters are ndarrays as necessary
 
@@ -160,6 +156,66 @@ def calculate_direct_perturbation_uncertainty(
       negative_perturbed_inputs=[],
       perturbation_coefficient=1.0,
 ):
+
+   """
+   Calculates the propagated uncertainty from direct perturbation method
+   outputs and an inputted covariance matrix using the Sandwich Rule.
+
+   Parameters
+   ----------
+
+   sens_calculation_method: str
+      Desired method used to calculate sensitivity coefficients.
+      Options: Forward, Backward, Central
+
+
+   unperturbed_output: int
+      Output from a simulation that used unperturbed inputs. This
+      is the reference value that perturbed outputs deviate from.
+
+   original_inputs: list or ndarray
+      Unperturbed inputs used to obtain the unperturbed simulation
+      output(s) of interest.
+
+   positive_perturbed_outputs: list or ndarray, optional
+      Outputs from simulations that utilized positively-perturbed 
+      inputs. Required for Forward and Central sensitivity coefficient
+      calculations.
+      Default is blank list.
+
+   negative_perturbed_outputs: list or ndarray, optional
+      Outputs from simulations that utilized negatively-perturbed 
+      inputs. Required for Backward and Central sensitivity coefficient
+      calculations.
+      Default is blank list.   
+
+   positive_perturbed_inputs: list or ndarray, optional
+      Inputs used in simulations to obtain the outputs given in
+      positive_perturbed_outputs. Required for the Forward sensitivity
+      coefficient calculations.
+      Default is blank list.
+
+   negative_perturbed_inputs: list or ndarray, optional
+      Inputs used in simulations to obtain the outputs given in
+      negative_perturbed_outputs. Required for the Backward sensitivity
+      coefficient calculations.
+      Default is blank list.      
+
+   perturbation_coefficient: float, optional
+      Fractional multiplier used to perturb the inputs in the 
+      sensitivity calculation simulations. Required for the Central 
+      sensitivity coefficient calculations. Assumes that the positive
+      and negative input perturbations were by the same amount. For 
+      example, for 10% positive and negative perturbations, the 
+      given value should be 0.1.
+      Default is 1.0.
+
+   Returns
+   ---------
+      propagated_uncertainty: float
+         Value of the propagated uncertainty calculated using the Sandwich Rule from direct perturbation
+         outputs.
+   """ 
    #Check that the inputted covariance matrix is square
 
    if (np.shape(covariance_matrix)[0] != np.shape(covariance_matrix)[1]):
@@ -238,6 +294,23 @@ def calculate_direct_perturbation_uncertainty(
 def calculate_random_sampling_uncertainty(
       perturbed_outputs
 ):
+   
+   """
+   Calculates the standard deviation of a set of perturbed outputs. This standard deviation serves
+   as the uncertainty calculated using the random sampling method.
+
+   Parameters
+   ----------
+
+   perturbed_outputs: list or ndarray
+      Outputs obtained using perturbed samples from the random sampling methodology.
+
+   Returns
+   ----------
+   propagated_uncertainty: float
+      Value of the standard deviation of the inputted set of perturbed outputs.
+
+   """
    
    #Check that the type of perturbed_outputs is np.ndarray, and change to it if necessary
    if type(perturbed_outputs) is not np.ndarray:
