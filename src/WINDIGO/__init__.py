@@ -20,10 +20,19 @@ from .openmc_main_functions import (
     build_perturbed_cross_sections_libraries,
 )
 
+from .post_processing_main_functions import (
+    generate_relative_sensitivity_plot,
+    calculate_direct_perturbation_uncertainty,
+    calculate_random_sampling_uncertainty
+)
+
 __all__ = [
     "generate_unperturbed_neutron_ace_file",
     "generate_direct_perturbation_ace_files",
     "generate_random_sampling_ace_files",
     "sandy_covariance_retrieval",
     "build_perturbed_cross_sections_libraries",
+    "generate_relative_sensitivity_plot",
+    "calculate_direct_perturbation_uncertainty",
+    "calculate_random_sampling_uncertainty",
 ]
