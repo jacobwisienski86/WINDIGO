@@ -190,8 +190,8 @@ def calculate_central_coefficients(
 
 def convert_per_lethargy(relative_sens_coefficients, energy_grid_MeV):
     """
-    Converts a set of relative sensitivity coefficients to being per unit
-    lethargy based on a given energy grid.
+    Converts a set of relative sensitivity coefficients to being per lethargy
+    width based on a given energy grid.
 
     Parameters
     ----------
@@ -205,7 +205,7 @@ def convert_per_lethargy(relative_sens_coefficients, energy_grid_MeV):
     Returns
     -------
     relative_sens_per_lethargy : ndarray
-        Relative sensitivity coefficients converted to be per unit lethargy.
+        Relative sensitivity coefficients converted to be per lethargy width.
     """
     # Create an array of lethargy widths
     lethargy_widths = []
@@ -218,7 +218,7 @@ def convert_per_lethargy(relative_sens_coefficients, energy_grid_MeV):
 
     lethargy_widths = np.array(lethargy_widths)
 
-    # Compute the relative sensitivity per unit lethargy
+    # Compute the relative sensitivity per lethargy width
     relative_sens_per_lethargy = (
         relative_sens_coefficients / lethargy_widths
     )
@@ -233,13 +233,13 @@ def convert_per_lethargy(relative_sens_coefficients, energy_grid_MeV):
 
 def plot_relative_sens(relative_sens_per_lethargy, energy_grid_MeV):
     """
-    Generates a plot of the relative sensitivity coefficients per unit lethargy
+    Generates a plot of the relative sensitivity coefficients per lethargy width
     plotted against the incident neutron energy in MeV.
 
     Parameters
     ----------
     relative_sens_per_lethargy : ndarray
-        Relative sensitivity coefficients per unit lethargy.
+        Relative sensitivity coefficients per lethargy width.
 
     energy_grid_MeV : ndarray
         Energy bounds of the perturbation intervals used for finding the

@@ -24,7 +24,7 @@ def generate_relative_sensitivity_plot(
     perturbation_coefficient=1.0,
 ):
     """
-    Generates a relative sensitivity per unit lethargy 
+    Generates a relative sensitivity per lethargy width 
     plot of the outputs with respect to incident neutron
     energy.
 
@@ -156,7 +156,7 @@ def generate_relative_sensitivity_plot(
             "Invalid sensitivity coefficient calculation method. Please use either 'Forward', 'Backward', or 'Central'. "
         )
 
-    # Calculate the relative sensitivity per unit lethargy
+    # Calculate the relative sensitivity per lethargy width
 
     relative_sens_per_lethargy = convert_per_lethargy(
         relative_sens_coefficients=relative_sens_coefficients,
