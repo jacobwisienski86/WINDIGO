@@ -146,8 +146,6 @@ def generate_relative_sensitivity_plot(
             positive_perturbed_outputs=positive_perturbed_outputs,
             negative_perturbed_outputs=negative_perturbed_outputs,
             unperturbed_output=unperturbed_output,
-            positive_perturbed_inputs=positive_perturbed_inputs,
-            negative_perturbed_inputs=negative_perturbed_inputs,
             original_inputs=original_inputs,
             perturbation_coefficient=perturbation_coefficient,
             relative_flag=relative_flag,
@@ -263,8 +261,6 @@ def calculate_direct_perturbation_uncertainty(
 
         if (
             (len(positive_perturbed_outputs) != len(original_inputs))
-            or (len(positive_perturbed_inputs) != len(original_inputs))
-            or (len(negative_perturbed_inputs) != len(original_inputs))
             or (len(negative_perturbed_outputs) != len(original_inputs))
         ):
             raise Exception(
@@ -276,8 +272,6 @@ def calculate_direct_perturbation_uncertainty(
             positive_perturbed_outputs=positive_perturbed_outputs,
             negative_perturbed_outputs=negative_perturbed_outputs,
             unperturbed_output=unperturbed_output,
-            positive_perturbed_inputs=positive_perturbed_inputs,
-            negative_perturbed_inputs=negative_perturbed_inputs,
             original_inputs=original_inputs,
             perturbation_coefficient=perturbation_coefficient,
             relative_flag=relative_flag,
