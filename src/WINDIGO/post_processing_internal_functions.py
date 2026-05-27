@@ -55,11 +55,11 @@ def calculate_forward_coefficients(
         Output from a simulation that used unperturbed inputs. This is the
         reference value that perturbed outputs deviate from.
 
-    positive_perturbed_inputs : list or ndarray
+    positive_perturbed_inputs : ndarray
         Inputs used in simulations to obtain the outputs given in
         positive_perturbed_outputs.
 
-    original_inputs : list or ndarray
+    original_inputs : ndarray
         Unperturbed inputs used to obtain the unperturbed simulation output(s)
         of interest.
 
@@ -98,7 +98,7 @@ def calculate_backward_coefficients(
 
     Parameters
     ----------
-    negative_perturbed_outputs : list or ndarray
+    negative_perturbed_outputs : ndarray
         Outputs from simulations that utilized negatively perturbed inputs.
 
     unperturbed_output : int
@@ -148,16 +148,16 @@ def calculate_central_coefficients(
 
     Parameters
     ----------
-    positive_perturbed_outputs : list or ndarray
+    positive_perturbed_outputs : ndarray
         Outputs from simulations that utilized positively perturbed inputs.
 
-    negative_perturbed_outputs : list or ndarray
+    negative_perturbed_outputs : ndarray
         Outputs from simulations that utilized negatively perturbed inputs.
 
     unperturbed_output : int
         Output from a simulation that used unperturbed inputs.
 
-    original_inputs : list or ndarray
+    original_inputs : ndarray
         Unperturbed inputs used to obtain the unperturbed simulation output(s)
         of interest.
 
