@@ -1,7 +1,6 @@
 #Functions adding data post-processing capabilities
 #within WINDIGO.
 
-import matplotlib.pyplot as plt
 import numpy as np
 from .post_processing_internal_functions import (
    check_input_types,
