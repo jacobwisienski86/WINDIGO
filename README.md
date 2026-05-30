@@ -60,6 +60,10 @@ FRENDY should be able to process any nuclear data evaluations that follow the st
 
 *It is advised not to modify the names and locations of directories within their installation of FRENDY. Doing so will limit the operational abilities of WINDIGO as it has been written with the default configuration of FRENDY in mind with regards to navigating directories.*
 
+# SANDY Data Retrieval Trouble-Shooting
+
+If you are having trouble with retrieving covariance data using SANDY, this may be due to issues with how SANDY's default behavior is to retrieve nuclear data files from an IAEA website instead of within a user's local file system. The developers of SANDY are aware of this issue and efforts are currently underway to remediate this. As a temporary fix, a private GitHub repository with some of the IAEA's nuclear data files, and instructions on how to allow SANDY to retrieve them from a user's local installations has been created by the authors of WINDIGO. Access to this private GitHub repository can be given to interested users upon request with the authors of WINDIGO.
+
 # References
 
 FRENDY:
