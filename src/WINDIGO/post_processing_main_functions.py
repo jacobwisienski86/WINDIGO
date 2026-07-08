@@ -31,53 +31,53 @@ def generate_relative_sensitivity_plot(
     Parameters
     ----------
     energy_grid_MeV: list or ndarray
-       Grid defining the energy bounds used to perturb inputs
-       in MeV
+        Grid defining the energy bounds used to perturb inputs
+        in MeV
 
     sens_calculation_method: str
-       Desired method used to calculate sensitivity coefficients.
-       Options: Forward, Backward, Central
+        Desired method used to calculate sensitivity coefficients.
+        Options: Forward, Backward, Central
 
     unperturbed_output: int
-       Output from a simulation that used unperturbed inputs. This
-       is the reference value that perturbed outputs deviate from.
+        Output from a simulation that used unperturbed inputs. This
+        is the reference value that perturbed outputs deviate from.
 
     original_inputs: list or ndarray
-       Unperturbed inputs used to obtain the unperturbed simulation
-       output(s) of interest.
+        Unperturbed inputs used to obtain the unperturbed simulation
+        output(s) of interest.
 
     positive_perturbed_outputs: list or ndarray, optional
-       Outputs from simulations that utilized positively-perturbed 
-       inputs. Required for Forward and Central sensitivity coefficient
-       calculations.
-       Default is blank list.
+        Outputs from simulations that utilized positively-perturbed 
+        inputs. Required for Forward and Central sensitivity coefficient
+        calculations.
+        Default is blank list.
 
     negative_perturbed_outputs: list or ndarray, optional
-       Outputs from simulations that utilized negatively-perturbed 
-       inputs. Required for Backward and Central sensitivity coefficient
-       calculations.
-       Default is blank list.   
+        Outputs from simulations that utilized negatively-perturbed 
+        inputs. Required for Backward and Central sensitivity coefficient
+        calculations.
+        Default is blank list.   
 
     positive_perturbed_inputs: list or ndarray, optional
-       Inputs used in simulations to obtain the outputs given in
-       positive_perturbed_outputs. Required for the Forward sensitivity
-       coefficient calculations.
-       Default is blank list.
+        Inputs used in simulations to obtain the outputs given in
+        positive_perturbed_outputs. Required for the Forward sensitivity
+        coefficient calculations.
+        Default is blank list.
 
     negative_perturbed_inputs: list or ndarray, optional
-       Inputs used in simulations to obtain the outputs given in
-       negative_perturbed_outputs. Required for the Backward sensitivity
-       coefficient calculations.
-       Default is blank list.      
+        Inputs used in simulations to obtain the outputs given in
+        negative_perturbed_outputs. Required for the Backward sensitivity
+        coefficient calculations.
+        Default is blank list.      
 
     perturbation_coefficient: float, optional
-       Fractional multiplier used to perturb the inputs in the 
-       sensitivity calculation simulations. Required for the Central 
-       sensitivity coefficient calculations. Assumes that the positive
-       and negative input perturbations were by the same amount. For 
-       example, for 10% positive and negative perturbations, the 
-       given value should be 0.1.
-       Default is 1.0.
+        Fractional multiplier used to perturb the inputs in the 
+        sensitivity calculation simulations. Required for the Central 
+        sensitivity coefficient calculations. Assumes that the positive
+        and negative input perturbations were by the same amount. For 
+        example, for 10% positive and negative perturbations, the 
+        given value should be 0.1.
+        Default is 1.0.
 
     """
 
@@ -190,60 +190,60 @@ def calculate_direct_perturbation_uncertainty(
     Parameters
     ----------
     sens_calculation_method: str
-       Desired method used to calculate sensitivity coefficients.
-       Options: Forward, Backward, Central
+        Desired method used to calculate sensitivity coefficients.
+        Options: Forward, Backward, Central
 
     covariance_matrix: list or ndarray
-       Matrix representing the covariances between the original inputs 
-       that are subsequently altered as part of the direct perturbation 
-       uncertainty quantification procedure.
+        Matrix representing the covariances between the original inputs 
+        that are subsequently altered as part of the direct perturbation 
+        uncertainty quantification procedure.
 
     unperturbed_output: int
-       Output from a simulation that used unperturbed inputs. This
-       is the reference value that perturbed outputs deviate from.
+        Output from a simulation that used unperturbed inputs. This
+        is the reference value that perturbed outputs deviate from.
 
     original_inputs: list or ndarray
-       Unperturbed inputs used to obtain the unperturbed simulation
-       output(s) of interest.
+        Unperturbed inputs used to obtain the unperturbed simulation
+        output(s) of interest.
 
     positive_perturbed_outputs: list or ndarray, optional
-       Outputs from simulations that utilized positively-perturbed 
-       inputs. Required for Forward and Central sensitivity coefficient
-       calculations.
-       Default is blank list.
+        Outputs from simulations that utilized positively-perturbed 
+        inputs. Required for Forward and Central sensitivity coefficient
+        calculations.
+        Default is blank list.
 
     negative_perturbed_outputs: list or ndarray, optional
-       Outputs from simulations that utilized negatively-perturbed 
-       inputs. Required for Backward and Central sensitivity coefficient
-       calculations.
-       Default is blank list.   
+        Outputs from simulations that utilized negatively-perturbed 
+        inputs. Required for Backward and Central sensitivity coefficient
+        calculations.
+        Default is blank list.   
 
     positive_perturbed_inputs: list or ndarray, optional
-       Inputs used in simulations to obtain the outputs given in
-       positive_perturbed_outputs. Required for the Forward sensitivity
-       coefficient calculations.
-       Default is blank list.
+        Inputs used in simulations to obtain the outputs given in
+        positive_perturbed_outputs. Required for the Forward sensitivity
+        coefficient calculations.
+        Default is blank list.
 
     negative_perturbed_inputs: list or ndarray, optional
-       Inputs used in simulations to obtain the outputs given in
-       negative_perturbed_outputs. Required for the Backward sensitivity
-       coefficient calculations.
-       Default is blank list.      
+        Inputs used in simulations to obtain the outputs given in
+        negative_perturbed_outputs. Required for the Backward sensitivity
+        coefficient calculations.
+        Default is blank list.      
 
     perturbation_coefficient: float, optional
-       Fractional multiplier used to perturb the inputs in the 
-       sensitivity calculation simulations. Required for the Central 
-       sensitivity coefficient calculations. Assumes that the positive
-       and negative input perturbations were by the same amount. For 
-       example, for 10% positive and negative perturbations, the 
-       given value should be 0.1.
-       Default is 1.0.
+        Fractional multiplier used to perturb the inputs in the 
+        sensitivity calculation simulations. Required for the Central 
+        sensitivity coefficient calculations. Assumes that the positive
+        and negative input perturbations were by the same amount. For 
+        example, for 10% positive and negative perturbations, the 
+        given value should be 0.1.
+        Default is 1.0.
 
     Returns
     ----------
     float
-       Calculated uncertainty of the outputs due to the uncertainties
-       of the inputs from the inputted covariance matrix.
+        Calculated uncertainty of the outputs due to the uncertainties
+        of the inputs from the inputted covariance matrix.
     """
 
     # Check that the inputted covariance matrix is square
@@ -365,15 +365,15 @@ def calculate_random_sampling_uncertainty(perturbed_outputs):
     Parameters
     ----------
     perturbed_outputs: list or ndarray
-       Set of output parameters calculated using inputs perturbed using 
-       randomly sampled perturbation coefficients.
+        Set of output parameters calculated using inputs perturbed using 
+        randomly sampled perturbation coefficients.
 
     Returns
     ----------
     float
-       Calculated uncertainty of the outputs due to the uncertainties
-       of the inputs. Assumes that the propagated uncertainty to the outputs
-       is the square root of the variance of the perturbed outputs. 
+        Calculated uncertainty of the outputs due to the uncertainties
+        of the inputs. Assumes that the propagated uncertainty to the outputs
+        is the square root of the variance of the perturbed outputs. 
     """
 
     # Check that the type of perturbed_outputs is np.ndarray, and change to it if necessary
