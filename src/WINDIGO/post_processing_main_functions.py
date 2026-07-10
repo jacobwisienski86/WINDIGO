@@ -9,6 +9,9 @@ from .post_processing_internal_functions import (
     calculate_central_coefficients,
     convert_per_lethargy,
     plot_relative_sens,
+    calculate_mean_error,
+    calculate_random_sampling_variance_error,
+    calculate_uncertainty_error,
 )
 
 
@@ -356,7 +359,10 @@ def calculate_direct_perturbation_uncertainty(
     return propagated_uncertainty
 
 
-def calculate_random_sampling_uncertainty(perturbed_outputs):
+def calculate_random_sampling_uncertainty(perturbed_outputs,
+                                          error_propagation_flag = False,
+                                          perturbed_output_errors = None,
+                                          ):
     """
     Calculates the standard deviation of a set of perturbed outputs. 
     This standard deviation serves as the uncertainty calculated using 
@@ -368,17 +374,35 @@ def calculate_random_sampling_uncertainty(perturbed_outputs):
         Set of output parameters calculated using inputs perturbed using 
         randomly sampled perturbation coefficients.
 
+    error_propagation_flag: bool, optional
+        Flag to determine if first-order error propagation to obtain the uncertainty 
+        of the calculated random sampling uncertainty. 
+        Default is False.
+
+    perturbed_output_errors: list or ndarray
+        Set of errors associated with the outputs within the perturbed_outputs
+        input. Required to perform first-order error propagation.
+        Default is None. 
+
     Returns
     ----------
-    float
+    propagated_uncertainty: float
         Calculated uncertainty of the outputs due to the uncertainties
         of the inputs. Assumes that the propagated uncertainty to the outputs
         is the square root of the variance of the perturbed outputs. 
+
+    uncertainty_error: float
+        Propagated error associated with propagated_uncertainty calculated
+        using a simple first-order error propagation scheme.
     """
 
     # Check that the type of perturbed_outputs is np.ndarray, and change to it if necessary
     if type(perturbed_outputs) is not np.ndarray:
         perturbed_outputs = np.array(perturbed_outputs)
+
+    # Check if perturbed_output_errors was given, and convert it to a np.ndarray if necessary
+    if (perturbed_output_errors != None) and type(perturbed_output_errors) is not np.ndarray:
+        perturbed_output_errors =  np.array(perturbed_output_errors)
 
     # Find the total number of perturbed outputs
     n = len(perturbed_outputs)
@@ -386,13 +410,36 @@ def calculate_random_sampling_uncertainty(perturbed_outputs):
     # Calculate the mean of the perturbed outputs
     mean_output = np.mean(perturbed_outputs)
 
+    # Calcuate the error of the mean of the perturbed outputs
+    if (error_propagation_flag) and (perturbed_output_errors != None):
+        mean_output_error = calculate_mean_error(
+            perturbed_output_errors = perturbed_output_errors
+            )
+    
     # Find the squared distances between the individual perturbed outputs and the mean perturbed output
     squared_distances = (perturbed_outputs - mean_output) ** 2
 
     # Calculate the random sampling uncertainty
     propagated_uncertainty = np.sqrt(np.sum(squared_distances) / (n - 1))
 
-    # Print the random sampling uncertainty 
-    print('The random sampling uncertainty is: ' + str(propagated_uncertainty))
+    # Calcuate the error of the random sampling variance and uncertainty
+    if error_propagation_flag:
+        variance_error = calculate_random_sampling_variance_error(
+            perturbed_outputs=perturbed_outputs,
+            mean_output=mean_output,
+            perturbed_output_errors=perturbed_output_errors,
+            mean_output_error=mean_output_error
+            )
+        
+        uncertainty_error = calculate_uncertainty_error(
+            propagated_uncertainty=propagated_uncertainty,
+            variance_error=variance_error
+        )
+    if (error_propagation_flag) and (uncertainty_error != None):
+        # Print the random sampling uncertainty and its associated error
+        print('The random sampling uncertainty is: ' + str(propagated_uncertainty) + '± ' + str(uncertainty_error))
+    else:
+        # Print the random sampling uncertainty 
+        print('The random sampling uncertainty is: ' + str(propagated_uncertainty))
 
-    return propagated_uncertainty
+    return propagated_uncertainty, uncertainty_error
