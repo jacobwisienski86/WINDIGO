@@ -33,47 +33,47 @@ def generate_relative_sensitivity_plot(
 
     Parameters
     ----------
-    energy_grid_MeV: list or ndarray
+    energy_grid_MeV : list or ndarray
         Grid defining the energy bounds used to perturb inputs
         in MeV
 
-    sens_calculation_method: str
+    sens_calculation_method : str
         Desired method used to calculate sensitivity coefficients.
         Options: Forward, Backward, Central
 
-    unperturbed_output: int
+    unperturbed_output : int
         Output from a simulation that used unperturbed inputs. This
         is the reference value that perturbed outputs deviate from.
 
-    original_inputs: list or ndarray
+    original_inputs : list or ndarray
         Unperturbed inputs used to obtain the unperturbed simulation
         output(s) of interest.
 
-    positive_perturbed_outputs: list or ndarray, optional
+    positive_perturbed_outputs : list or ndarray, optional
         Outputs from simulations that utilized positively-perturbed 
         inputs. Required for Forward and Central sensitivity coefficient
         calculations.
-        Default is blank list.
+        Default is None.
 
-    negative_perturbed_outputs: list or ndarray, optional
+    negative_perturbed_outputs : list or ndarray, optional
         Outputs from simulations that utilized negatively-perturbed 
         inputs. Required for Backward and Central sensitivity coefficient
         calculations.
-        Default is blank list.   
+        Default is None.   
 
-    positive_perturbed_inputs: list or ndarray, optional
+    positive_perturbed_inputs : list or ndarray, optional
         Inputs used in simulations to obtain the outputs given in
         positive_perturbed_outputs. Required for the Forward sensitivity
         coefficient calculations.
-        Default is blank list.
+        Default is None.
 
-    negative_perturbed_inputs: list or ndarray, optional
+    negative_perturbed_inputs : list or ndarray, optional
         Inputs used in simulations to obtain the outputs given in
         negative_perturbed_outputs. Required for the Backward sensitivity
         coefficient calculations.
-        Default is blank list.      
+        Default is None.      
 
-    perturbation_coefficient: float, optional
+    perturbation_coefficient : float, optional
         Fractional multiplier used to perturb the inputs in the 
         sensitivity calculation simulations. Required for the Central 
         sensitivity coefficient calculations. Assumes that the positive
@@ -192,48 +192,48 @@ def calculate_direct_perturbation_uncertainty(
 
     Parameters
     ----------
-    sens_calculation_method: str
+    sens_calculation_method : str
         Desired method used to calculate sensitivity coefficients.
         Options: Forward, Backward, Central
 
-    covariance_matrix: list or ndarray
+    covariance_matrix : list or ndarray
         Matrix representing the covariances between the original inputs 
         that are subsequently altered as part of the direct perturbation 
         uncertainty quantification procedure.
 
-    unperturbed_output: int
+    unperturbed_output : int
         Output from a simulation that used unperturbed inputs. This
         is the reference value that perturbed outputs deviate from.
 
-    original_inputs: list or ndarray
+    original_inputs : list or ndarray
         Unperturbed inputs used to obtain the unperturbed simulation
         output(s) of interest.
 
-    positive_perturbed_outputs: list or ndarray, optional
+    positive_perturbed_outputs : list or ndarray, optional
         Outputs from simulations that utilized positively-perturbed 
         inputs. Required for Forward and Central sensitivity coefficient
         calculations.
-        Default is blank list.
+        Default is None.
 
-    negative_perturbed_outputs: list or ndarray, optional
+    negative_perturbed_outputs : list or ndarray, optional
         Outputs from simulations that utilized negatively-perturbed 
         inputs. Required for Backward and Central sensitivity coefficient
         calculations.
-        Default is blank list.   
+        Default is None.   
 
-    positive_perturbed_inputs: list or ndarray, optional
+    positive_perturbed_inputs : list or ndarray, optional
         Inputs used in simulations to obtain the outputs given in
         positive_perturbed_outputs. Required for the Forward sensitivity
         coefficient calculations.
-        Default is blank list.
+        Default is None.
 
-    negative_perturbed_inputs: list or ndarray, optional
+    negative_perturbed_inputs : list or ndarray, optional
         Inputs used in simulations to obtain the outputs given in
         negative_perturbed_outputs. Required for the Backward sensitivity
         coefficient calculations.
-        Default is blank list.      
+        Default is None.      
 
-    perturbation_coefficient: float, optional
+    perturbation_coefficient : float, optional
         Fractional multiplier used to perturb the inputs in the 
         sensitivity calculation simulations. Required for the Central 
         sensitivity coefficient calculations. Assumes that the positive
@@ -244,7 +244,7 @@ def calculate_direct_perturbation_uncertainty(
 
     Returns
     ----------
-    float
+    propagated_uncertainty : float
         Calculated uncertainty of the outputs due to the uncertainties
         of the inputs from the inputted covariance matrix.
     """
@@ -370,28 +370,28 @@ def calculate_random_sampling_uncertainty(perturbed_outputs,
 
     Parameters
     ----------
-    perturbed_outputs: list or ndarray
+    perturbed_outputs : list or ndarray
         Set of output parameters calculated using inputs perturbed using 
         randomly sampled perturbation coefficients.
 
-    error_propagation_flag: bool, optional
+    error_propagation_flag : bool, optional
         Flag to determine if first-order error propagation to obtain the uncertainty 
         of the calculated random sampling uncertainty. 
         Default is False.
 
-    perturbed_output_errors: list or ndarray
+    perturbed_output_errors : list or ndarray
         Set of errors associated with the outputs within the perturbed_outputs
         input. Required to perform first-order error propagation.
         Default is None. 
 
     Returns
     ----------
-    propagated_uncertainty: float
+    propagated_uncertainty : float
         Calculated uncertainty of the outputs due to the uncertainties
         of the inputs. Assumes that the propagated uncertainty to the outputs
         is the square root of the variance of the perturbed outputs. 
 
-    uncertainty_error: float
+    uncertainty_error : float
         Propagated error associated with propagated_uncertainty calculated
         using a simple first-order error propagation scheme.
     """

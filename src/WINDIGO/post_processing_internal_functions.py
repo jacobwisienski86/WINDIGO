@@ -118,7 +118,7 @@ def calculate_backward_coefficients(
 
     Returns
     -------
-    ndarray
+    coefficients : ndarray
         Numpy array of either relative or absolute sensitivity coefficients.
     """
     # Calculate the absolute sensitivity coefficients using backward differencing
@@ -172,7 +172,7 @@ def calculate_central_coefficients(
 
     Returns
     -------
-    ndarray
+    coefficients : ndarray
         Numpy array of either relative or absolute sensitivity coefficients.
     """
     # Calculate absolute coefficients using central differencing with symmetric
@@ -204,7 +204,7 @@ def convert_per_lethargy(relative_sens_coefficients, energy_grid_MeV):
 
     Returns
     -------
-    ndarray
+    relative_sens_per_lethargy : ndarray
         Relative sensitivity coefficients converted to be per lethargy width.
     """
     # Create an array of lethargy widths
@@ -267,13 +267,13 @@ def calculate_mean_error(perturbed_output_errors):
 
     Parameters
     ----------
-    perturbed_output_errors: ndarray
+    perturbed_output_errors : ndarray
         Set of errors associated with the outputs within the perturbed_outputs
         input. 
 
     Returns
     ----------
-    float
+    mean_output_error : float
         Calculated error of the mean of the outputs given in 
         perturbed_outputs.
     """
@@ -299,24 +299,24 @@ def calculate_random_sampling_variance_error(perturbed_outputs,
 
     Parameters
     ----------
-    perturbed_outputs: ndarray
+    perturbed_outputs : ndarray
         Set of output parameters calculated using inputs perturbed using 
         randomly sampled perturbation coefficients.
 
-    mean_output: float
+    mean_output : float
         Calculated error of the mean of the outputs given in 
         perturbed_outputs.
 
-    perturbed_output_errors: ndarray
+    perturbed_output_errors : ndarray
         Set of errors associated with the outputs within the perturbed_outputs
         input.
 
-    mean_output_error: float
+    mean_output_error : float
         Error of the mean of the perturbed outputs.
 
     Returns
     ----------
-    variance_error: float
+    variance_error : float
         Error of the variance calculated from the random sampling methodology.
     """
 
@@ -341,17 +341,17 @@ def calculate_uncertainty_error(propagated_uncertainty,
 
     Parameters
     ----------
-    propagated_uncertainty: float
+    propagated_uncertainty : float
         Final uncertainty calculated from either the direct perturbation or random 
         sampling uncertainty propagation methodology.
 
-    variance_error: float
+    variance_error : float
         Error of the variance computed from either the direct perturbation or random 
         sampling uncertainty propagation methodology.
     
     Return
     ----------
-    uncertainty_error: float
+    uncertainty_error : float
         Error of the uncertainty from the direct perturbation or random sampling
         uncertainty propagation methodologies.
     """
