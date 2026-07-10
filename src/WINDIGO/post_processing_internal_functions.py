@@ -118,7 +118,7 @@ def calculate_backward_coefficients(
 
     Returns
     -------
-    coefficients : ndarray
+    ndarray
         Numpy array of either relative or absolute sensitivity coefficients.
     """
     # Calculate the absolute sensitivity coefficients using backward differencing
@@ -172,7 +172,7 @@ def calculate_central_coefficients(
 
     Returns
     -------
-    coefficients : ndarray
+    ndarray
         Numpy array of either relative or absolute sensitivity coefficients.
     """
     # Calculate absolute coefficients using central differencing with symmetric
@@ -204,7 +204,7 @@ def convert_per_lethargy(relative_sens_coefficients, energy_grid_MeV):
 
     Returns
     -------
-    relative_sens_per_lethargy : ndarray
+    ndarray
         Relative sensitivity coefficients converted to be per lethargy width.
     """
     # Create an array of lethargy widths
@@ -259,3 +259,105 @@ def plot_relative_sens(relative_sens_per_lethargy, energy_grid_MeV):
     plt.tight_layout()
     plt.savefig("RelativeSensitivityPlot.png", dpi=350, bbox_inches="tight")
     plt.show()
+
+def calculate_mean_error(perturbed_output_errors):
+    """
+    Calculates the error of the mean perturbed output using first-order error
+    propagation.
+
+    Parameters
+    ----------
+    perturbed_output_errors: ndarray
+        Set of errors associated with the outputs within the perturbed_outputs
+        input. 
+
+    Returns
+    ----------
+    float
+        Calculated error of the mean of the outputs given in 
+        perturbed_outputs.
+    """
+
+    # Find the number of perturbed outputs
+    n = len(perturbed_output_errors)
+
+    # Calculate the variances of the perturbed outputs
+    perturbed_output_variances = perturbed_output_errors**2
+
+    # Calculate the error of the mean output
+    mean_output_error = (1/n) * np.sqrt(np.sum(perturbed_output_variances))
+
+    return mean_output_error
+
+def calculate_random_sampling_variance_error(perturbed_outputs,
+                                             mean_output,
+                                             perturbed_output_errors,
+                                             mean_output_error):
+    """
+    Calculates the error of the variance from the random sampling uncertainty
+    propagation procedure.
+
+    Parameters
+    ----------
+    perturbed_outputs: ndarray
+        Set of output parameters calculated using inputs perturbed using 
+        randomly sampled perturbation coefficients.
+
+    mean_output: float
+        Calculated error of the mean of the outputs given in 
+        perturbed_outputs.
+
+    perturbed_output_errors: ndarray
+        Set of errors associated with the outputs within the perturbed_outputs
+        input.
+
+    mean_output_error: float
+        Error of the mean of the perturbed outputs.
+
+    Returns
+    ----------
+    variance_error: float
+        Error of the variance calculated from the random sampling methodology.
+    """
+
+    # Calculate an array of new variable tau and their associated errors
+
+    taus = (perturbed_outputs - mean_output)**2
+
+    tau_errors = np.sqrt((2 * np.sqrt(taus))**2 * perturbed_output_errors**2 + 
+                         (2 * -1  * np.sqrt(taus))**2 * mean_output_error**2)
+    
+    # Calculate the error of the random sampling variance
+
+    variance_error = 1/(len(perturbed_outputs)-1) * np.sqrt(np.sum(tau_errors**2))
+
+    return variance_error
+
+def calculate_uncertainty_error(propagated_uncertainty,
+                                variance_error):
+    """
+    Calculate the error of the uncertainty from a given variance. 
+    This assumes that the uncertainty is given by the square root of the variance.
+
+    Parameters
+    ----------
+    propagated_uncertainty: float
+        Final uncertainty calculated from either the direct perturbation or random 
+        sampling uncertainty propagation methodology.
+
+    variance_error: float
+        Error of the variance computed from either the direct perturbation or random 
+        sampling uncertainty propagation methodology.
+    
+    Return
+    ----------
+    uncertainty_error: float
+        Error of the uncertainty from the direct perturbation or random sampling
+        uncertainty propagation methodologies.
+    """
+
+    # Calculate the error of the propagated final uncertainty
+
+    uncertainty_error = variance_error / (2 * propagated_uncertainty)
+
+    return uncertainty_error
