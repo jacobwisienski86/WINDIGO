@@ -83,6 +83,43 @@ def calculate_forward_coefficients(
 
     return coefficients
 
+def calculate_absolute_forward_coefficient_errors(
+    original_inputs,
+    positive_perturbed_inputs,
+    unperturbed_output_error,
+    positive_perturbed_output_errors
+):
+    
+    """ 
+    Calculates the errors of the forward-differencing absolute sensitivity coefficients
+
+    Parameters
+    ----------
+    original_inputs : ndarray
+        Unperturbed inputs used to obtain the unperturbed simulation output(s)
+        of interest.
+
+    positive_perturbed_inputs : ndarray
+        Inputs used in simulations to obtain the outputs given in
+        positive_perturbed_outputs.
+
+    unperturbed_output_error : float
+        Error of the output parameter calculated using unperturbed inputs.
+
+    positive_perturbed_output_errors : ndarray
+        Errors of the output parameters calculated using positively-perturbed
+        inputs.
+
+    Returns
+    ----------
+    absolute_coefficient_errors : ndarray
+        Errors of the absolute sensitivity coefficients
+    """
+
+    absolute_coefficients_errors = ((1/(positive_perturbed_inputs - original_inputs)) *
+                                    np.sqrt(positive_perturbed_output_errors**2 + unperturbed_output_error**2))
+
+    return absolute_coefficients_errors 
 
 def calculate_backward_coefficients(
     negative_perturbed_outputs,
@@ -132,13 +169,51 @@ def calculate_backward_coefficients(
 
     return coefficients
 
+def calculate_absolute_backward_coefficient_errors(
+    original_inputs,
+    negative_perturbed_inputs,
+    unperturbed_output_error,
+    negative_perturbed_output_errors
+):
+    
+    """
+    Calculates the errors of the backward-differencing absolute sensitivity coefficients
+
+    Parameters
+    ----------
+    original_inputs : ndarray
+        Unperturbed inputs used to obtain the unperturbed simulation output(s)
+        of interest.
+
+    negative_perturbed_inputs : ndarray
+        Inputs used in simulations to obtain the outputs given in
+        negative_perturbed_outputs.
+
+    unperturbed_output_error : float
+        Error of the output parameter calculated using unperturbed inputs.
+
+    negative_perturbed_output_errors : ndarray
+        Errors of the output parameters calculated using negatively-perturbed
+        inputs.
+
+    Returns
+    ----------
+    absolute_coefficient_errors : ndarray
+        Errors of the absolute sensitivity coefficients
+    """
+
+    absolute_coefficient_errors = ((1/(original_inputs - negative_perturbed_inputs)) * 
+                                   np.sqrt(unperturbed_output_error**2 + negative_perturbed_output_errors**2))
+    
+    return absolute_coefficient_errors
 
 def calculate_central_coefficients(
     positive_perturbed_outputs,
     negative_perturbed_outputs,
     unperturbed_output,
     original_inputs,
-    perturbation_coefficient,
+    positive_perturbed_inputs,
+    negative_perturbed_inputs,
     relative_flag,
 ):
     """
@@ -161,10 +236,13 @@ def calculate_central_coefficients(
         Unperturbed inputs used to obtain the unperturbed simulation output(s)
         of interest.
 
-    perturbation_coefficient : float
-        Fractional multiplier used to perturb the inputs in the sensitivity
-        calculation simulations. Assumes symmetric positive and negative
-        perturbations.
+    positive_perturbed_inputs : ndarray
+        Inputs used in simulations to obtain the outputs given in
+        positive_perturbed_outputs.
+
+    negative_perturbed_inputs : ndarray
+        Inputs used in simulations to obtain the outputs given in
+        negative_perturbed_outputs.         
 
     relative_flag : bool
         Flag used to determine whether the sensitivity coefficients will be in
@@ -175,11 +253,10 @@ def calculate_central_coefficients(
     coefficients : ndarray
         Numpy array of either relative or absolute sensitivity coefficients.
     """
-    # Calculate absolute coefficients using central differencing with symmetric
-    # positive and negative perturbations
+    # Calculate absolute coefficients using central differencing
     coefficients = (
         positive_perturbed_outputs - negative_perturbed_outputs
-    ) / (2 * perturbation_coefficient * original_inputs)
+    ) / (positive_perturbed_inputs - negative_perturbed_inputs)
 
     # Convert the absolute coefficients to relative ones if needed
     if relative_flag:
@@ -187,6 +264,44 @@ def calculate_central_coefficients(
 
     return coefficients
 
+def calculate_absolute_central_coefficient_errors(
+        positive_perturbed_inputs,
+        negative_perturbed_inputs,
+        positive_perturbed_output_errors,
+        negative_perturbed_output_errors
+):
+    
+    """
+    Calculates the errors of the central-differencing absolute sensitivity coefficients
+
+    Parameters
+    ----------
+    positive_perturbed_inputs : ndarray
+        Inputs used in simulations to obtain the outputs given in
+        positive_perturbed_outputs.
+
+    negative_perturbed_inputs : ndarray
+        Inputs used in simulations to obtain the outputs given in
+        negative_perturbed_outputs.
+
+    positive_perturbed_output_errors : ndarray
+        Errors of the output parameters calculated using positively-perturbed
+        inputs.
+
+    negative_perturbed_output_errors : ndarray
+        Errors of the output parameters calculated using negatively-perturbed
+        inputs.
+
+    Returns
+    ----------
+    absolute_coefficient_errors : ndarray
+        Errors of the absolute sensitivity coefficients
+    """
+
+    absolute_coefficient_errors = ((1/(positive_perturbed_inputs - negative_perturbed_inputs)) * 
+                                   np.sqrt(positive_perturbed_output_errors**2 + negative_perturbed_output_errors**2))
+    
+    return absolute_coefficient_errors
 
 def convert_per_lethargy(relative_sens_coefficients, energy_grid_MeV):
     """
