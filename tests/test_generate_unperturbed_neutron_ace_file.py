@@ -1,5 +1,4 @@
 # tests/test_generate_unperturbed_neutron_ace_file.py
-# Tests for the main function: generate_unperturbed_neutron_ace_file
 
 import builtins
 import pytest
@@ -12,7 +11,6 @@ from src.WINDIGO.frendy_main_functions import (
 def test_generate_unperturbed_neutron_ace_file_basic(monkeypatch):
     """Test the normal (non-upgrade) workflow with cleanup enabled."""
 
-    # --- Mock internal helper functions ---
     monkeypatch.setattr(
         "src.WINDIGO.frendy_main_functions.format_endf_evaluation",
         lambda endf_Path: "formatted.dat",
@@ -23,7 +21,6 @@ def test_generate_unperturbed_neutron_ace_file_basic(monkeypatch):
         lambda **kwargs: "ace_input.inp",
     )
 
-    # --- Mock OS functions ---
     calls = {
         "getcwd": [],
         "chdir": [],
@@ -40,7 +37,6 @@ def test_generate_unperturbed_neutron_ace_file_basic(monkeypatch):
     monkeypatch.setattr("os.path.exists", lambda p: calls["exists"].append(p) or True)
     monkeypatch.setattr(builtins, "print", lambda msg: calls["print"].append(msg))
 
-    # --- Run function ---
     frendy_path = "/opt/frendy"
     result = generate_unperturbed_neutron_ace_file(
         frendy_Path=frendy_path,
@@ -52,37 +48,32 @@ def test_generate_unperturbed_neutron_ace_file_basic(monkeypatch):
         cleanup_Flag=True,
     )
 
-    # --- Expected output path ---
     expected_exe_dir = "/opt/frendy/frendy/main"
     expected_output = f"{expected_exe_dir}/U235.ace"
 
     assert result == expected_output
 
-    # --- Check directory switching ---
     assert calls["chdir"] == [
-        expected_exe_dir,  # enter FRENDY executable directory
-        "cwd",             # return to original directory
+        expected_exe_dir,
+        "cwd",
     ]
 
-    # --- Check system call ---
     assert calls["system"] == ["./frendy.exe ace_input.inp"]
 
-    # --- Check cleanup of intermediate files ---
     assert "formatted.dat" in calls["remove"]
     assert "ace_input.inp" in calls["remove"]
 
-    # --- Check cleanup of .ace.ace.dir ---
     assert f"{expected_exe_dir}/U235.ace.ace.dir" in calls["remove"]
 
-    # --- Check success print messages ---
-    assert "\n" in calls["print"]
+    # Updated: check for the printed blank line
+    assert any(msg.strip() == "" for msg in calls["print"])
+
     assert any("ACE file successfully generated" in msg for msg in calls["print"])
 
 
 def test_generate_unperturbed_neutron_ace_file_upgrade(monkeypatch):
     """Test upgrade mode, ensuring upgraded filename and cleanup behavior."""
 
-    # Mock helpers
     monkeypatch.setattr(
         "src.WINDIGO.frendy_main_functions.format_endf_evaluation",
         lambda endf_Path: "formatted.dat",
@@ -92,7 +83,6 @@ def test_generate_unperturbed_neutron_ace_file_upgrade(monkeypatch):
         lambda **kwargs: "ace_input.inp",
     )
 
-    # Mock OS
     calls = {"remove": [], "exists": [], "print": []}
 
     monkeypatch.setattr("os.getcwd", lambda: "cwd")
@@ -118,7 +108,6 @@ def test_generate_unperturbed_neutron_ace_file_upgrade(monkeypatch):
 
     assert result == expected_output
 
-    # Check cleanup of upgraded .ace.ace.dir
     assert f"{expected_exe_dir}/U235_upgrade.ace.ace.dir" in calls["remove"]
 
 
@@ -154,5 +143,4 @@ def test_generate_unperturbed_neutron_ace_file_no_cleanup(monkeypatch):
         cleanup_Flag=False,
     )
 
-    # No cleanup should occur
     assert calls["remove"] == []

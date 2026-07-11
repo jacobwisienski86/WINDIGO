@@ -1,5 +1,5 @@
-# Internal functions involving FRENDY related to the uncertainty
-# quantification workflow. Not intended to be called directly.
+# Internal functions involving FRENDY for WINDIGO.
+# Not intended to be called directly by users.
 
 import shutil
 import os
@@ -94,7 +94,7 @@ def create_unperturbed_ace_generation_input(
     endf_file_dat,
     temperature,
     upgrade_Flag=False,
-    energy_grid=None
+    energy_grid=None,
 ):
     """
     Write the input file used to generate unperturbed ACE files.
@@ -103,6 +103,22 @@ def create_unperturbed_ace_generation_input(
     ----------
     frendy_Path : str
         Path to FRENDY installation directory.
+
+    nuclide : str
+        Name of the nuclide whose ENDF evaluation is used.
+    
+    endf_file_dat: str
+        Name of the .dat-formatted ENDF evaluation used for
+        ACE file generation.
+
+    temperature : int
+        Temperature at which to generate the ACE file.
+
+    upgrade_Flag : bool, optional
+        Add additional energy grid points if True.
+
+    energy_grid : list or ndarray, optional
+        Energy grid used for perturbation bounds [eV].
 
     Returns
     -------

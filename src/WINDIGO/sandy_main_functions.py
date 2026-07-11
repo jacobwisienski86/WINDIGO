@@ -1,4 +1,4 @@
-# Main functions related to Sandy to be used with WENDIGO
+# Main functions related to SANDY to be used with WINDIGO
 
 # Import internal functions
 from .sandy_internal_functions import (
@@ -15,6 +15,7 @@ def sandy_covariance_retrieval(
     mt_Number,
     data_library,
     temperature,
+    err_tolerance = 0.1,
     relative_Flag=False,
     plotting_Flag=False
 ):
@@ -42,6 +43,13 @@ def sandy_covariance_retrieval(
     temperature : int
         Temperature at which to retrieve covariance data.
 
+    err_tolerance : float
+        Tolerance used by NJOY to convert continuous cross section
+        data to a tabulated version. Expressed as a fraction (i.e 
+        err_tolerance = 0.1 means that converted cross section data
+        is considered valid if it falls within 10% of the continuous
+        version) Default is 0.1.
+
     relative_Flag : bool, optional
         Retrieve relative covariance data if True. Default is False.
 
@@ -63,11 +71,11 @@ def sandy_covariance_retrieval(
     # Retrieve covariance data using Sandy
     covariance_data, flag_String = retrieve_covariance_data(
         energy_grid=energy_grid,
-        nuclide=nuclide,
         mt_Number=mt_Number,
         data_library=data_library,
         nuclide_number=nuclide_number,
         temperature=temperature,
+        err_tolerance=err_tolerance,
         relative_Flag=relative_Flag
     )
 

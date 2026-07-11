@@ -1,4 +1,4 @@
-# Functions related to functionality with OpenMC for WENDIGO
+# Functions related to functionality with OpenMC for WINDIGO
 
 from .openmc_internal_functions import (
     count_directories,

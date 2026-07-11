@@ -1,5 +1,4 @@
 # tests/test_create_unperturbed_ace_generation_input.py
-# Tests for the function: create_unperturbed_ace_generation_input
 
 import builtins
 import pytest
@@ -15,7 +14,6 @@ def test_create_unperturbed_ace_generation_input_normal(monkeypatch):
     written_path = None
     written_lines = []
 
-    # Fake open() to capture written content
     class FakeFile:
         def __init__(self, path, mode):
             nonlocal written_path
@@ -35,7 +33,6 @@ def test_create_unperturbed_ace_generation_input_normal(monkeypatch):
 
     monkeypatch.setattr(builtins, "open", lambda p, m: FakeFile(p, m))
 
-    # Capture print output
     printed = []
     monkeypatch.setattr(builtins, "print", lambda msg: printed.append(msg))
 
@@ -52,16 +49,12 @@ def test_create_unperturbed_ace_generation_input_normal(monkeypatch):
     assert result == expected_path
     assert written_path == expected_path
 
-    # Verify required lines
     assert written_lines[0] == "ace_file_generation_fast_mode\n"
     assert written_lines[1] == "    nucl_file_name    /data/U235.dat\n"
     assert written_lines[2] == "    temp    300\n"
     assert written_lines[3] == "    ace_file_name    U235.ace\n"
 
-    # No upgrade lines should appear
     assert len(written_lines) == 4
-
-    # Print message correctness
     assert expected_path in printed[0]
 
 
@@ -71,7 +64,6 @@ def test_create_unperturbed_ace_generation_input_upgrade(monkeypatch):
     written_lines = []
     written_path = None
 
-    # Fake open()
     class FakeFile:
         def __init__(self, path, mode):
             nonlocal written_path
@@ -91,14 +83,12 @@ def test_create_unperturbed_ace_generation_input_upgrade(monkeypatch):
 
     monkeypatch.setattr(builtins, "open", lambda p, m: FakeFile(p, m))
 
-    # Fake write_upgrade_lines
     fake_upgrade_lines = ["    add_grid_data    (1.0\n", "        2.0)\n"]
     monkeypatch.setattr(
         "src.WINDIGO.frendy_internal_functions.write_upgrade_lines",
         lambda energy_grid: fake_upgrade_lines,
     )
 
-    # Capture print
     printed = []
     monkeypatch.setattr(builtins, "print", lambda msg: printed.append(msg))
 
@@ -115,16 +105,12 @@ def test_create_unperturbed_ace_generation_input_upgrade(monkeypatch):
     assert result == expected_path
     assert written_path == expected_path
 
-    # Verify base lines
     assert written_lines[0] == "ace_file_generation_fast_mode\n"
     assert written_lines[1] == "    nucl_file_name    /data/U238.dat\n"
     assert written_lines[2] == "    temp    600\n"
     assert written_lines[3] == "    ace_file_name    U238_upgrade.ace\n"
 
-    # Upgrade lines appended
     assert written_lines[4:] == fake_upgrade_lines
-
-    # Print message correctness
     assert expected_path in printed[0]
 
 
@@ -169,5 +155,4 @@ def test_create_unperturbed_ace_generation_input_energy_grid_none(monkeypatch):
     assert result == expected_path
     assert written_path == expected_path
 
-    # No upgrade lines should appear
     assert len(written_lines) == 4

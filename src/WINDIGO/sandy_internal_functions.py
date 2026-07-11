@@ -1,4 +1,4 @@
-# Internal functions for Sandy used in the uncertainty quantification workflow.
+# Internal functions involving SANDY for WINDIGO.
 # These functions are not intended to be called directly by users.
 
 import os
@@ -49,11 +49,11 @@ def retrieve_nuclide_information(nuclide):
 
 def retrieve_covariance_data(
     energy_grid,
-    nuclide,
     mt_Number,
     data_library,
     nuclide_number,
     temperature,
+    err_tolerance,
     relative_Flag=False
 ):
     """
@@ -64,9 +64,6 @@ def retrieve_covariance_data(
     ----------
     energy_grid : list
         Desired energy bounds of the retrieved covariance data [eV].
-
-    nuclide : str
-        Nuclide whose covariance data will be retrieved.
 
     mt_Number : int
         MT number of the nuclear covariance data to retrieve.
@@ -82,6 +79,13 @@ def retrieve_covariance_data(
 
     temperature : int
         Temperature at which to retrieve covariance data.
+
+    err_tolerance : float
+        Tolerance used by NJOY to convert continuous cross section
+        data to a tabulated version. Expressed as a fraction (i.e 
+        err_tolerance = 0.1 means that converted cross section data
+        is considered valid if it falls within 10% of the continuous
+        version) Default is 0.1.
 
     relative_Flag : bool, optional
         Retrieve relative covariance if True, absolute if False.
@@ -103,7 +107,7 @@ def retrieve_covariance_data(
         "xs",
         nuclide_number
     ).get_errorr(
-        err=0.1,
+        err=err_tolerance,
         temperature=temperature,
         errorr_kws=dict(
             ek=energy_grid,
@@ -167,7 +171,7 @@ def plot_covariance(covariance_data, energy_grid, nuclide, mt_Number, flag_Strin
 
     plot_filename = (
         "covariancePlot_"
-        f"{len(energy_grid)}Groups_"
+        f"{len(energy_grid)-1}Groups_"
         f"{nuclide}MT{mt_Number}_"
         f"{flag_String}.png"
     )
@@ -212,7 +216,7 @@ def save_covariance_file(covariance_data, energy_grid, nuclide, mt_Number, flag_
 
     csv_filename = (
         "covarianceMatrix_"
-        f"{len(energy_grid)}Groups_"
+        f"{len(energy_grid)-1}Groups_"
         f"{nuclide}_MT_{mt_Number}_"
         f"{flag_String}.csv"
     )

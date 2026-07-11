@@ -1,3 +1,6 @@
+# Internal functions involving OpenMC for WINDIGO
+# Not intended to be called directly.
+
 import os
 import openmc
 from pathlib import Path

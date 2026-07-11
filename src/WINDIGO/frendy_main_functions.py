@@ -1,4 +1,4 @@
-# Functions related to FRENDY functionality for WENDIGO
+# Functions related to FRENDY functionality for WINDIGO
 
 import os
 import shutil
@@ -29,7 +29,6 @@ def generate_unperturbed_neutron_ace_file(
     upgrade_Flag=False,
     energy_grid=None,
     cleanup_Flag=True,
-    verbosity_Flag=False
 ):
     """
     Generate unperturbed neutron cross section ACE files for use in the
@@ -58,9 +57,6 @@ def generate_unperturbed_neutron_ace_file(
     cleanup_Flag : bool, optional
         Delete intermediate files if True.
 
-    verbosity_Flag: bool, optional
-        Suppress terminal output for ACE file creation if True.
-
     Returns
     -------
     str
@@ -80,7 +76,6 @@ def generate_unperturbed_neutron_ace_file(
         temperature=temperature,
         upgrade_Flag=upgrade_Flag,
         energy_grid=energy_grid,
-        verbosity_Flag=verbosity_Flag
     )
 
     # Build command and switch directories
