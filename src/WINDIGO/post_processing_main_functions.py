@@ -12,6 +12,7 @@ from .post_processing_internal_functions import (
     calculate_absolute_forward_coefficient_errors,
     calculate_absolute_backward_coefficient_errors,
     calculate_absolute_central_coefficient_errors,
+    calculate_direct_perturbation_variance_error,
     calculate_mean_error,
     calculate_random_sampling_variance_error,
     calculate_uncertainty_error,
@@ -254,6 +255,10 @@ def calculate_direct_perturbation_uncertainty(
     propagated_uncertainty : float
         Calculated uncertainty of the outputs due to the uncertainties
         of the inputs from the inputted covariance matrix.
+
+    uncertainty_error : float, optional
+        Propagated error associated with propagated_uncertainty calculated
+        using a simple first-order error propagation scheme.
     """
 
     # Adjust inputs to blank lists as needed 
@@ -418,15 +423,32 @@ def calculate_direct_perturbation_uncertainty(
         @ absolute_sensitivity_coefficients.T
     )
 
+    # Calculate the error of the propagated uncertainty if desired
 
-    # Print the calculated unceratainty
+    if absolute_coefficient_errors is not None:
 
-    print(
-        'The direct perturbatation uncertainty is: '
-        + str(propagated_uncertainty)
-    )
+        variance_error = calculate_direct_perturbation_variance_error()
 
-    return propagated_uncertainty
+        uncertainty_error = calculate_uncertainty_error(
+            propagated_uncertainty=propagated_uncertainty,
+            variance_error=variance_error
+        )
+
+    # Print the calculated unceratainty and potentially its associated error
+
+    if error_propagation_flag:
+
+        print('The direct perturnbtion uncertainty is: ' + 
+              str(propagated_uncertainty) + ' ± ' + str(uncertainty_error))
+        
+        return propagated_uncertainty, uncertainty_error
+
+    else:
+        
+        print('The direct perturbatation uncertainty is: '
+            + str(propagated_uncertainty))
+
+        return propagated_uncertainty
 
 
 def calculate_random_sampling_uncertainty(perturbed_outputs,
@@ -461,7 +483,7 @@ def calculate_random_sampling_uncertainty(perturbed_outputs,
         of the inputs. Assumes that the propagated uncertainty to the outputs
         is the square root of the variance of the perturbed outputs. 
 
-    uncertainty_error : float
+    uncertainty_error : float, optional
         Propagated error associated with propagated_uncertainty calculated
         using a simple first-order error propagation scheme.
     """
@@ -471,7 +493,7 @@ def calculate_random_sampling_uncertainty(perturbed_outputs,
         perturbed_outputs = np.array(perturbed_outputs)
 
     # Check if perturbed_output_errors was given, and convert it to a np.ndarray if necessary
-    if (perturbed_output_errors != None) and type(perturbed_output_errors) is not np.ndarray:
+    if (perturbed_output_errors is not None) and (type(perturbed_output_errors) is not np.ndarray):
         perturbed_output_errors =  np.array(perturbed_output_errors)
 
     # Find the total number of perturbed outputs
@@ -481,7 +503,7 @@ def calculate_random_sampling_uncertainty(perturbed_outputs,
     mean_output = np.mean(perturbed_outputs)
 
     # Calcuate the error of the mean of the perturbed outputs
-    if (error_propagation_flag) and (perturbed_output_errors != None):
+    if (error_propagation_flag) and (perturbed_output_errors is not None):
         mean_output_error = calculate_mean_error(
             perturbed_output_errors = perturbed_output_errors
             )
@@ -505,9 +527,10 @@ def calculate_random_sampling_uncertainty(perturbed_outputs,
             propagated_uncertainty=propagated_uncertainty,
             variance_error=variance_error
         )
-    if (error_propagation_flag) and (uncertainty_error != None):
+    if error_propagation_flag:
         # Print the random sampling uncertainty and its associated error
-        print('The random sampling uncertainty is: ' + str(propagated_uncertainty) + '± ' + str(uncertainty_error))
+        print('The random sampling uncertainty is: ' + str(propagated_uncertainty) + ' ± ' 
+              + str(uncertainty_error))
 
         return propagated_uncertainty, uncertainty_error
     else:

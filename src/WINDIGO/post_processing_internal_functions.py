@@ -375,6 +375,18 @@ def plot_relative_sens(relative_sens_per_lethargy, energy_grid_MeV):
     plt.savefig("RelativeSensitivityPlot.png", dpi=350, bbox_inches="tight")
     plt.show()
 
+def calculate_direct_perturbation_variance_error():
+    """
+    Calculates the error of the variance calculated from the direct 
+    perturbation methodology utilizing the Sandwich Rule.
+
+    Parameters
+    ----------
+
+    Returns
+    ----------
+    """
+
 def calculate_mean_error(perturbed_output_errors):
     """
     Calculates the error of the mean perturbed output using first-order error
