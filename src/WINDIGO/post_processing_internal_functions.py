@@ -133,6 +133,8 @@ def calculate_backward_coefficients(
     return coefficients
 
 
+#Calculation method based on methodology from Kleedtke et al. (2023)
+#DOI: https://doi.org/10.1016/j.anucene.2023.110031
 def calculate_central_coefficients(
     positive_perturbed_outputs,
     negative_perturbed_outputs,
