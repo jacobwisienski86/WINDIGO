@@ -427,7 +427,11 @@ def calculate_direct_perturbation_uncertainty(
 
     if absolute_coefficient_errors is not None:
 
-        variance_error = calculate_direct_perturbation_variance_error()
+        variance_error = calculate_direct_perturbation_variance_error(
+            absolute_sensitivity_coefficients=absolute_sensitivity_coefficients,
+            absolute_coefficient_errors=absolute_coefficient_errors,
+            covariance_matrix=covariance_matrix
+        )
 
         uncertainty_error = calculate_uncertainty_error(
             propagated_uncertainty=propagated_uncertainty,
@@ -451,10 +455,11 @@ def calculate_direct_perturbation_uncertainty(
         return propagated_uncertainty
 
 
-def calculate_random_sampling_uncertainty(perturbed_outputs,
-                                          error_propagation_flag = False,
-                                          perturbed_output_errors = None,
-                                          ):
+def calculate_random_sampling_uncertainty(
+        perturbed_outputs,
+        error_propagation_flag = False,
+        perturbed_output_errors = None,
+        ):
     """
     Calculates the standard deviation of a set of perturbed outputs. 
     This standard deviation serves as the uncertainty calculated using 
