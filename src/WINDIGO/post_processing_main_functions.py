@@ -498,8 +498,9 @@ def calculate_random_sampling_uncertainty(
         perturbed_outputs = np.array(perturbed_outputs)
 
     # Check if perturbed_output_errors was given, and convert it to a np.ndarray if necessary
-    if (perturbed_output_errors is not None) and (type(perturbed_output_errors) is not np.ndarray):
-        perturbed_output_errors =  np.array(perturbed_output_errors)
+    if perturbed_output_errors is not None: 
+        if type(perturbed_output_errors) is not np.ndarray:
+            perturbed_output_errors =  np.array(perturbed_output_errors)
 
     # Find the total number of perturbed outputs
     n = len(perturbed_outputs)
