@@ -119,7 +119,6 @@ def test_generate_plot_central(
         original_inputs=[1.0, 2.0],
         positive_perturbed_outputs=[11.0, 22.0],
         negative_perturbed_outputs=[9.0, 18.0],
-        perturbation_coefficient=0.1,
     )
 
     mock_check.assert_called_once()
