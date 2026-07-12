@@ -8,3 +8,5 @@ The main functions within WINDIGO that users directly interface with.
 
    openmc
    frendy
+   sandy
+   post_proc

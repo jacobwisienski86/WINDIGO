@@ -9,3 +9,5 @@ Not intended to be directly interfaced with by users.
 
    openmc
    frendy
+   sandy
+   post_proc

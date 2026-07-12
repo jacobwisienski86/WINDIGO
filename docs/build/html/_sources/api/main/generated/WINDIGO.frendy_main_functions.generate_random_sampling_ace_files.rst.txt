@@ -1,5 +1,5 @@
-﻿WINDIGO.frendy\_main\_functions.generate\_random\_sampling\_ace\_files
-======================================================================
+﻿generate_random_sampling_ace_files
+================================================================
 
 .. currentmodule:: WINDIGO.frendy_main_functions
 

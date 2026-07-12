@@ -1,5 +1,5 @@
-﻿WINDIGO.openmc\_internal\_functions.create\_numbers
-===================================================
+﻿create_numbers
+================================================
 
 .. currentmodule:: WINDIGO.openmc_internal_functions
 

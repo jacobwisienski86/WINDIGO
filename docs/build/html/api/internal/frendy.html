@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="WINDIGO.frendy_internal_functions.random_sampling_folder_check" href="generated/WINDIGO.frendy_internal_functions.random_sampling_folder_check.html"><link rel="prev" title="WINDIGO.openmc_internal_functions.create_numbers" href="generated/WINDIGO.openmc_internal_functions.create_numbers.html">
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="format_endf_evaluation" href="generated/WINDIGO.frendy_internal_functions.format_endf_evaluation.html"><link rel="prev" title="create_perturbed_xml" href="generated/WINDIGO.openmc_internal_functions.create_perturbed_xml.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>FRENDY Internal Functions - WINDIGO 0.0.1-beta documentation</title>
@@ -194,22 +194,75 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">WINDIGO Python API</a><input aria-label="Toggle navigation of WINDIGO Python API" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../main/index.html">Main Functions</a><input aria-label="Toggle navigation of Main Functions" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../main/openmc.html">OpenMC Main Functions</a><input aria-label="Toggle navigation of OpenMC Main Functions" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../main/generated/WINDIGO.openmc_main_functions.build_perturbed_cross_sections_libraries.html">WINDIGO.openmc_main_functions.build_perturbed_cross_sections_libraries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../main/generated/WINDIGO.openmc_main_functions.build_perturbed_cross_sections_libraries.html">build_perturbed_cross_sections_libraries</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../main/frendy.html">FRENDY Main Functions</a><input aria-label="Toggle navigation of FRENDY Main Functions" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../main/generated/WINDIGO.frendy_main_functions.generate_random_sampling_ace_files.html">WINDIGO.frendy_main_functions.generate_random_sampling_ace_files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../main/generated/WINDIGO.frendy_main_functions.generate_unperturbed_neutron_ace_file.html">generate_unperturbed_neutron_ace_file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../main/generated/WINDIGO.frendy_main_functions.generate_direct_perturbation_ace_files.html">generate_direct_perturbation_ace_files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../main/generated/WINDIGO.frendy_main_functions.generate_random_sampling_ace_files.html">generate_random_sampling_ace_files</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../main/sandy.html">SANDY Main Functions</a><input aria-label="Toggle navigation of SANDY Main Functions" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../main/generated/WINDIGO.sandy_main_functions.sandy_covariance_retrieval.html">sandy_covariance_retrieval</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../main/post_proc.html">Post-Processing Main Functions</a><input aria-label="Toggle navigation of Post-Processing Main Functions" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../main/generated/WINDIGO.post_processing_main_functions.generate_relative_sensitivity_plot.html">generate_relative_sensitivity_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../main/generated/WINDIGO.post_processing_main_functions.calculate_direct_perturbation_uncertainty.html">calculate_direct_perturbation_uncertainty</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../main/generated/WINDIGO.post_processing_main_functions.calculate_random_sampling_uncertainty.html">calculate_random_sampling_uncertainty</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">Internal Functions</a><input aria-label="Toggle navigation of Internal Functions" checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
-<li class="toctree-l3 has-children"><a class="reference internal" href="openmc.html">OpenMC Internal Functions</a><input aria-label="Toggle navigation of OpenMC Internal Functions" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.openmc_internal_functions.create_numbers.html">WINDIGO.openmc_internal_functions.create_numbers</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">Internal Functions</a><input aria-label="Toggle navigation of Internal Functions" checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="openmc.html">OpenMC Internal Functions</a><input aria-label="Toggle navigation of OpenMC Internal Functions" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.openmc_internal_functions.count_directories.html">count_directories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.openmc_internal_functions.create_numbers.html">create_numbers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.openmc_internal_functions.create_unperturbed_library.html">create_unperturbed_library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.openmc_internal_functions.create_model_folders.html">create_model_folders</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.openmc_internal_functions.create_perturbed_xml.html">create_perturbed_xml</a></li>
 </ul>
 </li>
-<li class="toctree-l3 current has-children current-page"><a class="current reference internal" href="#">FRENDY Internal Functions</a><input aria-label="Toggle navigation of FRENDY Internal Functions" checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.random_sampling_folder_check.html">WINDIGO.frendy_internal_functions.random_sampling_folder_check</a></li>
+<li class="toctree-l3 current has-children current-page"><a class="current reference internal" href="#">FRENDY Internal Functions</a><input aria-label="Toggle navigation of FRENDY Internal Functions" checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.format_endf_evaluation.html">format_endf_evaluation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.write_upgrade_lines.html">write_upgrade_lines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input.html">create_unperturbed_ace_generation_input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_direct_perturbation_inputs.html">create_direct_perturbation_inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_direct_perturbation_list.html">create_direct_perturbation_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_direct_perturbation_command_file.html">create_direct_perturbation_command_file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.direct_perturbation_folder_check.html">direct_perturbation_folder_check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file.html">create_random_sampling_tool_execution_file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_random_sampling_tool_inputs.html">create_random_sampling_tool_inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.generate_random_sampling_factors.html">generate_random_sampling_factors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.move_random_sampling_files.html">move_random_sampling_files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_random_sampling_pert_list.html">create_random_sampling_pert_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_random_sampling_ace_directory.html">create_random_sampling_ace_directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file.html">create_random_sampling_ace_execution_file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.random_sampling_folder_check.html">random_sampling_folder_check</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="sandy.html">SANDY Internal Functions</a><input aria-label="Toggle navigation of SANDY Internal Functions" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.sandy_internal_functions.retrieve_nuclide_information.html">retrieve_nuclide_information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.sandy_internal_functions.retrieve_covariance_data.html">retrieve_covariance_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.sandy_internal_functions.plot_covariance.html">plot_covariance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.sandy_internal_functions.save_covariance_file.html">save_covariance_file</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="post_proc.html">Post-Processing Internal Functions</a><input aria-label="Toggle navigation of Post-Processing Internal Functions" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.post_processing_internal_functions.check_input_types.html">check_input_types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.post_processing_internal_functions.calculate_forward_coefficients.html">calculate_forward_coefficients</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.post_processing_internal_functions.calculate_absolute_forward_coefficient_errors.html">calculate_absolute_forward_coefficient_errors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.post_processing_internal_functions.calculate_backward_coefficients.html">calculate_backward_coefficients</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.post_processing_internal_functions.calculate_absolute_backward_coefficient_errors.html">calculate_absolute_backward_coefficient_errors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.post_processing_internal_functions.calculate_central_coefficients.html">calculate_central_coefficients</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.post_processing_internal_functions.calculate_absolute_central_coefficient_errors.html">calculate_absolute_central_coefficient_errors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.post_processing_internal_functions.convert_per_lethargy.html">convert_per_lethargy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.post_processing_internal_functions.plot_relative_sens.html">plot_relative_sens</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.post_processing_internal_functions.calculate_direct_perturbation_variance_error.html">calculate_direct_perturbation_variance_error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.post_processing_internal_functions.calculate_mean_error.html">calculate_mean_error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.post_processing_internal_functions.calculate_random_sampling_variance_error.html">calculate_random_sampling_variance_error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/WINDIGO.post_processing_internal_functions.calculate_uncertainty_error.html">calculate_uncertainty_error</a></li>
 </ul>
 </li>
 </ul>
@@ -259,6 +312,48 @@
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.format_endf_evaluation.html#WINDIGO.frendy_internal_functions.format_endf_evaluation" title="WINDIGO.frendy_internal_functions.format_endf_evaluation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WINDIGO.frendy_internal_functions.format_endf_evaluation</span></code></a></p></td>
+<td><p>Format a raw ENDF evaluation into the .dat format required by FRENDY.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.write_upgrade_lines.html#WINDIGO.frendy_internal_functions.write_upgrade_lines" title="WINDIGO.frendy_internal_functions.write_upgrade_lines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WINDIGO.frendy_internal_functions.write_upgrade_lines</span></code></a></p></td>
+<td><p>Write optional lines for the unperturbed ACE generation input file to add additional energy grid points.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input.html#WINDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input" title="WINDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WINDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input</span></code></a></p></td>
+<td><p>Write the input file used to generate unperturbed ACE files.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_direct_perturbation_inputs.html#WINDIGO.frendy_internal_functions.create_direct_perturbation_inputs" title="WINDIGO.frendy_internal_functions.create_direct_perturbation_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WINDIGO.frendy_internal_functions.create_direct_perturbation_inputs</span></code></a></p></td>
+<td><p>Create a folder to store direct perturbation inputs, generate the input files, and return their names.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_direct_perturbation_list.html#WINDIGO.frendy_internal_functions.create_direct_perturbation_list" title="WINDIGO.frendy_internal_functions.create_direct_perturbation_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WINDIGO.frendy_internal_functions.create_direct_perturbation_list</span></code></a></p></td>
+<td><p>Create a file containing the list of direct perturbation input files.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_direct_perturbation_command_file.html#WINDIGO.frendy_internal_functions.create_direct_perturbation_command_file" title="WINDIGO.frendy_internal_functions.create_direct_perturbation_command_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WINDIGO.frendy_internal_functions.create_direct_perturbation_command_file</span></code></a></p></td>
+<td><p>Create a .csh script containing commands to generate direct perturbation ACE files.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.direct_perturbation_folder_check.html#WINDIGO.frendy_internal_functions.direct_perturbation_folder_check" title="WINDIGO.frendy_internal_functions.direct_perturbation_folder_check"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WINDIGO.frendy_internal_functions.direct_perturbation_folder_check</span></code></a></p></td>
+<td><p>Check that all direct perturbation ACE files were created by verifying that their expected folders exist.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file.html#WINDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file" title="WINDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WINDIGO.frendy_internal_functions.create_random_sampling_tool_execution_file</span></code></a></p></td>
+<td><p>Create the .csh script needed to execute the random sampling tool.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_random_sampling_tool_inputs.html#WINDIGO.frendy_internal_functions.create_random_sampling_tool_inputs" title="WINDIGO.frendy_internal_functions.create_random_sampling_tool_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WINDIGO.frendy_internal_functions.create_random_sampling_tool_inputs</span></code></a></p></td>
+<td><p>Create the input file used by the random sampling tool.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.generate_random_sampling_factors.html#WINDIGO.frendy_internal_functions.generate_random_sampling_factors" title="WINDIGO.frendy_internal_functions.generate_random_sampling_factors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WINDIGO.frendy_internal_functions.generate_random_sampling_factors</span></code></a></p></td>
+<td><p>Execute the creation of randomly sampled perturbation coefficients.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.move_random_sampling_files.html#WINDIGO.frendy_internal_functions.move_random_sampling_files" title="WINDIGO.frendy_internal_functions.move_random_sampling_files"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WINDIGO.frendy_internal_functions.move_random_sampling_files</span></code></a></p></td>
+<td><p>Move random sampling files from the tool directory to a new directory for better management.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_random_sampling_pert_list.html#WINDIGO.frendy_internal_functions.create_random_sampling_pert_list" title="WINDIGO.frendy_internal_functions.create_random_sampling_pert_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WINDIGO.frendy_internal_functions.create_random_sampling_pert_list</span></code></a></p></td>
+<td><p>Create the random sampling perturbation list file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_random_sampling_ace_directory.html#WINDIGO.frendy_internal_functions.create_random_sampling_ace_directory" title="WINDIGO.frendy_internal_functions.create_random_sampling_ace_directory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WINDIGO.frendy_internal_functions.create_random_sampling_ace_directory</span></code></a></p></td>
+<td><p>Create a directory to store ACE files and move required files into it.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file.html#WINDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file" title="WINDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WINDIGO.frendy_internal_functions.create_random_sampling_ace_execution_file</span></code></a></p></td>
+<td><p>Generate the execution file for creating random sampling ACE files.</p></td>
+</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/WINDIGO.frendy_internal_functions.random_sampling_folder_check.html#WINDIGO.frendy_internal_functions.random_sampling_folder_check" title="WINDIGO.frendy_internal_functions.random_sampling_folder_check"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WINDIGO.frendy_internal_functions.random_sampling_folder_check</span></code></a></p></td>
 <td><p>Check whether all expected ACE file folders were created.</p></td>
 </tr>
@@ -272,23 +367,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="generated/WINDIGO.frendy_internal_functions.random_sampling_folder_check.html">
+          <a class="next-page" href="generated/WINDIGO.frendy_internal_functions.format_endf_evaluation.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">WINDIGO.frendy_internal_functions.random_sampling_folder_check</div>
+                <div class="title">format_endf_evaluation</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="generated/WINDIGO.openmc_internal_functions.create_numbers.html">
+          <a class="prev-page" href="generated/WINDIGO.openmc_internal_functions.create_perturbed_xml.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">WINDIGO.openmc_internal_functions.create_numbers</div>
+                <div class="title">create_perturbed_xml</div>
                 
               </div>
             </a>

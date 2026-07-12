@@ -1,5 +1,5 @@
-﻿WINDIGO.frendy\_internal\_functions.random\_sampling\_folder\_check
-===================================================================
+﻿random_sampling_folder_check
+==============================================================
 
 .. currentmodule:: WINDIGO.frendy_internal_functions
 

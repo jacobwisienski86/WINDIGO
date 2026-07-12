@@ -24,9 +24,8 @@ extensions = [
     'sphinx.ext.viewcode',
 ]
 
-autosummary_generate = True
-
 templates_path = ['_templates']
+autosummary_generate = True
 exclude_patterns = []
 
 

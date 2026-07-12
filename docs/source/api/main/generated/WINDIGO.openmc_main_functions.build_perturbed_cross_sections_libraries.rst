@@ -1,5 +1,5 @@
-﻿WINDIGO.openmc\_main\_functions.build\_perturbed\_cross\_sections\_libraries
-============================================================================
+﻿build_perturbed_cross_sections_libraries
+======================================================================
 
 .. currentmodule:: WINDIGO.openmc_main_functions
 
