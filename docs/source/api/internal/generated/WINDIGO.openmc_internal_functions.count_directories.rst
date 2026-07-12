@@ -1,6 +1,6 @@
-﻿count_directories
-===================================================
+﻿count\_directories
+==================
 
 .. currentmodule:: WINDIGO.openmc_internal_functions
 
-.. autofunction:: count_directories
+.. autofunction:: WINDIGO.openmc_internal_functions.count_directories

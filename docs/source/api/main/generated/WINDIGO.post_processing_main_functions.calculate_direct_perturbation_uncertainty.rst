@@ -1,6 +1,6 @@
-﻿calculate_direct_perturbation_uncertainty
-================================================================================
+﻿calculate\_direct\_perturbation\_uncertainty
+============================================
 
 .. currentmodule:: WINDIGO.post_processing_main_functions
 
-.. autofunction:: calculate_direct_perturbation_uncertainty
+.. autofunction:: WINDIGO.post_processing_main_functions.calculate_direct_perturbation_uncertainty

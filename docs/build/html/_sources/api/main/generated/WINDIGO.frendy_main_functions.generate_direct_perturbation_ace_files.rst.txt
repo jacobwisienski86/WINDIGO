@@ -1,6 +1,6 @@
-﻿generate_direct_perturbation_ace_files
-====================================================================
+﻿generate\_direct\_perturbation\_ace\_files
+==========================================
 
 .. currentmodule:: WINDIGO.frendy_main_functions
 
-.. autofunction:: generate_direct_perturbation_ace_files
+.. autofunction:: WINDIGO.frendy_main_functions.generate_direct_perturbation_ace_files

@@ -1,6 +1,6 @@
-﻿direct_perturbation_folder_check
-==================================================================
+﻿direct\_perturbation\_folder\_check
+===================================
 
 .. currentmodule:: WINDIGO.frendy_internal_functions
 
-.. autofunction:: direct_perturbation_folder_check
+.. autofunction:: WINDIGO.frendy_internal_functions.direct_perturbation_folder_check

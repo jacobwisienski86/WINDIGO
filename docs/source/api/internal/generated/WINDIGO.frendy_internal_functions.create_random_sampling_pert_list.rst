@@ -1,6 +1,6 @@
-﻿create_random_sampling_pert_list
-==================================================================
+﻿create\_random\_sampling\_pert\_list
+====================================
 
 .. currentmodule:: WINDIGO.frendy_internal_functions
 
-.. autofunction:: create_random_sampling_pert_list
+.. autofunction:: WINDIGO.frendy_internal_functions.create_random_sampling_pert_list

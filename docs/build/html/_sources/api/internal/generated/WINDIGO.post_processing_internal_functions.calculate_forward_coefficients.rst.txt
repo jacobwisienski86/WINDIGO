@@ -1,6 +1,6 @@
-﻿calculate_forward_coefficients
-=========================================================================
+﻿calculate\_forward\_coefficients
+================================
 
 .. currentmodule:: WINDIGO.post_processing_internal_functions
 
-.. autofunction:: calculate_forward_coefficients
+.. autofunction:: WINDIGO.post_processing_internal_functions.calculate_forward_coefficients

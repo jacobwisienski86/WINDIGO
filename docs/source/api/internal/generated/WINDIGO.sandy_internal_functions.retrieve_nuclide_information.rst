@@ -1,6 +1,6 @@
-﻿retrieve_nuclide_information
-=============================================================
+﻿retrieve\_nuclide\_information
+==============================
 
 .. currentmodule:: WINDIGO.sandy_internal_functions
 
-.. autofunction:: retrieve_nuclide_information
+.. autofunction:: WINDIGO.sandy_internal_functions.retrieve_nuclide_information

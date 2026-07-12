@@ -1,6 +1,5 @@
-{{ name }}
-{{ underline }}
+{{ name | escape | underline }}
 
 .. currentmodule:: {{ module }}
 
-.. autofunction:: {{ name }}
+.. autofunction:: {{ fullname }}

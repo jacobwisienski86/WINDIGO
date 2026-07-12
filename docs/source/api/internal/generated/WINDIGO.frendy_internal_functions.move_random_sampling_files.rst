@@ -1,6 +1,6 @@
-﻿move_random_sampling_files
-============================================================
+﻿move\_random\_sampling\_files
+=============================
 
 .. currentmodule:: WINDIGO.frendy_internal_functions
 
-.. autofunction:: move_random_sampling_files
+.. autofunction:: WINDIGO.frendy_internal_functions.move_random_sampling_files

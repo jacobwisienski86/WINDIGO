@@ -1,6 +1,6 @@
-﻿create_unperturbed_library
-============================================================
+﻿create\_unperturbed\_library
+============================
 
 .. currentmodule:: WINDIGO.openmc_internal_functions
 
-.. autofunction:: create_unperturbed_library
+.. autofunction:: WINDIGO.openmc_internal_functions.create_unperturbed_library

@@ -1,6 +1,6 @@
-﻿save_covariance_file
-=====================================================
+﻿save\_covariance\_file
+======================
 
 .. currentmodule:: WINDIGO.sandy_internal_functions
 
-.. autofunction:: save_covariance_file
+.. autofunction:: WINDIGO.sandy_internal_functions.save_covariance_file

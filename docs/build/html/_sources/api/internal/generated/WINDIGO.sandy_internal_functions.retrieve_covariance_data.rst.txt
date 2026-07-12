@@ -1,6 +1,6 @@
-﻿retrieve_covariance_data
-=========================================================
+﻿retrieve\_covariance\_data
+==========================
 
 .. currentmodule:: WINDIGO.sandy_internal_functions
 
-.. autofunction:: retrieve_covariance_data
+.. autofunction:: WINDIGO.sandy_internal_functions.retrieve_covariance_data

@@ -1,6 +1,6 @@
-﻿format_endf_evaluation
-========================================================
+﻿format\_endf\_evaluation
+========================
 
 .. currentmodule:: WINDIGO.frendy_internal_functions
 
-.. autofunction:: format_endf_evaluation
+.. autofunction:: WINDIGO.frendy_internal_functions.format_endf_evaluation

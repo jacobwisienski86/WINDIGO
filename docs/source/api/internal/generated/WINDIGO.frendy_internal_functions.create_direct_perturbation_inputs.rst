@@ -1,6 +1,6 @@
-﻿create_direct_perturbation_inputs
-===================================================================
+﻿create\_direct\_perturbation\_inputs
+====================================
 
 .. currentmodule:: WINDIGO.frendy_internal_functions
 
-.. autofunction:: create_direct_perturbation_inputs
+.. autofunction:: WINDIGO.frendy_internal_functions.create_direct_perturbation_inputs

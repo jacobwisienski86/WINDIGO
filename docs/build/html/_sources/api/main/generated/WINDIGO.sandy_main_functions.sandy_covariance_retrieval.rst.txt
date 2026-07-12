@@ -1,6 +1,6 @@
-﻿sandy_covariance_retrieval
-=======================================================
+﻿sandy\_covariance\_retrieval
+============================
 
 .. currentmodule:: WINDIGO.sandy_main_functions
 
-.. autofunction:: sandy_covariance_retrieval
+.. autofunction:: WINDIGO.sandy_main_functions.sandy_covariance_retrieval

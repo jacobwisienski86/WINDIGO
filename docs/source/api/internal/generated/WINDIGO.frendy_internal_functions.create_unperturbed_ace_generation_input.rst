@@ -1,6 +1,6 @@
-﻿create_unperturbed_ace_generation_input
-=========================================================================
+﻿create\_unperturbed\_ace\_generation\_input
+===========================================
 
 .. currentmodule:: WINDIGO.frendy_internal_functions
 
-.. autofunction:: create_unperturbed_ace_generation_input
+.. autofunction:: WINDIGO.frendy_internal_functions.create_unperturbed_ace_generation_input

@@ -1,6 +1,6 @@
-﻿generate_random_sampling_ace_files
-================================================================
+﻿generate\_random\_sampling\_ace\_files
+======================================
 
 .. currentmodule:: WINDIGO.frendy_main_functions
 
-.. autofunction:: generate_random_sampling_ace_files
+.. autofunction:: WINDIGO.frendy_main_functions.generate_random_sampling_ace_files

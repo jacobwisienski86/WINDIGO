@@ -1,6 +1,6 @@
-﻿create_numbers
-================================================
+﻿create\_numbers
+===============
 
 .. currentmodule:: WINDIGO.openmc_internal_functions
 
-.. autofunction:: create_numbers
+.. autofunction:: WINDIGO.openmc_internal_functions.create_numbers

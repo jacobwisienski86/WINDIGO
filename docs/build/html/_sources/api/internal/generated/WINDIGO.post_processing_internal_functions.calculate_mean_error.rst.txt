@@ -1,6 +1,6 @@
-﻿calculate_mean_error
-===============================================================
+﻿calculate\_mean\_error
+======================
 
 .. currentmodule:: WINDIGO.post_processing_internal_functions
 
-.. autofunction:: calculate_mean_error
+.. autofunction:: WINDIGO.post_processing_internal_functions.calculate_mean_error

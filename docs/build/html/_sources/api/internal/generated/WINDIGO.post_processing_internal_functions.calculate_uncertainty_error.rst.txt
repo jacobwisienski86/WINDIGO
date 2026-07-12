@@ -1,6 +1,6 @@
-﻿calculate_uncertainty_error
-======================================================================
+﻿calculate\_uncertainty\_error
+=============================
 
 .. currentmodule:: WINDIGO.post_processing_internal_functions
 
-.. autofunction:: calculate_uncertainty_error
+.. autofunction:: WINDIGO.post_processing_internal_functions.calculate_uncertainty_error

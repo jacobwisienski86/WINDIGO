@@ -1,0 +1,48 @@
+/* Stack autosummary entries vertically */
+.autosummary table {
+    width: 100% !important;
+}
+
+.autosummary td {
+    display: block;
+    width: 100% !important;
+    padding-bottom: 0.5rem;
+}
+
+/* Make function names stand out */
+.autosummary td:first-child {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    white-space: normal !important;
+    word-break: break-word !important;
+}
+
+/* Stack autosummary entries vertically */
+.autosummary table {
+    width: 85% !important;       /* Reduce horizontal width */
+    margin-left: auto;           /* Center the table */
+    margin-right: auto;
+}
+
+/* Each cell becomes a block */
+.autosummary td {
+    display: block;
+    width: 100% !important;
+    padding-bottom: 0.75rem;     /* More spacing between entries */
+}
+
+/* Function name styling */
+.autosummary td:first-child {
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+    white-space: normal !important;
+    word-break: break-word !important;
+}
+
+/* Add subtle spacing between entries */
+.autosummary tr {
+    margin-bottom: 1rem;
+    display: block;
+}

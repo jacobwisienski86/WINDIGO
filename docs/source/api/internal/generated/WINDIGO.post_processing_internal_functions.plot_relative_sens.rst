@@ -1,6 +1,6 @@
-﻿plot_relative_sens
-=============================================================
+﻿plot\_relative\_sens
+====================
 
 .. currentmodule:: WINDIGO.post_processing_internal_functions
 
-.. autofunction:: plot_relative_sens
+.. autofunction:: WINDIGO.post_processing_internal_functions.plot_relative_sens

@@ -1,6 +1,6 @@
-﻿write_upgrade_lines
-=====================================================
+﻿write\_upgrade\_lines
+=====================
 
 .. currentmodule:: WINDIGO.frendy_internal_functions
 
-.. autofunction:: write_upgrade_lines
+.. autofunction:: WINDIGO.frendy_internal_functions.write_upgrade_lines

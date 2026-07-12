@@ -1,6 +1,6 @@
-﻿create_model_folders
-======================================================
+﻿create\_model\_folders
+======================
 
 .. currentmodule:: WINDIGO.openmc_internal_functions
 
-.. autofunction:: create_model_folders
+.. autofunction:: WINDIGO.openmc_internal_functions.create_model_folders

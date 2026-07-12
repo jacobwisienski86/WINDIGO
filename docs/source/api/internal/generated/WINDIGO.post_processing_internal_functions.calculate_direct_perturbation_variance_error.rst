@@ -1,6 +1,6 @@
-﻿calculate_direct_perturbation_variance_error
-=======================================================================================
+﻿calculate\_direct\_perturbation\_variance\_error
+================================================
 
 .. currentmodule:: WINDIGO.post_processing_internal_functions
 
-.. autofunction:: calculate_direct_perturbation_variance_error
+.. autofunction:: WINDIGO.post_processing_internal_functions.calculate_direct_perturbation_variance_error
