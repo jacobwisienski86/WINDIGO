@@ -20,7 +20,7 @@ def count_directories(perturbed_ACE_folder_path):
 
     Returns
     -------
-    int
+    directory_number : int
         Number of directories within the folder containing the perturbed
         ACE files. Directories containing perturbation inputs are excluded.
     """
@@ -47,7 +47,7 @@ def create_numbers(directory_number):
 
     Returns
     -------
-    list of str
+    four_digit_numbers : list of str
         Four-digit folder identifiers.
     """
     four_digit_numbers = []
@@ -85,7 +85,7 @@ def create_unperturbed_library(
 
     Returns
     -------
-    openmc.data.DataLibrary
+    unperturbed_library : openmc.data.DataLibrary
         Data library containing all unperturbed cross section data.
     """
     unperturbed_library = openmc.data.DataLibrary()
@@ -98,7 +98,7 @@ def create_unperturbed_library(
                 unperturbed_library.register_file(xs_filename)
 
     #Check if thermal scattering data will be included in the model of interest
-    if (thermal_scatter_sublibrary_path != '') and (unperturbed_TSL_list != []):
+    if (thermal_scatter_sublibrary_path != None) and (unperturbed_TSL_list != None):
         # Register thermal scattering files
         for thermal_scatter in unperturbed_TSL_list:
             for file in os.listdir(thermal_scatter_sublibrary_path):

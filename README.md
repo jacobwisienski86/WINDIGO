@@ -67,16 +67,13 @@ If you are having trouble with retrieving covariance data using SANDY, this may 
 # References
 
 FRENDY:
-K. Tada, A. Yamamoto, S. Kunieda, C. Konno, R. Kondo, T. Endo, G. Chiba, M. Ono, M. Tojo, "Development and verification of nuclear data processing code FRENDY version 2," J. Nucl. Sci. Technol., 61, pp.830-839 (2024).
-https://www.tandfonline.com/doi/full/10.1080/00223131.2023.2278600
+K. Tada, A. Yamamoto, S. Kunieda, C. Konno, R. Kondo, T. Endo, G. Chiba, M. Ono, and M. Tojo, "Development and verification of nuclear data processing code FRENDY version 2," Journal of Nuclear Science and Technology, Volume 61, pp.830-839 (2024). DOI: https://doi.org/10.1080/00223131.2023.2278600
 
 OpenMC:
-Paul K. Romano, Nicholas E. Horelik, Bryan R. Herman, Adam G. Nelson, Benoit Forget, and Kord Smith, “OpenMC: A State-of-the-Art Monte Carlo Code for Research and Development,” Ann. Nucl. Energy, 82, 90–97 (2015).
-https://www.sciencedirect.com/science/article/pii/S030645491400379X?via%3Dihub
+P. K. Romano, N. E. Horelik, B. R. Herman, A. G. Nelson, B. Forget, and K. Smith, “OpenMC: A State-of-the-Art Monte Carlo Code for Research and Development,” Annals of Nuclear Energy, Volume 82, pp. 90–97 (2015). DOI: https://doi.org/10.1016/j.anucene.2014.07.048
 
 SANDY:
-L. Fiorito, G. Žerovnik, A. Stankovskiy, G. Van den Eynde, P.E. Labeau, Nuclear data uncertainty propagation to integral responses using SANDY, Annals of Nuclear Energy, Volume 101, 2017, Pages 359-366, ISSN 0306-4549.
-https://www.sciencedirect.com/science/article/pii/S0306454916305278
+L. Fiorito, G. Žerovnik, A. Stankovskiy, G. Van den Eynde, P.E. Labeau, "Nuclear data uncertainty propagation to integral responses using SANDY", Annals of Nuclear Energy, Volume 101, pp. 359-366 (2017). DOI: https://doi.org/10.1016/j.anucene.2016.11.026
 
 Additional References:
 N. Kleedtke, W. Haeck, and J. Hutchinson, "Utilization of ACE nuclear data file toolkit ACEtk to calculate relative sensitivity coefficients of point-kinetics parameters," Annals of Nuclear Energy, Volume 193, Pages 110031, DOI: https://doi.org/10.1016/j.anucene.2023.110031

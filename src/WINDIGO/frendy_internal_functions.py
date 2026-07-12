@@ -16,7 +16,7 @@ def format_endf_evaluation(endf_Path):
 
     Returns
     -------
-    str
+    endf_file_dat : str
         Path to the .dat formatted ENDF evaluation.
     """
     endf_file_original = endf_Path
@@ -40,7 +40,7 @@ def write_upgrade_lines(energy_grid):
 
     Returns
     -------
-    list of str
+    upgrade_lines : list of str
         Lines specifying additional energy grid points.
     """
     upgrade_lines = []
@@ -107,7 +107,7 @@ def create_unperturbed_ace_generation_input(
     nuclide : str
         Name of the nuclide whose ENDF evaluation is used.
     
-    endf_file_dat: str
+    endf_file_dat : str
         Name of the .dat-formatted ENDF evaluation used for
         ACE file generation.
 
@@ -122,7 +122,7 @@ def create_unperturbed_ace_generation_input(
 
     Returns
     -------
-    str
+    ace_file_gen_input_filename : str
         Path to the ACE generation input file.
     """
     if energy_grid is None:
@@ -203,10 +203,10 @@ def create_direct_perturbation_inputs(
 
     Returns
     -------
-    list of str
+    perturbation_list_lines : list of str
         Names of each direct perturbation input file.
 
-    str
+    folder_name : str
         Directory containing the input files.
     """
     folder_name = (
@@ -256,7 +256,7 @@ def create_direct_perturbation_list(
 
     Returns
     -------
-    str
+    perturbation_list_filename : str
         Name of the file containing the list of direct perturbation inputs.
     """
     perturbation_list_filename = (
@@ -291,7 +291,7 @@ def create_direct_perturbation_command_file(
 
     Returns
     -------
-    str
+    create_ace_files_input_filename : str
         Path to the generated .csh command file.
     """
     create_ace_files_input_filename = "run_create_perturbed_ace_file.csh"
@@ -346,7 +346,7 @@ def direct_perturbation_folder_check(
 
     Returns
     -------
-    bool
+    file_failure_flag : bool
         True if any ACE file folder is missing, False otherwise.
     """
     file_failure_flag = False
@@ -383,7 +383,7 @@ def create_random_sampling_tool_execution_file(
 
     Returns
     -------
-    str
+    execution_filename : str
         Path to the .csh execution script.
     """
     execution_filename = "run_make_perturbation_factor.csh"
@@ -449,7 +449,7 @@ def create_random_sampling_tool_inputs(
 
     Returns
     -------
-    str
+    sample_filename : str
         Path to the random sampling tool input file.
     """
     sample_filename = "sample_copy.inp"
@@ -554,7 +554,7 @@ def move_random_sampling_files(
 
     Returns
     -------
-    str
+    new_inputs_directory_name : str
         Directory where the sampling inputs are stored.
     """
     original_inputs_directory = (
@@ -600,7 +600,7 @@ def create_random_sampling_pert_list(
 
     Returns
     -------
-    str
+    perturbation_list_filename : str
         Path to the file containing the list of random sampling inputs.
     """
     perturbation_list_filename = (
@@ -655,7 +655,7 @@ def create_random_sampling_ace_directory(
 
     Returns
     -------
-    str
+    ace_files_directory : str
         Path to the directory containing the ACE files.
     """
     ace_files_directory = (
@@ -707,7 +707,7 @@ def create_random_sampling_ace_execution_file(
 
     Returns
     -------
-    str
+    create_ace_files_input_filename : str
         Path to the .csh execution file.
     """
     create_ace_files_input_filename = "run_create_perturbed_ace_file.csh"
@@ -764,7 +764,7 @@ def random_sampling_folder_check(
 
     Returns
     -------
-    bool
+    file_failure_flag : bool
         True if any ACE file folder is missing, False otherwise.
     """
     file_failure_flag = False

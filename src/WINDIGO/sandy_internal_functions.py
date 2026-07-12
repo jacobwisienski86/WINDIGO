@@ -23,7 +23,7 @@ def retrieve_nuclide_information(nuclide):
 
     Returns
     -------
-    int
+    nuclide_number : int
         ZZZAAA-style integer used to specify the nuclide in Sandy.
     """
     # Extract element symbol and mass number from input string
@@ -161,7 +161,7 @@ def plot_covariance(covariance_data, energy_grid, nuclide, mt_Number, flag_Strin
 
     Returns
     -------
-    str
+    plot_filename : str
         Path to the saved plot.
     """
     fig, ax = plt.subplots(figsize=(8, 8), dpi=100)
@@ -207,7 +207,7 @@ def save_covariance_file(covariance_data, energy_grid, nuclide, mt_Number, flag_
 
     Returns
     -------
-    str
+    csv_filename : str
         Path to the saved CSV file.
     """
     covariance_data.to_csv('intermediate_dataframe.csv', index=False)

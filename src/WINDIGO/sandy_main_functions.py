@@ -48,13 +48,16 @@ def sandy_covariance_retrieval(
         data to a tabulated version. Expressed as a fraction (i.e 
         err_tolerance = 0.1 means that converted cross section data
         is considered valid if it falls within 10% of the continuous
-        version) Default is 0.1.
+        version) 
+        Default is 0.1.
 
     relative_Flag : bool, optional
-        Retrieve relative covariance data if True. Default is False.
+        Retrieve relative covariance data if True. 
+        Default is False.
 
     plotting_Flag : bool, optional
-        Produce a plot of the covariance data if True. Default is False.
+        Produce a plot of the covariance data if True. 
+        Default is False.
 
     Returns
     -------
@@ -62,7 +65,7 @@ def sandy_covariance_retrieval(
         Path to the saved covariance CSV file.
 
     plot_filename : str, optional
-        Path to the saved covariance plot file (if plotting_Flag=True).
+        Path to the saved covariance plot file if plotting_Flag=True.
     """
 
     # Retrieve the nuclide number used for Sandy covariance retrieval

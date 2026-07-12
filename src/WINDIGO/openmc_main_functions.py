@@ -13,11 +13,11 @@ def build_perturbed_cross_sections_libraries(
     unperturbed_nuclide_list,
     neutron_sublibrary_path,
     perturbed_ACE_folder_path,
-    unperturbed_TSL_list = [],
-    thermal_scatter_sublibrary_path = '',
-    perturbed_nuclide='',
-    model_name='',
-    perturbation_type=''
+    unperturbed_TSL_list=None,
+    thermal_scatter_sublibrary_path=None,
+    perturbed_nuclide=None,
+    model_name=None,
+    perturbation_type=None
 ):
     """
     Create a directory with numbered folders, each containing a
@@ -36,23 +36,28 @@ def build_perturbed_cross_sections_libraries(
 
     unperturbed_TSL_list : list of str, optional
         Names of thermal scattering libraries to include.
+        Default is None
 
     thermal_scatter_sublibrary_path : str, optional
         Path to directory containing unperturbed thermal scattering .h5 files.
+        Default is None
 
     perturbed_nuclide : str, optional
         Name of the nuclide being perturbed. Used only for naming folders.
+        Default is None
 
     model_name : str, optional
         Name of the model under investigation. Used only for naming folders.
+        Default is None
 
     perturbation_type : str, optional
         Type of perturbation (e.g., direct, random). Used only for naming
         folders.
+        Default is None
 
     Returns
     -------
-    str
+    perturbed_model_top_directory_name : str
         Path to the directory containing all perturbed cross_sections.xml files.
     """
     # Count directories containing perturbed ACE files

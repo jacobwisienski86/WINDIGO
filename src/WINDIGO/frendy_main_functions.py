@@ -59,7 +59,7 @@ def generate_unperturbed_neutron_ace_file(
 
     Returns
     -------
-    str
+    output_file_path : str
         Path to the generated ACE file.
     """
     if energy_grid is None:
@@ -163,7 +163,7 @@ def generate_direct_perturbation_ace_files(
 
     Returns
     -------
-    str
+    perturbed_ace_folder_path : str
         Directory containing perturbed ACE files.
     """
     starting_directory = os.getcwd()
@@ -273,17 +273,19 @@ def generate_random_sampling_ace_files(
         Nuclide name without hyphens (e.g., H1, U235).
 
     seed : int, optional
-        Random sampling seed. Default is 1234567.
+        Random sampling seed. 
+        Default is 1234567.
 
     sample_size : int, optional
-        Number of random sampling input files. Default is 100.
+        Number of random sampling input files. 
+        Default is 100.
 
     cleanup_Flag : bool, optional
         Delete intermediate files if True.
 
     Returns
     -------
-    str
+    ace_files_directory : str
         Directory where the random sampling ACE files are located.
     """
     # Save starting directory
