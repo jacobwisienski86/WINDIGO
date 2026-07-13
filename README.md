@@ -1,6 +1,6 @@
 # WINDIGO
 
-[![Documentation Status](https://readthedocs.org/projects/windigo/badge/?version=latest)](https://windigo.readthedocs.io/en/latest/)
+**Documentation:** [![Documentation Status](https://readthedocs.org/projects/windigo/badge/?version=latest)](https://windigo.readthedocs.io/en/latest/)
 
 The Workflow Integrating Nuclear Data InvestiGations into Openmc (WINDIGO) is a Python package with a set of functions to help users propagate uncertainty into OpenMC (Open Monte Carlo) calculations based on uncertainties in nuclear data more efficiently. These functions make use of the Python package SANDY (SAmpler of Nuclear Data and uncertaintY), the software FRENDY (FRom Evaluated Nuclear Data librarY), and OpenMC. WINDIGO doesn't perform any modifications to nuclear data or any simulations using said data on its own, rather it serves as a tool to make performing these tasks more efficient using pre-established codes.
 
