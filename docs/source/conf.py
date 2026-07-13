@@ -46,7 +46,9 @@ html_css_files = [
     'autosummary_vertical.css',
 ]
 
-
+autodoc_mock_imports = [
+    "openmc"
+]
 
 # -- Intersphinx configuration ----------------------------------------------
 
