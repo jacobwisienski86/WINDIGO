@@ -126,9 +126,9 @@ def calculate_relative_forward_coefficient_errors(
         Errors of the relative sensitivity coefficients
     """
 
-    cross_section_factor = original_inputs/(positive_perturbed_inputs - original_inputs)
-    relative_coefficient_error_term1 = cross_section_factor * (-1*positive_perturbed_outputs/unperturbed_output**2)
-    relative_coefficient_error_term2 = cross_section_factor * (1/unperturbed_output)
+    input_factor = original_inputs/(positive_perturbed_inputs - original_inputs)
+    relative_coefficient_error_term1 = input_factor * (-1*positive_perturbed_outputs/unperturbed_output**2)
+    relative_coefficient_error_term2 = input_factor * (1/unperturbed_output)
     relative_coefficient_error = np.sqrt(relative_coefficient_error_term1**2 * unperturbed_output_error**2 
                                          + relative_coefficient_error_term2**2 * positive_perturbed_output_errors**2)
 
@@ -261,9 +261,9 @@ def calculate_relative_backward_coefficient_errors(
         Errors of the relative sensitivity coefficients
     """
 
-    cross_section_factor = original_inputs/(negative_perturbed_inputs - original_inputs)
-    relative_coefficient_error_term1 = cross_section_factor * (negative_perturbed_outputs/unperturbed_output**2)
-    relative_coefficient_error_term2 = cross_section_factor * (-1/unperturbed_output)
+    input_factor = original_inputs/(negative_perturbed_inputs - original_inputs)
+    relative_coefficient_error_term1 = input_factor * (negative_perturbed_outputs/unperturbed_output**2)
+    relative_coefficient_error_term2 = input_factor * (-1/unperturbed_output)
     relative_coefficient_errors = np.sqrt(relative_coefficient_error_term1**2 * unperturbed_output_error**2
                                           + relative_coefficient_error_term2**2 * negative_perturbed_output_errors**2)
 
@@ -419,11 +419,11 @@ def calculate_relative_central_coefficient_errors(
         Errors of the relative sensitivity coefficients
     """
 
-    cross_section_factor = original_inputs/(positive_perturbed_inputs - negative_perturbed_inputs)
-    relative_sensitivity_error_term1 = (cross_section_factor/unperturbed_output**2) * (negative_perturbed_outputs -
+    input_factor = original_inputs/(positive_perturbed_inputs - negative_perturbed_inputs)
+    relative_sensitivity_error_term1 = (input_factor/unperturbed_output**2) * (negative_perturbed_outputs -
                                                                                        positive_perturbed_outputs)
-    relative_sensitivity_error_term2 = cross_section_factor * (1/unperturbed_output)
-    relative_sensitivity_error_term3 = cross_section_factor * (-1/unperturbed_output)
+    relative_sensitivity_error_term2 = input_factor * (1/unperturbed_output)
+    relative_sensitivity_error_term3 = input_factor * (-1/unperturbed_output)
     relative_coefficient_errors = np.sqrt(relative_sensitivity_error_term1**2 * unperturbed_output_error**2
                                           + relative_sensitivity_error_term2**2 * positive_perturbed_output_errors**2
                                           + relative_sensitivity_error_term3**2 * negative_perturbed_output_errors**2)
@@ -470,17 +470,18 @@ def calculate_absolute_central_coefficient_errors(
     return absolute_coefficient_errors
 
 def convert_per_lethargy(
-        relative_sens_coefficients, 
+        relative_parameters, 
         energy_grid_MeV
         ):
     """
-    Converts a set of relative sensitivity coefficients to being per lethargy
+    Converts a set of relative parameters to being per lethargy
     width based on a given energy grid.
 
     Parameters
     ----------
-    relative_sens_coefficients : ndarray
-        Relative sensitivity coefficients.
+    relative_parameters : ndarray
+        Relative sensitivity coefficients or relative sensitivity
+        coefficient errors to be made per lethargy width.
 
     energy_grid_MeV : ndarray
         Energy bounds of the perturbation intervals used for finding the
@@ -488,8 +489,8 @@ def convert_per_lethargy(
 
     Returns
     -------
-    relative_sens_per_lethargy : ndarray
-        Relative sensitivity coefficients converted to be per lethargy width.
+    relative_parameters_per_lethargy : ndarray
+        Relative parameters converted to be per lethargy width.
     """
     # Create an array of lethargy widths
     lethargy_widths = []
@@ -503,21 +504,23 @@ def convert_per_lethargy(
     lethargy_widths = np.array(lethargy_widths)
 
     # Compute the relative sensitivity per lethargy width
-    relative_sens_per_lethargy = (
-        relative_sens_coefficients / lethargy_widths
+    relative_parameters_per_lethargy = (
+        relative_parameters / lethargy_widths
     )
 
     # Add an extra zero to assist with plotting
-    relative_sens_per_lethargy = np.insert(
-        relative_sens_per_lethargy, 0, 0
+    relative_parameters_per_lethargy = np.insert(
+        relative_parameters_per_lethargy, 0, 0
     )
 
-    return relative_sens_per_lethargy
+    return relative_parameters_per_lethargy
 
 
 def plot_relative_sens(
         relative_sens_per_lethargy, 
-        energy_grid_MeV
+        energy_grid_MeV,
+        error_propagation_flag=False,
+        relative_sens_error_per_lethargy=None,
         ):
     """
     Generates a plot of the relative sensitivity coefficients per lethargy width
@@ -531,11 +534,33 @@ def plot_relative_sens(
     energy_grid_MeV : ndarray
         Energy bounds of the perturbation intervals used for finding the
         relative sensitivity coefficients.
+
+    error_propagation_flag : bool, optional
+        Flag to determine if propagated errors will be plotted on the relative
+        sensitivity plot.
+        Default is False.
+
+    relative_sens_error_per_lethargy : ndarray, optional
+        Relative sensitivity coefficient per lethargy errors to be potentially
+        included as error bars within the relative sensitivity plots.
+        Default is None.
     """
     # Plot the sensitivity profile
     fig, ax = plt.subplots(figsize=(8, 6))
 
     ax.step(energy_grid_MeV, relative_sens_per_lethargy, color="black")
+    if error_propagation_flag:
+        # Calculate the midpoints of the energy grid of interest
+        energy_midpoints = []
+        for ii in range(0, len(energy_grid_MeV)-1):
+            energy_midpoints.append((energy_grid_MeV[ii] + energy_grid_MeV[ii+1])/2)
+        energy_midpoints = np.array(energy_midpoints)
+        # Add an additional zero to the energy midpoints for plotting
+        energy_midpoints = np.insert(energy_midpoints, 0, 0)
+        # Plot the error bars within the relative sensitivity plot
+        ax.errorbar(energy_midpoints, relative_sens_per_lethargy, yerr = relative_sens_error_per_lethargy, 
+                    fmt = 'none', color = 'black', capsize = 3)
+
     ax.tick_params(axis="x", labelsize=18)
     ax.tick_params(axis="y", labelsize=18)
     ax.set_xscale("log")
