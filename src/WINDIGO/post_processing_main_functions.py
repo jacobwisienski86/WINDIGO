@@ -442,14 +442,14 @@ def calculate_direct_perturbation_uncertainty(
 
     if error_propagation_flag:
 
-        print('The direct perturnbtion uncertainty is: ' + 
+        print('The direct perturbation uncertainty is: ' + 
               str(propagated_uncertainty) + ' ± ' + str(uncertainty_error))
         
         return propagated_uncertainty, uncertainty_error
 
     else:
         
-        print('The direct perturbatation uncertainty is: '
+        print('The direct perturbation uncertainty is: '
             + str(propagated_uncertainty))
 
         return propagated_uncertainty
