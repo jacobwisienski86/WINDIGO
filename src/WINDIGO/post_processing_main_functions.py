@@ -237,6 +237,8 @@ def generate_relative_sensitivity_plot(
             relative_parameters=relative_coefficient_errors,
             energy_grid_MeV=energy_grid_MeV
         )
+    else:
+        relative_sens_error_per_lethargy=None
 
     # Generate the relative sensitivity plot with potential additional error bars
 
