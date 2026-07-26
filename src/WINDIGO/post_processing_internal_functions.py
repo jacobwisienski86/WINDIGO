@@ -85,6 +85,55 @@ def calculate_forward_coefficients(
 
     return coefficients
 
+def calculate_relative_forward_coefficient_errors(
+    original_inputs,
+    positive_perturbed_inputs,
+    unperturbed_output,
+    positive_perturbed_outputs,
+    unperturbed_output_error,
+    positive_perturbed_output_errors
+):
+
+    """ 
+    Calculates the errors of the forward-differencing relative sensitivity coefficients
+
+    Parameters
+    ----------
+    original_inputs : ndarray
+        Unperturbed inputs used to obtain the unperturbed simulation output(s)
+        of interest.
+
+    positive_perturbed_inputs : ndarray
+        Inputs used in simulations to obtain the outputs given in
+        positive_perturbed_outputs.
+
+    unperturbed_output : float
+        Output from the simulations obtained using unperturbed inputs.
+    
+    positive_perturbed_outputs : ndarray
+        Outputs from simulations that utilized positively perturbed inputs.
+
+    unperturbed_output_error : float
+        Error of the output parameter calculated using unperturbed inputs.
+
+    positive_perturbed_output_errors : ndarray
+        Errors of the output parameters calculated using positively-perturbed
+        inputs.
+
+    Returns
+    ----------
+    relative_coefficient_errors : ndarray
+        Errors of the relative sensitivity coefficients
+    """
+
+    cross_section_factor = original_inputs/(positive_perturbed_inputs - original_inputs)
+    relative_coefficient_error_term1 = cross_section_factor * (-1*positive_perturbed_outputs/unperturbed_output**2)
+    relative_coefficient_error_term2 = cross_section_factor * (1/unperturbed_output)
+    relative_coefficient_error = np.sqrt(relative_coefficient_error_term1**2 * unperturbed_output_error**2 
+                                         + relative_coefficient_error_term2**2 * positive_perturbed_output_errors**2)
+
+    return relative_coefficient_error
+
 def calculate_absolute_forward_coefficient_errors(
     original_inputs,
     positive_perturbed_inputs,
@@ -170,6 +219,55 @@ def calculate_backward_coefficients(
         coefficients = coefficients * (original_inputs / unperturbed_output)
 
     return coefficients
+
+def calculate_relative_backward_coefficient_errors(
+        original_inputs,
+        negative_perturbed_inputs,
+        unperturbed_output,
+        negative_perturbed_outputs,
+        unperturbed_output_error,
+        negative_perturbed_output_errors,
+):
+
+    """ 
+    Calculates the errors of the backward-differencing relative sensitivity coefficients
+
+    Parameters
+    ----------
+    original_inputs : ndarray
+        Unperturbed inputs used to obtain the unperturbed simulation output(s)
+        of interest.
+
+    negative_perturbed_inputs : ndarray
+        Inputs used in simulations to obtain the outputs given in
+        negative_perturbed_outputs.
+
+    unperturbed_output : float
+        Output from the simulations obtained using unperturbed inputs.
+    
+    negative_perturbed_outputs : ndarray
+        Outputs from simulations that utilized negatively perturbed inputs.
+
+    unperturbed_output_error : float
+        Error of the output parameter calculated using unperturbed inputs.
+
+    negative_perturbed_output_errors : ndarray
+        Errors of the output parameters calculated using negatively-perturbed
+        inputs.
+
+    Returns
+    ----------
+    relative_coefficient_errors : ndarray
+        Errors of the relative sensitivity coefficients
+    """
+
+    cross_section_factor = original_inputs/(negative_perturbed_inputs - original_inputs)
+    relative_coefficient_error_term1 = cross_section_factor * (negative_perturbed_outputs/unperturbed_output**2)
+    relative_coefficient_error_term2 = cross_section_factor * (-1/unperturbed_output)
+    relative_coefficient_errors = np.sqrt(relative_coefficient_error_term1**2 * unperturbed_output_error**2
+                                          + relative_coefficient_error_term2**2 * negative_perturbed_output_errors**2)
+
+    return relative_coefficient_errors
 
 def calculate_absolute_backward_coefficient_errors(
     original_inputs,
@@ -265,6 +363,72 @@ def calculate_central_coefficients(
         coefficients = coefficients * (original_inputs / unperturbed_output)
 
     return coefficients
+
+def calculate_relative_central_coefficient_errors(
+        original_inputs,
+        positive_perturbed_inputs,
+        negative_perturbed_inputs,
+        unperturbed_output,
+        positive_perturbed_outputs,
+        negative_perturbed_outputs,
+        unperturbed_output_error,
+        positive_perturbed_output_errors,
+        negative_perturbed_output_errors,
+):
+
+    """ 
+    Calculates the errors of the backward-differencing relative sensitivity coefficients
+
+    Parameters
+    ----------
+    original_inputs : ndarray
+        Unperturbed inputs used to obtain the unperturbed simulation output(s)
+        of interest.
+
+    positive_perturbed_inputs : ndarray
+        Inputs used in simulations to obtain the outputs given in
+        positive_perturbed_outputs.
+
+    negative_perturbed_inputs : ndarray
+        Inputs used in simulations to obtain the outputs given in
+        negative_perturbed_outputs.
+
+    unperturbed_output : float
+        Output from the simulations obtained using unperturbed inputs.
+
+    positive_perturbed_outputs : ndarray
+        Outputs from simulations that utilized positive perturbed inputs.
+    
+    negative_perturbed_outputs : ndarray
+        Outputs from simulations that utilized negatively perturbed inputs.
+
+    unperturbed_output_error : float
+        Error of the output parameter calculated using unperturbed inputs.
+
+    positive_perturbed_output_errors : ndarray
+        Errors of the output parameters calculated using positively-perturbed
+        inputs.
+
+    negative_perturbed_output_errors : ndarray
+        Errors of the output parameters calculated using negatively-perturbed
+        inputs.
+
+    Returns
+    ----------
+    relative_coefficient_errors : ndarray
+        Errors of the relative sensitivity coefficients
+    """
+
+    cross_section_factor = original_inputs/(positive_perturbed_inputs - negative_perturbed_inputs)
+    relative_sensitivity_error_term1 = (cross_section_factor/unperturbed_output**2) * (negative_perturbed_outputs -
+                                                                                       positive_perturbed_outputs)
+    relative_sensitivity_error_term2 = cross_section_factor * (1/unperturbed_output)
+    relative_sensitivity_error_term3 = cross_section_factor * (-1/unperturbed_output)
+    relative_coefficient_errors = np.sqrt(relative_sensitivity_error_term1**2 * unperturbed_output_error**2
+                                          + relative_sensitivity_error_term2**2 * positive_perturbed_output_errors**2
+                                          + relative_sensitivity_error_term3**2 * negative_perturbed_output_errors**2)
+
+    return relative_coefficient_errors
 
 def calculate_absolute_central_coefficient_errors(
         positive_perturbed_inputs,
