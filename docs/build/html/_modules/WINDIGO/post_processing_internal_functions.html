@@ -252,10 +252,13 @@
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../api/internal/post_proc.html">Post-Processing Internal Functions</a><input aria-label="Toggle navigation of Post-Processing Internal Functions" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.check_input_types.html">check_input_types</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_forward_coefficients.html">calculate_forward_coefficients</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_relative_forward_coefficient_errors.html">calculate_relative_forward_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_absolute_forward_coefficient_errors.html">calculate_absolute_forward_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_backward_coefficients.html">calculate_backward_coefficients</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_relative_backward_coefficient_errors.html">calculate_relative_backward_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_absolute_backward_coefficient_errors.html">calculate_absolute_backward_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_central_coefficients.html">calculate_central_coefficients</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_relative_central_coefficient_errors.html">calculate_relative_central_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_absolute_central_coefficient_errors.html">calculate_absolute_central_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.convert_per_lethargy.html">convert_per_lethargy</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.plot_relative_sens.html">plot_relative_sens</a></li>
@@ -395,6 +398,58 @@
     <span class="k">return</span> <span class="n">coefficients</span></div>
 
 
+<div class="viewcode-block" id="calculate_relative_forward_coefficient_errors">
+<a class="viewcode-back" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_relative_forward_coefficient_errors.html#WINDIGO.post_processing_internal_functions.calculate_relative_forward_coefficient_errors">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_relative_forward_coefficient_errors</span><span class="p">(</span>
+    <span class="n">original_inputs</span><span class="p">,</span>
+    <span class="n">positive_perturbed_inputs</span><span class="p">,</span>
+    <span class="n">unperturbed_output</span><span class="p">,</span>
+    <span class="n">positive_perturbed_outputs</span><span class="p">,</span>
+    <span class="n">unperturbed_output_error</span><span class="p">,</span>
+    <span class="n">positive_perturbed_output_errors</span>
+<span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Calculates the errors of the forward-differencing relative sensitivity coefficients</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    original_inputs : ndarray</span>
+<span class="sd">        Unperturbed inputs used to obtain the unperturbed simulation output(s)</span>
+<span class="sd">        of interest.</span>
+
+<span class="sd">    positive_perturbed_inputs : ndarray</span>
+<span class="sd">        Inputs used in simulations to obtain the outputs given in</span>
+<span class="sd">        positive_perturbed_outputs.</span>
+
+<span class="sd">    unperturbed_output : float</span>
+<span class="sd">        Output from the simulations obtained using unperturbed inputs.</span>
+<span class="sd">    </span>
+<span class="sd">    positive_perturbed_outputs : ndarray</span>
+<span class="sd">        Outputs from simulations that utilized positively perturbed inputs.</span>
+
+<span class="sd">    unperturbed_output_error : float</span>
+<span class="sd">        Error of the output parameter calculated using unperturbed inputs.</span>
+
+<span class="sd">    positive_perturbed_output_errors : ndarray</span>
+<span class="sd">        Errors of the output parameters calculated using positively-perturbed</span>
+<span class="sd">        inputs.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    ----------</span>
+<span class="sd">    relative_coefficient_errors : ndarray</span>
+<span class="sd">        Errors of the relative sensitivity coefficients</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">input_factor</span> <span class="o">=</span> <span class="n">original_inputs</span><span class="o">/</span><span class="p">(</span><span class="n">positive_perturbed_inputs</span> <span class="o">-</span> <span class="n">original_inputs</span><span class="p">)</span>
+    <span class="n">relative_coefficient_error_term1</span> <span class="o">=</span> <span class="n">input_factor</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">positive_perturbed_outputs</span><span class="o">/</span><span class="n">unperturbed_output</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">relative_coefficient_error_term2</span> <span class="o">=</span> <span class="n">input_factor</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">unperturbed_output</span><span class="p">)</span>
+    <span class="n">relative_coefficient_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">relative_coefficient_error_term1</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">unperturbed_output_error</span><span class="o">**</span><span class="mi">2</span> 
+                                         <span class="o">+</span> <span class="n">relative_coefficient_error_term2</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">positive_perturbed_output_errors</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">relative_coefficient_error</span></div>
+
+
 <div class="viewcode-block" id="calculate_absolute_forward_coefficient_errors">
 <a class="viewcode-back" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_absolute_forward_coefficient_errors.html#WINDIGO.post_processing_internal_functions.calculate_absolute_forward_coefficient_errors">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">calculate_absolute_forward_coefficient_errors</span><span class="p">(</span>
@@ -485,6 +540,58 @@
         <span class="n">coefficients</span> <span class="o">=</span> <span class="n">coefficients</span> <span class="o">*</span> <span class="p">(</span><span class="n">original_inputs</span> <span class="o">/</span> <span class="n">unperturbed_output</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">coefficients</span></div>
+
+
+<div class="viewcode-block" id="calculate_relative_backward_coefficient_errors">
+<a class="viewcode-back" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_relative_backward_coefficient_errors.html#WINDIGO.post_processing_internal_functions.calculate_relative_backward_coefficient_errors">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_relative_backward_coefficient_errors</span><span class="p">(</span>
+        <span class="n">original_inputs</span><span class="p">,</span>
+        <span class="n">negative_perturbed_inputs</span><span class="p">,</span>
+        <span class="n">unperturbed_output</span><span class="p">,</span>
+        <span class="n">negative_perturbed_outputs</span><span class="p">,</span>
+        <span class="n">unperturbed_output_error</span><span class="p">,</span>
+        <span class="n">negative_perturbed_output_errors</span><span class="p">,</span>
+<span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Calculates the errors of the backward-differencing relative sensitivity coefficients</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    original_inputs : ndarray</span>
+<span class="sd">        Unperturbed inputs used to obtain the unperturbed simulation output(s)</span>
+<span class="sd">        of interest.</span>
+
+<span class="sd">    negative_perturbed_inputs : ndarray</span>
+<span class="sd">        Inputs used in simulations to obtain the outputs given in</span>
+<span class="sd">        negative_perturbed_outputs.</span>
+
+<span class="sd">    unperturbed_output : float</span>
+<span class="sd">        Output from the simulations obtained using unperturbed inputs.</span>
+<span class="sd">    </span>
+<span class="sd">    negative_perturbed_outputs : ndarray</span>
+<span class="sd">        Outputs from simulations that utilized negatively perturbed inputs.</span>
+
+<span class="sd">    unperturbed_output_error : float</span>
+<span class="sd">        Error of the output parameter calculated using unperturbed inputs.</span>
+
+<span class="sd">    negative_perturbed_output_errors : ndarray</span>
+<span class="sd">        Errors of the output parameters calculated using negatively-perturbed</span>
+<span class="sd">        inputs.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    ----------</span>
+<span class="sd">    relative_coefficient_errors : ndarray</span>
+<span class="sd">        Errors of the relative sensitivity coefficients</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">input_factor</span> <span class="o">=</span> <span class="n">original_inputs</span><span class="o">/</span><span class="p">(</span><span class="n">negative_perturbed_inputs</span> <span class="o">-</span> <span class="n">original_inputs</span><span class="p">)</span>
+    <span class="n">relative_coefficient_error_term1</span> <span class="o">=</span> <span class="n">input_factor</span> <span class="o">*</span> <span class="p">(</span><span class="n">negative_perturbed_outputs</span><span class="o">/</span><span class="n">unperturbed_output</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">relative_coefficient_error_term2</span> <span class="o">=</span> <span class="n">input_factor</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">unperturbed_output</span><span class="p">)</span>
+    <span class="n">relative_coefficient_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">relative_coefficient_error_term1</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">unperturbed_output_error</span><span class="o">**</span><span class="mi">2</span>
+                                          <span class="o">+</span> <span class="n">relative_coefficient_error_term2</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">negative_perturbed_output_errors</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">relative_coefficient_errors</span></div>
 
 
 <div class="viewcode-block" id="calculate_absolute_backward_coefficient_errors">
@@ -588,6 +695,75 @@
     <span class="k">return</span> <span class="n">coefficients</span></div>
 
 
+<div class="viewcode-block" id="calculate_relative_central_coefficient_errors">
+<a class="viewcode-back" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_relative_central_coefficient_errors.html#WINDIGO.post_processing_internal_functions.calculate_relative_central_coefficient_errors">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_relative_central_coefficient_errors</span><span class="p">(</span>
+        <span class="n">original_inputs</span><span class="p">,</span>
+        <span class="n">positive_perturbed_inputs</span><span class="p">,</span>
+        <span class="n">negative_perturbed_inputs</span><span class="p">,</span>
+        <span class="n">unperturbed_output</span><span class="p">,</span>
+        <span class="n">positive_perturbed_outputs</span><span class="p">,</span>
+        <span class="n">negative_perturbed_outputs</span><span class="p">,</span>
+        <span class="n">unperturbed_output_error</span><span class="p">,</span>
+        <span class="n">positive_perturbed_output_errors</span><span class="p">,</span>
+        <span class="n">negative_perturbed_output_errors</span><span class="p">,</span>
+<span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Calculates the errors of the backward-differencing relative sensitivity coefficients</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    original_inputs : ndarray</span>
+<span class="sd">        Unperturbed inputs used to obtain the unperturbed simulation output(s)</span>
+<span class="sd">        of interest.</span>
+
+<span class="sd">    positive_perturbed_inputs : ndarray</span>
+<span class="sd">        Inputs used in simulations to obtain the outputs given in</span>
+<span class="sd">        positive_perturbed_outputs.</span>
+
+<span class="sd">    negative_perturbed_inputs : ndarray</span>
+<span class="sd">        Inputs used in simulations to obtain the outputs given in</span>
+<span class="sd">        negative_perturbed_outputs.</span>
+
+<span class="sd">    unperturbed_output : float</span>
+<span class="sd">        Output from the simulations obtained using unperturbed inputs.</span>
+
+<span class="sd">    positive_perturbed_outputs : ndarray</span>
+<span class="sd">        Outputs from simulations that utilized positive perturbed inputs.</span>
+<span class="sd">    </span>
+<span class="sd">    negative_perturbed_outputs : ndarray</span>
+<span class="sd">        Outputs from simulations that utilized negatively perturbed inputs.</span>
+
+<span class="sd">    unperturbed_output_error : float</span>
+<span class="sd">        Error of the output parameter calculated using unperturbed inputs.</span>
+
+<span class="sd">    positive_perturbed_output_errors : ndarray</span>
+<span class="sd">        Errors of the output parameters calculated using positively-perturbed</span>
+<span class="sd">        inputs.</span>
+
+<span class="sd">    negative_perturbed_output_errors : ndarray</span>
+<span class="sd">        Errors of the output parameters calculated using negatively-perturbed</span>
+<span class="sd">        inputs.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    ----------</span>
+<span class="sd">    relative_coefficient_errors : ndarray</span>
+<span class="sd">        Errors of the relative sensitivity coefficients</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">input_factor</span> <span class="o">=</span> <span class="n">original_inputs</span><span class="o">/</span><span class="p">(</span><span class="n">positive_perturbed_inputs</span> <span class="o">-</span> <span class="n">negative_perturbed_inputs</span><span class="p">)</span>
+    <span class="n">relative_sensitivity_error_term1</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_factor</span><span class="o">/</span><span class="n">unperturbed_output</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">negative_perturbed_outputs</span> <span class="o">-</span>
+                                                                                       <span class="n">positive_perturbed_outputs</span><span class="p">)</span>
+    <span class="n">relative_sensitivity_error_term2</span> <span class="o">=</span> <span class="n">input_factor</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">unperturbed_output</span><span class="p">)</span>
+    <span class="n">relative_sensitivity_error_term3</span> <span class="o">=</span> <span class="n">input_factor</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">unperturbed_output</span><span class="p">)</span>
+    <span class="n">relative_coefficient_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">relative_sensitivity_error_term1</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">unperturbed_output_error</span><span class="o">**</span><span class="mi">2</span>
+                                          <span class="o">+</span> <span class="n">relative_sensitivity_error_term2</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">positive_perturbed_output_errors</span><span class="o">**</span><span class="mi">2</span>
+                                          <span class="o">+</span> <span class="n">relative_sensitivity_error_term3</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">negative_perturbed_output_errors</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">relative_coefficient_errors</span></div>
+
+
 <div class="viewcode-block" id="calculate_absolute_central_coefficient_errors">
 <a class="viewcode-back" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_absolute_central_coefficient_errors.html#WINDIGO.post_processing_internal_functions.calculate_absolute_central_coefficient_errors">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">calculate_absolute_central_coefficient_errors</span><span class="p">(</span>
@@ -633,17 +809,18 @@
 <div class="viewcode-block" id="convert_per_lethargy">
 <a class="viewcode-back" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.convert_per_lethargy.html#WINDIGO.post_processing_internal_functions.convert_per_lethargy">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">convert_per_lethargy</span><span class="p">(</span>
-        <span class="n">relative_sens_coefficients</span><span class="p">,</span> 
+        <span class="n">relative_parameters</span><span class="p">,</span> 
         <span class="n">energy_grid_MeV</span>
         <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Converts a set of relative sensitivity coefficients to being per lethargy</span>
+<span class="sd">    Converts a set of relative parameters to being per lethargy</span>
 <span class="sd">    width based on a given energy grid.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    relative_sens_coefficients : ndarray</span>
-<span class="sd">        Relative sensitivity coefficients.</span>
+<span class="sd">    relative_parameters : ndarray</span>
+<span class="sd">        Relative sensitivity coefficients or relative sensitivity</span>
+<span class="sd">        coefficient errors to be made per lethargy width.</span>
 
 <span class="sd">    energy_grid_MeV : ndarray</span>
 <span class="sd">        Energy bounds of the perturbation intervals used for finding the</span>
@@ -651,8 +828,8 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    relative_sens_per_lethargy : ndarray</span>
-<span class="sd">        Relative sensitivity coefficients converted to be per lethargy width.</span>
+<span class="sd">    relative_parameters_per_lethargy : ndarray</span>
+<span class="sd">        Relative parameters converted to be per lethargy width.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Create an array of lethargy widths</span>
     <span class="n">lethargy_widths</span> <span class="o">=</span> <span class="p">[]</span>
@@ -666,16 +843,16 @@
     <span class="n">lethargy_widths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lethargy_widths</span><span class="p">)</span>
 
     <span class="c1"># Compute the relative sensitivity per lethargy width</span>
-    <span class="n">relative_sens_per_lethargy</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">relative_sens_coefficients</span> <span class="o">/</span> <span class="n">lethargy_widths</span>
+    <span class="n">relative_parameters_per_lethargy</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">relative_parameters</span> <span class="o">/</span> <span class="n">lethargy_widths</span>
     <span class="p">)</span>
 
     <span class="c1"># Add an extra zero to assist with plotting</span>
-    <span class="n">relative_sens_per_lethargy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
-        <span class="n">relative_sens_per_lethargy</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">relative_parameters_per_lethargy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
+        <span class="n">relative_parameters_per_lethargy</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
     <span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">relative_sens_per_lethargy</span></div>
+    <span class="k">return</span> <span class="n">relative_parameters_per_lethargy</span></div>
 
 
 
@@ -683,7 +860,9 @@
 <a class="viewcode-back" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.plot_relative_sens.html#WINDIGO.post_processing_internal_functions.plot_relative_sens">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_relative_sens</span><span class="p">(</span>
         <span class="n">relative_sens_per_lethargy</span><span class="p">,</span> 
-        <span class="n">energy_grid_MeV</span>
+        <span class="n">energy_grid_MeV</span><span class="p">,</span>
+        <span class="n">error_propagation_flag</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">relative_sens_error_per_lethargy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates a plot of the relative sensitivity coefficients per lethargy width</span>
@@ -697,11 +876,33 @@
 <span class="sd">    energy_grid_MeV : ndarray</span>
 <span class="sd">        Energy bounds of the perturbation intervals used for finding the</span>
 <span class="sd">        relative sensitivity coefficients.</span>
+
+<span class="sd">    error_propagation_flag : bool, optional</span>
+<span class="sd">        Flag to determine if propagated errors will be plotted on the relative</span>
+<span class="sd">        sensitivity plot.</span>
+<span class="sd">        Default is False.</span>
+
+<span class="sd">    relative_sens_error_per_lethargy : ndarray, optional</span>
+<span class="sd">        Relative sensitivity coefficient per lethargy errors to be potentially</span>
+<span class="sd">        included as error bars within the relative sensitivity plots.</span>
+<span class="sd">        Default is None.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Plot the sensitivity profile</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
     <span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">energy_grid_MeV</span><span class="p">,</span> <span class="n">relative_sens_per_lethargy</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">error_propagation_flag</span><span class="p">:</span>
+        <span class="c1"># Calculate the midpoints of the energy grid of interest</span>
+        <span class="n">energy_midpoints</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">energy_grid_MeV</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">energy_midpoints</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">energy_grid_MeV</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">+</span> <span class="n">energy_grid_MeV</span><span class="p">[</span><span class="n">ii</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">energy_midpoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">energy_midpoints</span><span class="p">)</span>
+        <span class="c1"># Add an additional zero to the energy midpoints for plotting</span>
+        <span class="n">energy_midpoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">energy_midpoints</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># Plot the error bars within the relative sensitivity plot</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">energy_midpoints</span><span class="p">,</span> <span class="n">relative_sens_per_lethargy</span><span class="p">,</span> <span class="n">yerr</span> <span class="o">=</span> <span class="n">relative_sens_error_per_lethargy</span><span class="p">,</span> 
+                    <span class="n">fmt</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">capsize</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+
     <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
@@ -909,7 +1110,7 @@
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 
+                Copyright &#169; 2026, The Pennsylvania State University
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

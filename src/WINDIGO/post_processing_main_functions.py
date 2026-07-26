@@ -9,6 +9,9 @@ from .post_processing_internal_functions import (
     calculate_central_coefficients,
     convert_per_lethargy,
     plot_relative_sens,
+    calculate_relative_forward_coefficient_errors,
+    calculate_relative_backward_coefficient_errors,
+    calculate_relative_central_coefficient_errors,
     calculate_absolute_forward_coefficient_errors,
     calculate_absolute_backward_coefficient_errors,
     calculate_absolute_central_coefficient_errors,
@@ -28,6 +31,10 @@ def generate_relative_sensitivity_plot(
     negative_perturbed_outputs=None,
     positive_perturbed_inputs=None,
     negative_perturbed_inputs=None,
+    error_propagation_flag=False,
+    unperturbed_output_error=None,
+    positive_perturbed_output_errors=None,
+    negative_perturbed_output_errors=None
 ):
     """
     Generates a relative sensitivity per lethargy width 
@@ -76,6 +83,25 @@ def generate_relative_sensitivity_plot(
         Central sensitivity coefficient calculations.
         Default is None.      
 
+    error_propagation_flag : bool, optional
+        Flag to determine if first-order error propagation to obtain the uncertainty 
+        of the calculated relative sensitivities. 
+        Default is False.
+    
+    unperturbed_output_error : float, optional
+        Error of the output parameter calculated using unperturbed inputs.
+        Default is None.
+
+    positive_perturbed_output_errors : list or ndarray, optional
+        Errors of the output parameters calculated using positively-perturbed
+        inputs.
+        Default is None.
+
+    negative_perturbed_output_errors : list or ndarray, optional
+        Errors of the output parameters calculated using negatively-perturbed
+        inputs.
+        Default is None.
+
     """
 
     # Ensure that parameters are ndarrays as necessary
@@ -88,6 +114,10 @@ def generate_relative_sensitivity_plot(
         positive_perturbed_inputs = []
     if negative_perturbed_inputs is None:
         negative_perturbed_inputs = []
+    if positive_perturbed_output_errors is None:
+        positive_perturbed_output_errors = []
+    if negative_perturbed_output_errors is None:
+        negative_perturbed_output_errors = []
 
     inputs = [
         energy_grid_MeV,
@@ -96,6 +126,8 @@ def generate_relative_sensitivity_plot(
         negative_perturbed_outputs,
         positive_perturbed_inputs,
         negative_perturbed_inputs,
+        positive_perturbed_output_errors,
+        negative_perturbed_output_errors
     ]
 
     modified_inputs = check_input_types(inputs=inputs)
@@ -106,6 +138,8 @@ def generate_relative_sensitivity_plot(
     negative_perturbed_outputs = modified_inputs[3]
     positive_perturbed_inputs = modified_inputs[4]
     negative_perturbed_inputs = modified_inputs[5]
+    positive_perturbed_output_errors = modified_inputs[6]
+    negative_perturbed_output_errors = modified_inputs[7]
 
     # Check that a correct sensitivity coefficient calculation method has been input
 
@@ -116,9 +150,12 @@ def generate_relative_sensitivity_plot(
     ):
         raise Exception('Invalid sensitivity coefficient calculation method')
 
-    # Calculate the relative sensitivity coefficients
+    # Set a flag to indicate that relative sensitivity coefficients are being calculated
 
     relative_flag = True
+
+    # Calculate the relative sensitivity coefficients and their associated errors if desired
+    # Forward Differing Method
 
     if sens_calculation_method == 'Forward':
         relative_sens_coefficients = calculate_forward_coefficients(
@@ -129,6 +166,18 @@ def generate_relative_sensitivity_plot(
             relative_flag=relative_flag,
         )
 
+        if error_propagation_flag:
+            relative_coefficient_errors = calculate_relative_forward_coefficient_errors(
+                original_inputs=original_inputs,
+                positive_perturbed_inputs=positive_perturbed_inputs,
+                unperturbed_output=unperturbed_output,
+                positive_perturbed_outputs=positive_perturbed_outputs,
+                unperturbed_output_error=unperturbed_output_error,
+                positive_perturbed_output_errors=positive_perturbed_output_errors
+            )
+
+    # Backward Differencing Method
+
     elif sens_calculation_method == 'Backward':
         relative_sens_coefficients = calculate_backward_coefficients(
             negative_perturbed_outputs=negative_perturbed_outputs,
@@ -137,6 +186,18 @@ def generate_relative_sensitivity_plot(
             original_inputs=original_inputs,
             relative_flag=relative_flag,
         )
+
+        if error_propagation_flag:
+            relative_coefficient_errors = calculate_relative_backward_coefficient_errors(
+                original_inputs=original_inputs,
+                negative_perturbed_inputs=negative_perturbed_inputs,
+                unperturbed_output=unperturbed_output,
+                negative_perturbed_outputs=negative_perturbed_outputs,
+                unperturbed_output_error=unperturbed_output_error,
+                negative_perturbed_output_errors=negative_perturbed_output_errors
+            )
+
+    # Central Differencing Method
 
     elif sens_calculation_method == 'Central':
         relative_sens_coefficients = calculate_central_coefficients(
@@ -149,18 +210,43 @@ def generate_relative_sensitivity_plot(
             relative_flag=relative_flag,
         )
 
+        if error_propagation_flag:
+            relative_coefficient_errors = calculate_relative_central_coefficient_errors(
+                original_inputs=original_inputs,
+                positive_perturbed_inputs=positive_perturbed_inputs,
+                negative_perturbed_inputs=negative_perturbed_inputs,
+                unperturbed_output=unperturbed_output,
+                positive_perturbed_outputs=positive_perturbed_outputs,
+                negative_perturbed_outputs=negative_perturbed_outputs,
+                unperturbed_output_error=unperturbed_output_error,
+                positive_perturbed_output_errors=positive_perturbed_output_errors,
+                negative_perturbed_output_errors=negative_perturbed_output_errors
+            )
+
     # Calculate the relative sensitivity per lethargy width
 
     relative_sens_per_lethargy = convert_per_lethargy(
-        relative_sens_coefficients=relative_sens_coefficients,
+        relative_parameters=relative_sens_coefficients,
         energy_grid_MeV=energy_grid_MeV,
     )
 
-    # Generate the relative sensitivity plot
+    # Optionally calculate the relative sensitivity errors per lethargy width
+
+    if error_propagation_flag:
+        relative_sens_error_per_lethargy = convert_per_lethargy(
+            relative_parameters=relative_coefficient_errors,
+            energy_grid_MeV=energy_grid_MeV
+        )
+    else:
+        relative_sens_error_per_lethargy=None
+
+    # Generate the relative sensitivity plot with potential additional error bars
 
     plot_relative_sens(
         relative_sens_per_lethargy=relative_sens_per_lethargy,
         energy_grid_MeV=energy_grid_MeV,
+        error_propagation_flag=error_propagation_flag,
+        relative_sens_error_per_lethargy=relative_sens_error_per_lethargy
     )
 
 
@@ -233,7 +319,7 @@ def calculate_direct_perturbation_uncertainty(
 
     error_propagation_flag : bool, optional
         Flag to determine if first-order error propagation to obtain the uncertainty 
-        of the calculated random sampling uncertainty. 
+        of the calculated direct perturbation uncertainty. 
         Default is False.
     
     unperturbed_output_error : float, optional
@@ -442,14 +528,14 @@ def calculate_direct_perturbation_uncertainty(
 
     if error_propagation_flag:
 
-        print('The direct perturnbtion uncertainty is: ' + 
+        print('The direct perturbation uncertainty is: ' + 
               str(propagated_uncertainty) + ' ± ' + str(uncertainty_error))
         
         return propagated_uncertainty, uncertainty_error
 
     else:
         
-        print('The direct perturbatation uncertainty is: '
+        print('The direct perturbation uncertainty is: '
             + str(propagated_uncertainty))
 
         return propagated_uncertainty

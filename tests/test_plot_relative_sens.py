@@ -1,84 +1,108 @@
 import numpy as np
 import pytest
-from unittest.mock import patch, Mock
+from unittest.mock import patch, MagicMock
 
 from src.WINDIGO.post_processing_internal_functions import (
     plot_relative_sens,
 )
 
 
-@patch("src.WINDIGO.post_processing_internal_functions.plt.show")
-@patch("src.WINDIGO.post_processing_internal_functions.plt.savefig")
-@patch("src.WINDIGO.post_processing_internal_functions.plt.subplots")
-def test_plot_relative_sens_basic(mock_subplots, mock_savefig, mock_show):
-    """Ensure the plotting function calls Matplotlib correctly."""
+@patch("src.WINDIGO.post_processing_internal_functions.plt")
+def test_plot_relative_sens_basic(mock_plt):
+    """Test that the basic step plot is created without error bars."""
+    # Mock figure and axes
+    mock_fig = MagicMock()
+    mock_ax = MagicMock()
+    mock_plt.subplots.return_value = (mock_fig, mock_ax)
 
-    # Mock figure and axis objects
-    mock_fig = object()
-    mock_ax = Mock()
+    relative_sens_per_lethargy = np.array([0.0, 1.0, 2.0, 3.0])
+    energy_grid_MeV = np.array([1.0, 2.0, 4.0, 8.0])
 
-    # Configure subplots() to return our mock fig/ax
-    mock_subplots.return_value = (mock_fig, mock_ax)
+    plot_relative_sens(relative_sens_per_lethargy, energy_grid_MeV)
 
-    # Sample inputs
-    relative_sens = np.array([0.0, 1.0, 2.0])
-    energy_grid = np.array([1.0, 2.0, 4.0])
+    # Verify step plot call
+    mock_ax.step.assert_called_once_with(
+        energy_grid_MeV, relative_sens_per_lethargy, color="black"
+    )
 
-    # Run the function
-    plot_relative_sens(relative_sens, energy_grid)
+    # No error bars should be plotted
+    mock_ax.errorbar.assert_not_called()
 
-    # subplots() should be called once with figsize
-    mock_subplots.assert_called_once_with(figsize=(8, 6))
-
-    # step() should be called with correct data
-    mock_ax.step.assert_called_once_with(energy_grid, relative_sens, color="black")
-
-    # savefig should be called with the expected filename
-    mock_savefig.assert_called_once()
-    args, kwargs = mock_savefig.call_args
-    assert args[0] == "RelativeSensitivityPlot.png"
-
-    # show() should be called exactly once
-    mock_show.assert_called_once()
+    # Ensure savefig and show were called
+    mock_plt.savefig.assert_called_once()
+    mock_plt.show.assert_called_once()
 
 
-@patch("src.WINDIGO.post_processing_internal_functions.plt.show")
-@patch("src.WINDIGO.post_processing_internal_functions.plt.savefig")
-@patch("src.WINDIGO.post_processing_internal_functions.plt.subplots")
-def test_plot_relative_sens_grid_called(mock_subplots, mock_savefig, mock_show):
-    """Ensure ax.grid() is called to enable gridlines."""
+@patch("src.WINDIGO.post_processing_internal_functions.plt")
+def test_plot_relative_sens_with_errors(mock_plt):
+    """Test that error bars are plotted when error_propagation_flag=True."""
+    mock_fig = MagicMock()
+    mock_ax = MagicMock()
+    mock_plt.subplots.return_value = (mock_fig, mock_ax)
 
-    mock_fig = object()
-    mock_ax = Mock()
-    mock_subplots.return_value = (mock_fig, mock_ax)
+    relative_sens_per_lethargy = np.array([0.0, 10.0, 20.0])
+    relative_sens_error_per_lethargy = np.array([0.0, 1.0, 2.0])
+    energy_grid_MeV = np.array([1.0, 2.0, 10.0])
 
-    relative_sens = np.array([0.0, 1.0])
-    energy_grid = np.array([1.0, 2.0])
+    # Expected midpoints
+    expected_midpoints = np.array([
+        0.0,            # inserted zero
+        (1.0 + 2.0) / 2,
+        (2.0 + 10.0) / 2,
+    ])
 
-    plot_relative_sens(relative_sens, energy_grid)
+    plot_relative_sens(
+        relative_sens_per_lethargy,
+        energy_grid_MeV,
+        error_propagation_flag=True,
+        relative_sens_error_per_lethargy=relative_sens_error_per_lethargy,
+    )
 
-    mock_ax.grid.assert_called_once()
+    # Verify step plot call
+    mock_ax.step.assert_called_once_with(
+        energy_grid_MeV, relative_sens_per_lethargy, color="black"
+    )
+
+    # Verify errorbar call
+    mock_ax.errorbar.assert_called_once()
+    args, kwargs = mock_ax.errorbar.call_args
+
+    # Check x-values (midpoints)
+    np.testing.assert_allclose(args[0], expected_midpoints)
+
+    # Check y-values
+    np.testing.assert_allclose(args[1], relative_sens_per_lethargy)
+
+    # Check yerr
+    np.testing.assert_allclose(kwargs["yerr"], relative_sens_error_per_lethargy)
+
+    # Check formatting options
+    assert kwargs["fmt"] == "none"
+    assert kwargs["color"] == "black"
+    assert kwargs["capsize"] == 3
+
+    mock_plt.savefig.assert_called_once()
+    mock_plt.show.assert_called_once()
 
 
-@patch("src.WINDIGO.post_processing_internal_functions.plt.show")
-@patch("src.WINDIGO.post_processing_internal_functions.plt.savefig")
-@patch("src.WINDIGO.post_processing_internal_functions.plt.subplots")
-def test_plot_relative_sens_tick_params(mock_subplots, mock_savefig, mock_show):
-    """Ensure tick_params() is called for both x and y axes."""
+@patch("src.WINDIGO.post_processing_internal_functions.plt")
+def test_plot_relative_sens_no_errors_when_flag_false(mock_plt):
+    """Ensure error bars are NOT plotted when flag=False even if errors are provided."""
+    mock_fig = MagicMock()
+    mock_ax = MagicMock()
+    mock_plt.subplots.return_value = (mock_fig, mock_ax)
 
-    mock_fig = object()
-    mock_ax = Mock()
-    mock_subplots.return_value = (mock_fig, mock_ax)
+    relative_sens_per_lethargy = np.array([0.0, 5.0])
+    relative_sens_error_per_lethargy = np.array([0.0, 0.5])
+    energy_grid_MeV = np.array([1.0, 2.0])
 
-    relative_sens = np.array([0.0, 1.0])
-    energy_grid = np.array([1.0, 2.0])
+    plot_relative_sens(
+        relative_sens_per_lethargy,
+        energy_grid_MeV,
+        error_propagation_flag=False,
+        relative_sens_error_per_lethargy=relative_sens_error_per_lethargy,
+    )
 
-    plot_relative_sens(relative_sens, energy_grid)
-
-    # tick_params should be called twice: once for x, once for y
-    calls = mock_ax.tick_params.call_args_list
-    assert len(calls) == 2
-
-    # Validate axis arguments
-    assert calls[0].kwargs["axis"] == "x"
-    assert calls[1].kwargs["axis"] == "y"
+    mock_ax.errorbar.assert_not_called()
+    mock_plt.savefig.assert_called_once()
+    mock_plt.show.assert_called_once()

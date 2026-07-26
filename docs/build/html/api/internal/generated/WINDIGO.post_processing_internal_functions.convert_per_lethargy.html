@@ -253,10 +253,13 @@
 <li class="toctree-l3 current has-children"><a class="reference internal" href="../post_proc.html">Post-Processing Internal Functions</a><input aria-label="Toggle navigation of Post-Processing Internal Functions" checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="WINDIGO.post_processing_internal_functions.check_input_types.html">check_input_types</a></li>
 <li class="toctree-l4"><a class="reference internal" href="WINDIGO.post_processing_internal_functions.calculate_forward_coefficients.html">calculate_forward_coefficients</a></li>
+<li class="toctree-l4"><a class="reference internal" href="WINDIGO.post_processing_internal_functions.calculate_relative_forward_coefficient_errors.html">calculate_relative_forward_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="WINDIGO.post_processing_internal_functions.calculate_absolute_forward_coefficient_errors.html">calculate_absolute_forward_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="WINDIGO.post_processing_internal_functions.calculate_backward_coefficients.html">calculate_backward_coefficients</a></li>
+<li class="toctree-l4"><a class="reference internal" href="WINDIGO.post_processing_internal_functions.calculate_relative_backward_coefficient_errors.html">calculate_relative_backward_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="WINDIGO.post_processing_internal_functions.calculate_absolute_backward_coefficient_errors.html">calculate_absolute_backward_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="WINDIGO.post_processing_internal_functions.calculate_central_coefficients.html">calculate_central_coefficients</a></li>
+<li class="toctree-l4"><a class="reference internal" href="WINDIGO.post_processing_internal_functions.calculate_relative_central_coefficient_errors.html">calculate_relative_central_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="WINDIGO.post_processing_internal_functions.calculate_absolute_central_coefficient_errors.html">calculate_absolute_central_coefficient_errors</a></li>
 <li class="toctree-l4 current current-page"><a class="current reference internal" href="#">convert_per_lethargy</a></li>
 <li class="toctree-l4"><a class="reference internal" href="WINDIGO.post_processing_internal_functions.plot_relative_sens.html">plot_relative_sens</a></li>
@@ -312,19 +315,20 @@
 <h1>convert_per_lethargy<a class="headerlink" href="#convert-per-lethargy" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="WINDIGO.post_processing_internal_functions.convert_per_lethargy">
-<span class="sig-prename descclassname"><span class="pre">WINDIGO.post_processing_internal_functions.</span></span><span class="sig-name descname"><span class="pre">convert_per_lethargy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_sens_coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_grid_MeV</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/WINDIGO/post_processing_internal_functions.html#convert_per_lethargy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WINDIGO.post_processing_internal_functions.convert_per_lethargy" title="Link to this definition">¶</a></dt>
-<dd><p>Converts a set of relative sensitivity coefficients to being per lethargy
+<span class="sig-prename descclassname"><span class="pre">WINDIGO.post_processing_internal_functions.</span></span><span class="sig-name descname"><span class="pre">convert_per_lethargy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_grid_MeV</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/WINDIGO/post_processing_internal_functions.html#convert_per_lethargy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WINDIGO.post_processing_internal_functions.convert_per_lethargy" title="Link to this definition">¶</a></dt>
+<dd><p>Converts a set of relative parameters to being per lethargy
 width based on a given energy grid.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>relative_sens_coefficients</strong> (<em>ndarray</em>) – Relative sensitivity coefficients.</p></li>
+<li><p><strong>relative_parameters</strong> (<em>ndarray</em>) – Relative sensitivity coefficients or relative sensitivity
+coefficient errors to be made per lethargy width.</p></li>
 <li><p><strong>energy_grid_MeV</strong> (<em>ndarray</em>) – Energy bounds of the perturbation intervals used for finding the
 relative sensitivity coefficients.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>relative_sens_per_lethargy</strong> – Relative sensitivity coefficients converted to be per lethargy width.</p>
+<dd class="field-even"><p><strong>relative_parameters_per_lethargy</strong> – Relative parameters converted to be per lethargy width.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray</p>

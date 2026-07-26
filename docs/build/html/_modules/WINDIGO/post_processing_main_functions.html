@@ -252,10 +252,13 @@
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../api/internal/post_proc.html">Post-Processing Internal Functions</a><input aria-label="Toggle navigation of Post-Processing Internal Functions" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.check_input_types.html">check_input_types</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_forward_coefficients.html">calculate_forward_coefficients</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_relative_forward_coefficient_errors.html">calculate_relative_forward_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_absolute_forward_coefficient_errors.html">calculate_absolute_forward_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_backward_coefficients.html">calculate_backward_coefficients</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_relative_backward_coefficient_errors.html">calculate_relative_backward_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_absolute_backward_coefficient_errors.html">calculate_absolute_backward_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_central_coefficients.html">calculate_central_coefficients</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_relative_central_coefficient_errors.html">calculate_relative_central_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.calculate_absolute_central_coefficient_errors.html">calculate_absolute_central_coefficient_errors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.convert_per_lethargy.html">convert_per_lethargy</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../api/internal/generated/WINDIGO.post_processing_internal_functions.plot_relative_sens.html">plot_relative_sens</a></li>
@@ -313,6 +316,9 @@
     <span class="n">calculate_central_coefficients</span><span class="p">,</span>
     <span class="n">convert_per_lethargy</span><span class="p">,</span>
     <span class="n">plot_relative_sens</span><span class="p">,</span>
+    <span class="n">calculate_relative_forward_coefficient_errors</span><span class="p">,</span>
+    <span class="n">calculate_relative_backward_coefficient_errors</span><span class="p">,</span>
+    <span class="n">calculate_relative_central_coefficient_errors</span><span class="p">,</span>
     <span class="n">calculate_absolute_forward_coefficient_errors</span><span class="p">,</span>
     <span class="n">calculate_absolute_backward_coefficient_errors</span><span class="p">,</span>
     <span class="n">calculate_absolute_central_coefficient_errors</span><span class="p">,</span>
@@ -334,6 +340,10 @@
     <span class="n">negative_perturbed_outputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">positive_perturbed_inputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">negative_perturbed_inputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">error_propagation_flag</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">unperturbed_output_error</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">positive_perturbed_output_errors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">negative_perturbed_output_errors</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates a relative sensitivity per lethargy width </span>
@@ -382,6 +392,25 @@
 <span class="sd">        Central sensitivity coefficient calculations.</span>
 <span class="sd">        Default is None.      </span>
 
+<span class="sd">    error_propagation_flag : bool, optional</span>
+<span class="sd">        Flag to determine if first-order error propagation to obtain the uncertainty </span>
+<span class="sd">        of the calculated relative sensitivities. </span>
+<span class="sd">        Default is False.</span>
+<span class="sd">    </span>
+<span class="sd">    unperturbed_output_error : float, optional</span>
+<span class="sd">        Error of the output parameter calculated using unperturbed inputs.</span>
+<span class="sd">        Default is None.</span>
+
+<span class="sd">    positive_perturbed_output_errors : list or ndarray, optional</span>
+<span class="sd">        Errors of the output parameters calculated using positively-perturbed</span>
+<span class="sd">        inputs.</span>
+<span class="sd">        Default is None.</span>
+
+<span class="sd">    negative_perturbed_output_errors : list or ndarray, optional</span>
+<span class="sd">        Errors of the output parameters calculated using negatively-perturbed</span>
+<span class="sd">        inputs.</span>
+<span class="sd">        Default is None.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Ensure that parameters are ndarrays as necessary</span>
@@ -394,6 +423,10 @@
         <span class="n">positive_perturbed_inputs</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">negative_perturbed_inputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">negative_perturbed_inputs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">positive_perturbed_output_errors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">positive_perturbed_output_errors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">negative_perturbed_output_errors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">negative_perturbed_output_errors</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">energy_grid_MeV</span><span class="p">,</span>
@@ -402,6 +435,8 @@
         <span class="n">negative_perturbed_outputs</span><span class="p">,</span>
         <span class="n">positive_perturbed_inputs</span><span class="p">,</span>
         <span class="n">negative_perturbed_inputs</span><span class="p">,</span>
+        <span class="n">positive_perturbed_output_errors</span><span class="p">,</span>
+        <span class="n">negative_perturbed_output_errors</span>
     <span class="p">]</span>
 
     <span class="n">modified_inputs</span> <span class="o">=</span> <span class="n">check_input_types</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">)</span>
@@ -412,6 +447,8 @@
     <span class="n">negative_perturbed_outputs</span> <span class="o">=</span> <span class="n">modified_inputs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
     <span class="n">positive_perturbed_inputs</span> <span class="o">=</span> <span class="n">modified_inputs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
     <span class="n">negative_perturbed_inputs</span> <span class="o">=</span> <span class="n">modified_inputs</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+    <span class="n">positive_perturbed_output_errors</span> <span class="o">=</span> <span class="n">modified_inputs</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+    <span class="n">negative_perturbed_output_errors</span> <span class="o">=</span> <span class="n">modified_inputs</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
 
     <span class="c1"># Check that a correct sensitivity coefficient calculation method has been input</span>
 
@@ -422,9 +459,12 @@
     <span class="p">):</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Invalid sensitivity coefficient calculation method&#39;</span><span class="p">)</span>
 
-    <span class="c1"># Calculate the relative sensitivity coefficients</span>
+    <span class="c1"># Set a flag to indicate that relative sensitivity coefficients are being calculated</span>
 
     <span class="n">relative_flag</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># Calculate the relative sensitivity coefficients and their associated errors if desired</span>
+    <span class="c1"># Forward Differing Method</span>
 
     <span class="k">if</span> <span class="n">sens_calculation_method</span> <span class="o">==</span> <span class="s1">&#39;Forward&#39;</span><span class="p">:</span>
         <span class="n">relative_sens_coefficients</span> <span class="o">=</span> <span class="n">calculate_forward_coefficients</span><span class="p">(</span>
@@ -435,6 +475,18 @@
             <span class="n">relative_flag</span><span class="o">=</span><span class="n">relative_flag</span><span class="p">,</span>
         <span class="p">)</span>
 
+        <span class="k">if</span> <span class="n">error_propagation_flag</span><span class="p">:</span>
+            <span class="n">relative_coefficient_errors</span> <span class="o">=</span> <span class="n">calculate_relative_forward_coefficient_errors</span><span class="p">(</span>
+                <span class="n">original_inputs</span><span class="o">=</span><span class="n">original_inputs</span><span class="p">,</span>
+                <span class="n">positive_perturbed_inputs</span><span class="o">=</span><span class="n">positive_perturbed_inputs</span><span class="p">,</span>
+                <span class="n">unperturbed_output</span><span class="o">=</span><span class="n">unperturbed_output</span><span class="p">,</span>
+                <span class="n">positive_perturbed_outputs</span><span class="o">=</span><span class="n">positive_perturbed_outputs</span><span class="p">,</span>
+                <span class="n">unperturbed_output_error</span><span class="o">=</span><span class="n">unperturbed_output_error</span><span class="p">,</span>
+                <span class="n">positive_perturbed_output_errors</span><span class="o">=</span><span class="n">positive_perturbed_output_errors</span>
+            <span class="p">)</span>
+
+    <span class="c1"># Backward Differencing Method</span>
+
     <span class="k">elif</span> <span class="n">sens_calculation_method</span> <span class="o">==</span> <span class="s1">&#39;Backward&#39;</span><span class="p">:</span>
         <span class="n">relative_sens_coefficients</span> <span class="o">=</span> <span class="n">calculate_backward_coefficients</span><span class="p">(</span>
             <span class="n">negative_perturbed_outputs</span><span class="o">=</span><span class="n">negative_perturbed_outputs</span><span class="p">,</span>
@@ -443,6 +495,18 @@
             <span class="n">original_inputs</span><span class="o">=</span><span class="n">original_inputs</span><span class="p">,</span>
             <span class="n">relative_flag</span><span class="o">=</span><span class="n">relative_flag</span><span class="p">,</span>
         <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">error_propagation_flag</span><span class="p">:</span>
+            <span class="n">relative_coefficient_errors</span> <span class="o">=</span> <span class="n">calculate_relative_backward_coefficient_errors</span><span class="p">(</span>
+                <span class="n">original_inputs</span><span class="o">=</span><span class="n">original_inputs</span><span class="p">,</span>
+                <span class="n">negative_perturbed_inputs</span><span class="o">=</span><span class="n">negative_perturbed_inputs</span><span class="p">,</span>
+                <span class="n">unperturbed_output</span><span class="o">=</span><span class="n">unperturbed_output</span><span class="p">,</span>
+                <span class="n">negative_perturbed_outputs</span><span class="o">=</span><span class="n">negative_perturbed_outputs</span><span class="p">,</span>
+                <span class="n">unperturbed_output_error</span><span class="o">=</span><span class="n">unperturbed_output_error</span><span class="p">,</span>
+                <span class="n">negative_perturbed_output_errors</span><span class="o">=</span><span class="n">negative_perturbed_output_errors</span>
+            <span class="p">)</span>
+
+    <span class="c1"># Central Differencing Method</span>
 
     <span class="k">elif</span> <span class="n">sens_calculation_method</span> <span class="o">==</span> <span class="s1">&#39;Central&#39;</span><span class="p">:</span>
         <span class="n">relative_sens_coefficients</span> <span class="o">=</span> <span class="n">calculate_central_coefficients</span><span class="p">(</span>
@@ -455,18 +519,43 @@
             <span class="n">relative_flag</span><span class="o">=</span><span class="n">relative_flag</span><span class="p">,</span>
         <span class="p">)</span>
 
+        <span class="k">if</span> <span class="n">error_propagation_flag</span><span class="p">:</span>
+            <span class="n">relative_coefficient_errors</span> <span class="o">=</span> <span class="n">calculate_relative_central_coefficient_errors</span><span class="p">(</span>
+                <span class="n">original_inputs</span><span class="o">=</span><span class="n">original_inputs</span><span class="p">,</span>
+                <span class="n">positive_perturbed_inputs</span><span class="o">=</span><span class="n">positive_perturbed_inputs</span><span class="p">,</span>
+                <span class="n">negative_perturbed_inputs</span><span class="o">=</span><span class="n">negative_perturbed_inputs</span><span class="p">,</span>
+                <span class="n">unperturbed_output</span><span class="o">=</span><span class="n">unperturbed_output</span><span class="p">,</span>
+                <span class="n">positive_perturbed_outputs</span><span class="o">=</span><span class="n">positive_perturbed_outputs</span><span class="p">,</span>
+                <span class="n">negative_perturbed_outputs</span><span class="o">=</span><span class="n">negative_perturbed_outputs</span><span class="p">,</span>
+                <span class="n">unperturbed_output_error</span><span class="o">=</span><span class="n">unperturbed_output_error</span><span class="p">,</span>
+                <span class="n">positive_perturbed_output_errors</span><span class="o">=</span><span class="n">positive_perturbed_output_errors</span><span class="p">,</span>
+                <span class="n">negative_perturbed_output_errors</span><span class="o">=</span><span class="n">negative_perturbed_output_errors</span>
+            <span class="p">)</span>
+
     <span class="c1"># Calculate the relative sensitivity per lethargy width</span>
 
     <span class="n">relative_sens_per_lethargy</span> <span class="o">=</span> <span class="n">convert_per_lethargy</span><span class="p">(</span>
-        <span class="n">relative_sens_coefficients</span><span class="o">=</span><span class="n">relative_sens_coefficients</span><span class="p">,</span>
+        <span class="n">relative_parameters</span><span class="o">=</span><span class="n">relative_sens_coefficients</span><span class="p">,</span>
         <span class="n">energy_grid_MeV</span><span class="o">=</span><span class="n">energy_grid_MeV</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="c1"># Generate the relative sensitivity plot</span>
+    <span class="c1"># Optionally calculate the relative sensitivity errors per lethargy width</span>
+
+    <span class="k">if</span> <span class="n">error_propagation_flag</span><span class="p">:</span>
+        <span class="n">relative_sens_error_per_lethargy</span> <span class="o">=</span> <span class="n">convert_per_lethargy</span><span class="p">(</span>
+            <span class="n">relative_parameters</span><span class="o">=</span><span class="n">relative_coefficient_errors</span><span class="p">,</span>
+            <span class="n">energy_grid_MeV</span><span class="o">=</span><span class="n">energy_grid_MeV</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">relative_sens_error_per_lethargy</span><span class="o">=</span><span class="kc">None</span>
+
+    <span class="c1"># Generate the relative sensitivity plot with potential additional error bars</span>
 
     <span class="n">plot_relative_sens</span><span class="p">(</span>
         <span class="n">relative_sens_per_lethargy</span><span class="o">=</span><span class="n">relative_sens_per_lethargy</span><span class="p">,</span>
         <span class="n">energy_grid_MeV</span><span class="o">=</span><span class="n">energy_grid_MeV</span><span class="p">,</span>
+        <span class="n">error_propagation_flag</span><span class="o">=</span><span class="n">error_propagation_flag</span><span class="p">,</span>
+        <span class="n">relative_sens_error_per_lethargy</span><span class="o">=</span><span class="n">relative_sens_error_per_lethargy</span>
     <span class="p">)</span></div>
 
 
@@ -542,7 +631,7 @@
 
 <span class="sd">    error_propagation_flag : bool, optional</span>
 <span class="sd">        Flag to determine if first-order error propagation to obtain the uncertainty </span>
-<span class="sd">        of the calculated random sampling uncertainty. </span>
+<span class="sd">        of the calculated direct perturbation uncertainty. </span>
 <span class="sd">        Default is False.</span>
 <span class="sd">    </span>
 <span class="sd">    unperturbed_output_error : float, optional</span>
@@ -753,14 +842,14 @@
 
     <span class="k">if</span> <span class="n">error_propagation_flag</span><span class="p">:</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The direct perturnbtion uncertainty is: &#39;</span> <span class="o">+</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The direct perturbation uncertainty is: &#39;</span> <span class="o">+</span> 
               <span class="nb">str</span><span class="p">(</span><span class="n">propagated_uncertainty</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; ± &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">uncertainty_error</span><span class="p">))</span>
         
         <span class="k">return</span> <span class="n">propagated_uncertainty</span><span class="p">,</span> <span class="n">uncertainty_error</span>
 
     <span class="k">else</span><span class="p">:</span>
         
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The direct perturbatation uncertainty is: &#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The direct perturbation uncertainty is: &#39;</span>
             <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">propagated_uncertainty</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">propagated_uncertainty</span></div>
@@ -869,7 +958,7 @@
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 
+                Copyright &#169; 2026, The Pennsylvania State University
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
