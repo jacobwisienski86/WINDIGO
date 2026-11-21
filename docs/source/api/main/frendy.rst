@@ -1,5 +1,5 @@
 FRENDY Main Functions
-=====================================
+=====================
 
 .. autosummary::
    :toctree: generated/

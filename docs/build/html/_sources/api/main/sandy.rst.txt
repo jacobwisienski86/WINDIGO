@@ -1,5 +1,5 @@
 SANDY Main Functions
-=====================================
+====================
 
 .. autosummary::
    :toctree: generated/

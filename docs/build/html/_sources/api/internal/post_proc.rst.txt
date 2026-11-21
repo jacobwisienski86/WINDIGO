@@ -1,5 +1,5 @@
 Post-Processing Internal Functions
-=====================================
+==================================
 
 .. autosummary::
    :toctree: generated/

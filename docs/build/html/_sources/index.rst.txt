@@ -13,4 +13,7 @@ using the contact information at the bottom of the WINDIGO GitHub repository's R
 .. toctree::
    :maxdepth: 2
 
+   overview/index
+   theory/index
    api/index
+   publications/index

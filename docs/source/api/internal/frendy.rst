@@ -1,5 +1,5 @@
 FRENDY Internal Functions
-=====================================
+=========================
 
 .. autosummary::
    :toctree: generated/

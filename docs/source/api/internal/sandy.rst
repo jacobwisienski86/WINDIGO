@@ -1,5 +1,5 @@
 SANDY Internal Functions
-=====================================
+========================
 
 .. autosummary::
    :toctree: generated/

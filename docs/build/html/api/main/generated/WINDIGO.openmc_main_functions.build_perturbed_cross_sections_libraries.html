@@ -192,6 +192,8 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../overview/index.html">WINDIGO Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../theory/index.html">WINDIGO Theory</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../../index.html">WINDIGO Python API</a><input aria-label="Toggle navigation of WINDIGO Python API" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2 current has-children"><a class="reference internal" href="../index.html">Main Functions</a><input aria-label="Toggle navigation of Main Functions" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l3 current has-children"><a class="reference internal" href="../openmc.html">OpenMC Main Functions</a><input aria-label="Toggle navigation of OpenMC Main Functions" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
@@ -273,6 +275,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../../publications/index.html">WINDIGO-Related Publications</a></li>
 </ul>
 
 </div>
@@ -321,18 +324,18 @@ cross_sections.xml file created using perturbed cross section data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>unperturbed_nuclide_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em> of </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Names of nuclides whose cross section data is unperturbed.</p></li>
-<li><p><strong>neutron_sublibrary_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to directory containing unperturbed neutron .h5 files.</p></li>
-<li><p><strong>perturbed_ACE_folder_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to directory containing folders with perturbed ACE files.</p></li>
-<li><p><strong>unperturbed_TSL_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em> of </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – Names of thermal scattering libraries to include.
+<li><p><strong>unperturbed_nuclide_list</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><em>list</em></a><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – Names of nuclides whose cross section data is unperturbed.</p></li>
+<li><p><strong>neutron_sublibrary_path</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – Path to directory containing unperturbed neutron .h5 files.</p></li>
+<li><p><strong>perturbed_ACE_folder_path</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a>) – Path to directory containing folders with perturbed ACE files.</p></li>
+<li><p><strong>unperturbed_TSL_list</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><em>list</em></a><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>, </em><em>optional</em>) – Names of thermal scattering libraries to include.
 Default is None</p></li>
-<li><p><strong>thermal_scatter_sublibrary_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – Path to directory containing unperturbed thermal scattering .h5 files.
+<li><p><strong>thermal_scatter_sublibrary_path</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>, </em><em>optional</em>) – Path to directory containing unperturbed thermal scattering .h5 files.
 Default is None</p></li>
-<li><p><strong>perturbed_nuclide</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – Name of the nuclide being perturbed. Used only for naming folders.
+<li><p><strong>perturbed_nuclide</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>, </em><em>optional</em>) – Name of the nuclide being perturbed. Used only for naming folders.
 Default is None</p></li>
-<li><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – Name of the model under investigation. Used only for naming folders.
+<li><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>, </em><em>optional</em>) – Name of the model under investigation. Used only for naming folders.
 Default is None</p></li>
-<li><p><strong>perturbation_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – Type of perturbation (e.g., direct, random). Used only for naming
+<li><p><strong>perturbation_type</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>, </em><em>optional</em>) – Type of perturbation (e.g., direct, random). Used only for naming
 folders.
 Default is None</p></li>
 </ul>
@@ -341,7 +344,7 @@ Default is None</p></li>
 <dd class="field-even"><p><strong>perturbed_model_top_directory_name</strong> – Path to the directory containing all perturbed cross_sections.xml files.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a></p>
 </dd>
 </dl>
 </dd></dl>

@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Main Functions" href="main/index.html"><link rel="prev" title="WINDIGO Documentation" href="../index.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Main Functions" href="main/index.html"><link rel="prev" title="WINDIGO Theory" href="../theory/index.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>WINDIGO Python API - WINDIGO 0.0.1-beta documentation</title>
@@ -192,6 +192,8 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">WINDIGO Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory/index.html">WINDIGO Theory</a></li>
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">WINDIGO Python API</a><input aria-label="Toggle navigation of WINDIGO Python API" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="main/index.html">Main Functions</a><input aria-label="Toggle navigation of Main Functions" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="main/openmc.html">OpenMC Main Functions</a><input aria-label="Toggle navigation of OpenMC Main Functions" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -273,6 +275,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../publications/index.html">WINDIGO-Related Publications</a></li>
 </ul>
 
 </div>
@@ -313,6 +316,13 @@
         <article role="main" id="furo-main-content">
           <section id="windigo-python-api">
 <h1>WINDIGO Python API<a class="headerlink" href="#windigo-python-api" title="Link to this heading">¶</a></h1>
+<p>WINDIGO is composed of two types of functions: main and internal.</p>
+<p>Main functions are designed to be called directly by users when utilizing WINDIGO.</p>
+<p>Internal functions are called within the main functions to perform subsections of the overall
+tasks performed by the main functions. Internal functions are not intended to be called
+directly by users.</p>
+<p>The types of functions are sorted based on either their general utility (i.e. post-processing) and
+the codes they interface with.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="main/index.html">Main Functions</a><ul>
@@ -347,14 +357,14 @@
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../index.html">
+          <a class="prev-page" href="../theory/index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Home</div>
+                <div class="title">WINDIGO Theory</div>
                 
               </div>
             </a>

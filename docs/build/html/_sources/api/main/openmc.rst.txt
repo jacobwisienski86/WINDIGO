@@ -1,5 +1,5 @@
 OpenMC Main Functions
-=====================================
+=====================
 
 .. autosummary::
    :toctree: generated/
