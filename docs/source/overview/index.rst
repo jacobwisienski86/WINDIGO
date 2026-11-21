@@ -12,8 +12,9 @@ outputs.
 
 References: 
 
-[1]
 
-[2]
+[1] Romano, P. K., et al., 2015. OpenMC: A state-of-the-art Monte Carlo code for research and development. Annals of Nuclear Energy 82, 90-97. `http://dx.doi.org/https://doi.org/10.1016/j.anucene.2014.07.048 <http://dx.doi.org/https://doi.org/10.1016/j.anucene.2014.07.048>`_.
 
-[3]
+[2] Fiorito, L., et al., 2017. Nuclear data uncertainty propagation to integral responses using SANDY. Annals of Nuclear Energy 101, 359-366. doi: `http://dx.doi.org/https://doi.org/10.1016/j.anucene.2016.11.026 <http://dx.doi.org/https://doi.org/10.1016/j.anucene.2016.11.026>`_.
+
+[3] Tada, K., et al., 2017. Development and verification of a new nuclear data processing system FRENDY. Journal of Nuclear Science and Technology 54, 806-817. doi: `http://dx.doi.org/https://doi.org/10.1080/00223131.2022.2130463 <http://dx.doi.org/https://doi.org/10.1080/00223131.2022.2130463>`_.
